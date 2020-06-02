@@ -16,10 +16,29 @@ public class Missile : MonoBehaviour
 
     void Update()
     {
-        ProccesInput();        
+        Rotate(); 
+        Thrust();
     }
 
-    private void ProccesInput()
+    // Rotate object, reacting only to one statement at time
+    private void Rotate()
+    {
+        rigidBody.freezeRotation = true;  // take manual control of rotation
+
+        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+        {
+            transform.Rotate(Vector3.forward);
+        }
+        else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+        {
+            transform.Rotate(-Vector3.forward);
+        }
+
+        rigidBody.freezeRotation = false;  // resume physics control of rotation
+    }
+
+    // Accelerate object, play audio sound of thrusting while pressing button
+    private void Thrust()
     {
         if (Input.GetKey(KeyCode.Space))  // can adjust speed while rotating
         {
@@ -29,22 +48,13 @@ public class Missile : MonoBehaviour
                 audioSource.Play();
             }
         }
-        else if (Input.GetKeyUp(KeyCode.Space))
+        else if (Input.GetKeyUp(KeyCode.Space))  // fade out audio sound
         {
             StartCoroutine(FadeOut(audioSource));
         }
-
-        // reacting only to one statement at time
-        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
-        {
-            transform.Rotate(Vector3.forward);
-        }
-        else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
-        {
-            transform.Rotate(-Vector3.forward);
-        }
     }
 
+    // Fade out audioSource to avoid clip after .Stop()
     IEnumerator FadeOut(AudioSource audioSource)
     {
         float FadeTime = .5f;
