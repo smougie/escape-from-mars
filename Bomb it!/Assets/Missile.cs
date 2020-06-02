@@ -8,6 +8,9 @@ public class Missile : MonoBehaviour
     Rigidbody rigidBody;
     AudioSource audioSource;
 
+    [SerializeField] float rcsThrust = 200f;
+    [SerializeField] float mainThrust = 200f;
+
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
@@ -23,15 +26,16 @@ public class Missile : MonoBehaviour
     // Rotate object, reacting only to one statement at time
     private void Rotate()
     {
+        float rotationThisFrame = rcsThrust * Time.deltaTime;
         rigidBody.freezeRotation = true;  // take manual control of rotation
 
         if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
         {
-            transform.Rotate(Vector3.forward);
+            transform.Rotate(Vector3.forward * rotationThisFrame);
         }
         else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
         {
-            transform.Rotate(-Vector3.forward);
+            transform.Rotate(-Vector3.forward * rotationThisFrame);
         }
 
         rigidBody.freezeRotation = false;  // resume physics control of rotation
@@ -40,9 +44,10 @@ public class Missile : MonoBehaviour
     // Accelerate object, play audio sound of thrusting while pressing button
     private void Thrust()
     {
+        float mainThrustThisFrame = mainThrust * Time.deltaTime;
         if (Input.GetKey(KeyCode.Space))  // can adjust speed while rotating
         {
-            rigidBody.AddRelativeForce(Vector3.up);
+            rigidBody.AddRelativeForce(Vector3.up *  mainThrustThisFrame);
             if (!audioSource.isPlaying)
             {
                 audioSource.Play();

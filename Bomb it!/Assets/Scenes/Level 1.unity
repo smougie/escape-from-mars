@@ -377,7 +377,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1898214247, guid: 18d53518e7ac53d43a690fca174dad21, type: 3}
       propertyPath: m_Drag
-      value: 0.2
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1898214247, guid: 18d53518e7ac53d43a690fca174dad21, type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1898214248, guid: 18d53518e7ac53d43a690fca174dad21, type: 3}
+      propertyPath: rcsThrust
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 1898214248, guid: 18d53518e7ac53d43a690fca174dad21, type: 3}
+      propertyPath: mainThrust
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 5686950070206086552, guid: 18d53518e7ac53d43a690fca174dad21,
         type: 3}
@@ -438,6 +450,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Rocket Ship
+      objectReference: {fileID: 0}
+    - target: {fileID: 5686950070206086559, guid: 18d53518e7ac53d43a690fca174dad21,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18d53518e7ac53d43a690fca174dad21, type: 3}
@@ -798,6 +815,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Constraints
       value: 56
+      objectReference: {fileID: 0}
+    - target: {fileID: 6695098719491790881, guid: 09a5fa340dc5f324fac29e11b724315a,
+        type: 3}
+      propertyPath: m_Drag
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6695098719491790881, guid: 09a5fa340dc5f324fac29e11b724315a,
+        type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6695098719491790881, guid: 09a5fa340dc5f324fac29e11b724315a,
+        type: 3}
+      propertyPath: m_Mass
+      value: 0.15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09a5fa340dc5f324fac29e11b724315a, type: 3}
