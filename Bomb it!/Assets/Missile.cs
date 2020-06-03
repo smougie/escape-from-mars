@@ -23,6 +23,24 @@ public class Missile : MonoBehaviour
         Thrust();
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        // remove print lines
+        switch (collision.gameObject.tag)
+        {
+            case "Friendly":
+                print("OK");
+                break;
+            case "Fuel":
+                print("Fuel");
+                break;
+            default:
+                print("Dead");  
+                // destroy player gameObject
+                break;
+        }
+    }
+
     // Rotate object, reacting only to one statement at time
     private void Rotate()
     {
