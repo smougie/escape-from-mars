@@ -62,9 +62,10 @@ public class Missile : MonoBehaviour
     // Accelerate object, play audio sound of thrusting while pressing button
     private void Thrust()
     {
+        float thrustThisFrame = mainThrust * Time.deltaTime;
         if (Input.GetKey(KeyCode.Space))  // can adjust speed while rotating
         {
-            rigidBody.AddRelativeForce(Vector3.up *  mainThrust);
+            rigidBody.AddRelativeForce(Vector3.up * thrustThisFrame);
             if (!audioSource.isPlaying)
             {
                 audioSource.Play();
