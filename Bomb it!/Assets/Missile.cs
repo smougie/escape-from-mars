@@ -19,7 +19,7 @@ public class Missile : MonoBehaviour
 
     void Update()
     {
-        Rotate(); 
+        Rotate();
         Thrust();
     }
 
@@ -44,7 +44,7 @@ public class Missile : MonoBehaviour
     // Rotate object, reacting only to one statement at time
     private void Rotate()
     {
-        float rotationThisFrame = rcsThrust * Time.deltaTime;
+        float rotationThisFrame = rcsThrust * Time.deltaTime;  // rotate speed
         rigidBody.freezeRotation = true;  // take manual control of rotation
 
         if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
