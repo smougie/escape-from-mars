@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,6 +11,9 @@ public class Missile : MonoBehaviour
     [SerializeField] float rcsThrust = 200f;
     [SerializeField] float mainThrust = 200f;
 
+    enum State { Alive, Transcending, Dying};
+    State state = State.Alive;
+
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
@@ -18,28 +22,46 @@ public class Missile : MonoBehaviour
 
     void Update()
     {
-        Rotate();
-        Thrust();
+        if (state == State.Alive)
+        {
+            Rotate();
+            Thrust();
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (state != State.Alive)  // ignore collisions if not in Alive state
+        {
+            return;
+        }
+
         // remove print lines
         switch (collision.gameObject.tag)
         {
             case "Friendly":
                 break;
             case "Finish":
-                // todo load next level
-                print("Finish");
-                SceneManager.LoadScene(1);
+                // TODO load next level
+                state = State.Transcending;
+                Invoke("LoadNextLevel", 1f);
                 break;
             default:
-                print("Dead");  
-                SceneManager.LoadScene(0);
+                state = State.Dying;
+                Invoke("LoadFirstLevel", 1f);
                 // destroy player gameObject
                 break;
         }
+    }
+
+    private void LoadFirstLevel()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    private void LoadNextLevel()
+    {
+        SceneManager.LoadScene(1);  // TODO allow for more that just 2 levels
     }
 
     // Rotate object, reacting only to one statement at time
@@ -74,7 +96,7 @@ public class Missile : MonoBehaviour
         }
         else if (Input.GetKeyUp(KeyCode.Space))  // fade out audio sound
         {
-            StartCoroutine(FadeOut(audioSource));
+            StartCoroutine(FadeOut(audioSource));  // TODO if state == State.Dying - startcoroutine to fadeout audio while player still press space 
         }
     }
 
