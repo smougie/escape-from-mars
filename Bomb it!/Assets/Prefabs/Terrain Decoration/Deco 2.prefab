@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8348589276891575708}
+  - component: {fileID: 5880850283788562695}
   m_Layer: 0
   m_Name: Deco 2
   m_TagString: Untagged
@@ -25,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 2847219046970104724}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 5.5, y: 1.5, z: 2}
   m_Children:
   - {fileID: 263626559296568841}
   - {fileID: 7838674315905622080}
@@ -34,6 +35,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &5880850283788562695
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2847219046970104724}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.8846195, y: 2.1104393, z: 2.9122188}
+  m_Center: {x: -0.20730798, y: 3.2870767, z: 0.34188002}
 --- !u!1 &3393261478904494100
 GameObject:
   m_ObjectHideFlags: 0
@@ -45,7 +59,6 @@ GameObject:
   - component: {fileID: 7838674315905622080}
   - component: {fileID: 5206389171930124442}
   - component: {fileID: 3112865518196355572}
-  - component: {fileID: 8886712714725899473}
   m_Layer: 0
   m_Name: Obstacle (1)
   m_TagString: Untagged
@@ -114,19 +127,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &8886712714725899473
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3393261478904494100}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4829801813285568634
 GameObject:
   m_ObjectHideFlags: 0
@@ -138,7 +138,6 @@ GameObject:
   - component: {fileID: 6314967259242674399}
   - component: {fileID: 7758070194526290403}
   - component: {fileID: 3066328009997302746}
-  - component: {fileID: 195300352065308430}
   m_Layer: 0
   m_Name: Obstacle (3)
   m_TagString: Untagged
@@ -207,19 +206,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &195300352065308430
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4829801813285568634}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5596566298655711487
 GameObject:
   m_ObjectHideFlags: 0
@@ -231,7 +217,6 @@ GameObject:
   - component: {fileID: 263626559296568841}
   - component: {fileID: 7417841161516302085}
   - component: {fileID: 8046555671829314186}
-  - component: {fileID: 3021824883338589335}
   m_Layer: 0
   m_Name: Obstacle
   m_TagString: Untagged
@@ -300,19 +285,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &3021824883338589335
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5596566298655711487}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7303288460016098086
 GameObject:
   m_ObjectHideFlags: 0
@@ -324,7 +296,6 @@ GameObject:
   - component: {fileID: 855189229032460812}
   - component: {fileID: 1343712738277018564}
   - component: {fileID: 5152079343193775628}
-  - component: {fileID: 2104386764946167189}
   m_Layer: 0
   m_Name: Obstacle (2)
   m_TagString: Untagged
@@ -393,16 +364,3 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &2104386764946167189
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7303288460016098086}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}

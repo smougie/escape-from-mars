@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Missile : MonoBehaviour
 {
@@ -29,13 +28,15 @@ public class Missile : MonoBehaviour
         switch (collision.gameObject.tag)
         {
             case "Friendly":
-                print("OK");
                 break;
-            case "Fuel":
-                print("Fuel");
+            case "Finish":
+                // todo load next level
+                print("Finish");
+                SceneManager.LoadScene(1);
                 break;
             default:
                 print("Dead");  
+                SceneManager.LoadScene(0);
                 // destroy player gameObject
                 break;
         }
@@ -89,6 +90,5 @@ public class Missile : MonoBehaviour
         }
         audioSource.Stop();
         audioSource.volume = startVolume;
-
     }
 }
