@@ -19,6 +19,8 @@ public class Missile : MonoBehaviour
     [SerializeField] ParticleSystem deathParticles = null;
     [SerializeField] ParticleSystem finishParticles = null;
 
+    float transcendingTime = 1.5f;
+
     enum State { Alive, Transcending, Dying};
     State state = State.Alive;
 
@@ -61,22 +63,30 @@ public class Missile : MonoBehaviour
 
     private void StartSuccessSequence()
     {
+        // TODO freeze ship position to avoid falling down from landing platform
         state = State.Transcending;
         finishParticles.Play();
         Invoke("LoadNextLevel", 1.5f);
         thrustParticles.Stop();
-        StartCoroutine(FadeOut(audioSource));
-        audioSource.PlayOneShot(finishSound);
+        ManageAudio(finishSound);
     }
 
     private void StartDeathSequence()
     {
         state = State.Dying;
         deathParticles.Play();
-        Invoke("LoadFirstLevel", 1.5f);
+        Invoke("LoadFirstLevel", transcendingTime);
         thrustParticles.Stop();
-        StartCoroutine(FadeOut(audioSource));
-        audioSource.PlayOneShot(deathSound);
+        // TODO refactor audio control section
+        ManageAudio(deathSound);
+    }
+
+    // stop current audioSource (thrusting), play death/finish clip, fade out audio death/finish clip in same time as level transcend
+    private void ManageAudio(AudioClip audioClip)
+    {
+        audioSource.Stop();
+        audioSource.PlayOneShot(audioClip);
+        StartCoroutine(FadeOut(audioSource, transcendingTime));
     }
 
     private void LoadFirstLevel()
@@ -117,7 +127,7 @@ public class Missile : MonoBehaviour
         }
         else if (Input.GetKeyUp(KeyCode.Space))  // stop playing audio by fading out audio sound
         {
-            StartCoroutine(FadeOut(audioSource));
+            StartCoroutine(FadeOut(audioSource, .5f));
             thrustParticles.Stop();
         }
     }
@@ -136,13 +146,13 @@ public class Missile : MonoBehaviour
     }
 
     // Fade out audioSource to avoid clip after .Stop()
-    IEnumerator FadeOut(AudioSource audioSource)
+    IEnumerator FadeOut(AudioSource audioSource, float fadingTime)
     {
-        float FadeTime = .5f;
+        float fadeTime = fadingTime;
         float startVolume = audioSource.volume;
         while (audioSource.volume > 0)
         {
-            audioSource.volume -= startVolume * Time.deltaTime / FadeTime;
+            audioSource.volume -= startVolume * Time.deltaTime / fadeTime;
             yield return null;
         }
         audioSource.Stop();
