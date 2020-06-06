@@ -482,6 +482,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 250322170}
   m_PrefabAsset: {fileID: 0}
+--- !u!198 &261457178 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2730476062390118897, guid: 18d53518e7ac53d43a690fca174dad21,
+    type: 3}
+  m_PrefabInstance: {fileID: 1807934448}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &269122251 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4409835928609750110, guid: a6c0b9965f412c64eb72a0bded7325e9,
@@ -3206,6 +3212,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1519749983}
   m_PrefabAsset: {fileID: 0}
+--- !u!198 &1634817192 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 464178776282568813, guid: 18d53518e7ac53d43a690fca174dad21,
+    type: 3}
+  m_PrefabInstance: {fileID: 1807934448}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1642959247 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1698417310696964478, guid: 3cbcce6b1b6367f45a4338175f6fb762,
@@ -3626,6 +3638,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1898214248, guid: 18d53518e7ac53d43a690fca174dad21, type: 3}
+      propertyPath: deathParticles
+      value: 
+      objectReference: {fileID: 261457178}
+    - target: {fileID: 1898214248, guid: 18d53518e7ac53d43a690fca174dad21, type: 3}
+      propertyPath: thrustParticles
+      value: 
+      objectReference: {fileID: 1634817192}
+    - target: {fileID: 1898214248, guid: 18d53518e7ac53d43a690fca174dad21, type: 3}
+      propertyPath: finishParticles
+      value: 
+      objectReference: {fileID: 2140360222}
     - target: {fileID: 5686950070206086552, guid: 18d53518e7ac53d43a690fca174dad21,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3685,6 +3709,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Rocket Ship
+      objectReference: {fileID: 0}
+    - target: {fileID: 5686950070206086559, guid: 18d53518e7ac53d43a690fca174dad21,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18d53518e7ac53d43a690fca174dad21, type: 3}
@@ -4373,6 +4402,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5254473618626432870, guid: 453ac52eacd0d7f458f99083b3fee95c,
     type: 3}
   m_PrefabInstance: {fileID: 460496518}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &2140360222 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 3298692190940383444, guid: 18d53518e7ac53d43a690fca174dad21,
+    type: 3}
+  m_PrefabInstance: {fileID: 1807934448}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &229828750982560153 stripped
 Transform:
@@ -5269,6 +5304,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Missile
+      objectReference: {fileID: 0}
+    - target: {fileID: 3443047847440442901, guid: 09a5fa340dc5f324fac29e11b724315a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5344584235940021895, guid: 09a5fa340dc5f324fac29e11b724315a,
+        type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5344584235940021895, guid: 09a5fa340dc5f324fac29e11b724315a,
+        type: 3}
+      propertyPath: prewarm
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09a5fa340dc5f324fac29e11b724315a, type: 3}

@@ -9,7 +9,15 @@ public class Missile : MonoBehaviour
     AudioSource audioSource;
 
     [SerializeField] float rcsThrust = 200f;
-    [SerializeField] float mainThrust = 200f;
+    [SerializeField] float mainThrust = 1000f;
+
+    [SerializeField] AudioClip thrustSound = null;
+    [SerializeField] AudioClip deathSound = null;
+    [SerializeField] AudioClip finishSound = null;
+
+    [SerializeField] ParticleSystem thrustParticles = null;
+    [SerializeField] ParticleSystem deathParticles = null;
+    [SerializeField] ParticleSystem finishParticles = null;
 
     enum State { Alive, Transcending, Dying};
     State state = State.Alive;
@@ -24,8 +32,8 @@ public class Missile : MonoBehaviour
     {
         if (state == State.Alive)
         {
-            Rotate();
-            Thrust();
+            RespondToRotateInput();
+            RespondToThrustInput();
         }
     }
 
@@ -42,16 +50,33 @@ public class Missile : MonoBehaviour
             case "Friendly":
                 break;
             case "Finish":
-                // TODO load next level
-                state = State.Transcending;
-                Invoke("LoadNextLevel", 1f);
+                StartSuccessSequence();
                 break;
             default:
-                state = State.Dying;
-                Invoke("LoadFirstLevel", 1f);
+                StartDeathSequence();
                 // destroy player gameObject
                 break;
         }
+    }
+
+    private void StartSuccessSequence()
+    {
+        state = State.Transcending;
+        finishParticles.Play();
+        Invoke("LoadNextLevel", 1.5f);
+        thrustParticles.Stop();
+        StartCoroutine(FadeOut(audioSource));
+        audioSource.PlayOneShot(finishSound);
+    }
+
+    private void StartDeathSequence()
+    {
+        state = State.Dying;
+        deathParticles.Play();
+        Invoke("LoadFirstLevel", 1.5f);
+        thrustParticles.Stop();
+        StartCoroutine(FadeOut(audioSource));
+        audioSource.PlayOneShot(deathSound);
     }
 
     private void LoadFirstLevel()
@@ -65,7 +90,7 @@ public class Missile : MonoBehaviour
     }
 
     // Rotate object, reacting only to one statement at time
-    private void Rotate()
+    private void RespondToRotateInput()
     {
         float rotationThisFrame = rcsThrust * Time.deltaTime;  // rotate speed
         rigidBody.freezeRotation = true;  // take manual control of rotation
@@ -83,20 +108,30 @@ public class Missile : MonoBehaviour
     }
 
     // Accelerate object, play audio sound of thrusting while pressing button
-    private void Thrust()
+    private void RespondToThrustInput()
     {
         float thrustThisFrame = mainThrust * Time.deltaTime;
         if (Input.GetKey(KeyCode.Space))  // can adjust speed while rotating
         {
-            rigidBody.AddRelativeForce(Vector3.up * thrustThisFrame);
-            if (!audioSource.isPlaying)
-            {
-                audioSource.Play();
-            }
+            ApplyThrust(thrustThisFrame);
         }
-        else if (Input.GetKeyUp(KeyCode.Space))  // fade out audio sound
+        else if (Input.GetKeyUp(KeyCode.Space))  // stop playing audio by fading out audio sound
         {
-            StartCoroutine(FadeOut(audioSource));  // TODO if state == State.Dying - startcoroutine to fadeout audio while player still press space 
+            StartCoroutine(FadeOut(audioSource));
+            thrustParticles.Stop();
+        }
+    }
+
+    private void ApplyThrust(float thrustThisFrame)
+    {
+        rigidBody.AddRelativeForce(Vector3.up * thrustThisFrame);
+        if (!audioSource.isPlaying)
+        {
+            audioSource.PlayOneShot(thrustSound);
+        }
+        if (!thrustParticles.isPlaying)
+        {
+            thrustParticles.Play();
         }
     }
 
