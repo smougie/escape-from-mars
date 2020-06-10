@@ -23,8 +23,12 @@ public class RotateOscillator : MonoBehaviour
 
     private void MovePlatform()
     {
+        if (period <= Mathf.Epsilon)
+        {
+            return;
+        }
         float cycles = Time.time / period;  // number of cycles as decimal number, from starting the game
-        const float tau = Mathf.PI * 2;  // tau is equal to 2x PI number, so just raw number 6.28(...)
+        const float tau = Mathf.PI * 2f;  // tau is equal to 2x PI number, so just raw number 6.28(...)
 
         // Sine with values from -1 to 1, whole period takes 2 PI or 1 tau, converting number of cycles * tau
         // if cycles is in half (cycles = 0.5f) sin value would be 0 because 0.5 * 2PI gives 1 PI = half cycle

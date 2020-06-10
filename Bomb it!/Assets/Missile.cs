@@ -10,6 +10,7 @@ public class Missile : MonoBehaviour
 
     [SerializeField] float rcsThrust = 200f;
     [SerializeField] float mainThrust = 1000f;
+    [SerializeField] float levelLoadDelay = 1.5f;
 
     [SerializeField] AudioClip thrustSound = null;
     [SerializeField] AudioClip deathSound = null;
@@ -19,7 +20,6 @@ public class Missile : MonoBehaviour
     [SerializeField] ParticleSystem deathParticles = null;
     [SerializeField] ParticleSystem finishParticles = null;
 
-    float transcendingTime = 1.5f;
 
     enum State { Alive, Transcending, Dying};
     State state = State.Alive;
@@ -46,7 +46,6 @@ public class Missile : MonoBehaviour
             return;
         }
 
-        // remove print lines
         switch (collision.gameObject.tag)
         {
             case "Friendly":
@@ -66,7 +65,7 @@ public class Missile : MonoBehaviour
         // TODO freeze ship position to avoid falling down from landing platform
         state = State.Transcending;
         finishParticles.Play();
-        Invoke("LoadNextLevel", 1.5f);
+        Invoke("LoadNextLevel", levelLoadDelay);
         thrustParticles.Stop();
         ManageAudio(finishSound);
     }
@@ -75,7 +74,7 @@ public class Missile : MonoBehaviour
     {
         state = State.Dying;
         deathParticles.Play();
-        Invoke("LoadFirstLevel", transcendingTime);
+        Invoke("LoadFirstLevel", levelLoadDelay);
         thrustParticles.Stop();
         // TODO refactor audio control section
         ManageAudio(deathSound);
@@ -84,9 +83,10 @@ public class Missile : MonoBehaviour
     // stop current audioSource (thrusting), play death/finish clip, fade out audio death/finish clip in same time as level transcend
     private void ManageAudio(AudioClip audioClip)
     {
+        StopAllCoroutines();  // stop FadeOut coroutine which can fadeout finish/death audio clip
         audioSource.Stop();
         audioSource.PlayOneShot(audioClip);
-        StartCoroutine(FadeOut(audioSource, transcendingTime));
+        StartCoroutine(FadeOut(audioSource, levelLoadDelay));
     }
 
     private void LoadFirstLevel()
