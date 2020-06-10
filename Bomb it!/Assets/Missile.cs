@@ -19,6 +19,7 @@ public class Missile : MonoBehaviour
     [SerializeField] ParticleSystem thrustParticles = null;
     [SerializeField] ParticleSystem deathParticles = null;
     [SerializeField] ParticleSystem finishParticles = null;
+    [SerializeField] Light[] objectLights = null;
 
 
     enum State { Alive, Transcending, Dying};
@@ -73,10 +74,10 @@ public class Missile : MonoBehaviour
     private void StartDeathSequence()
     {
         state = State.Dying;
+        DisableLight();
         deathParticles.Play();
         Invoke("LoadFirstLevel", levelLoadDelay);
         thrustParticles.Stop();
-        DisableLight();
         ManageAudio(deathSound);
     }
 
@@ -147,7 +148,10 @@ public class Missile : MonoBehaviour
 
     private void DisableLight()
     {
-        gameObject.layer = 0;
+        foreach (var item in objectLights)
+        {
+            item.enabled = false;
+        }
     }
 
     // Fade out audioSource to avoid clip after .Stop()
