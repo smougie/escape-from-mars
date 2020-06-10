@@ -76,7 +76,7 @@ public class Missile : MonoBehaviour
         deathParticles.Play();
         Invoke("LoadFirstLevel", levelLoadDelay);
         thrustParticles.Stop();
-        // TODO refactor audio control section
+        DisableLight();
         ManageAudio(deathSound);
     }
 
@@ -143,6 +143,11 @@ public class Missile : MonoBehaviour
         {
             thrustParticles.Play();
         }
+    }
+
+    private void DisableLight()
+    {
+        gameObject.layer = 0;
     }
 
     // Fade out audioSource to avoid clip after .Stop()

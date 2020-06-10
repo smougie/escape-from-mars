@@ -2840,6 +2840,10 @@ PrefabInstance:
       propertyPath: mainThrust
       value: 1000
       objectReference: {fileID: 0}
+    - target: {fileID: 1898214248, guid: 18d53518e7ac53d43a690fca174dad21, type: 3}
+      propertyPath: thrustSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 1b1b1842657d5c54e835130112010cc0, type: 3}
     - target: {fileID: 5686950070206086552, guid: 18d53518e7ac53d43a690fca174dad21,
         type: 3}
       propertyPath: m_LocalPosition.x
