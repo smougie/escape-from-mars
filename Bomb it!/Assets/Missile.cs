@@ -22,7 +22,7 @@ public class Missile : MonoBehaviour
 
     [SerializeField] Light[] objectLights = null;
 
-    [SerializeField] GameObject rocketParts = null;
+    [SerializeField] GameObject rocketPartsObject = null;
 
     enum State { Alive, Transcending, Dying};
     State state = State.Alive;
@@ -77,11 +77,11 @@ public class Missile : MonoBehaviour
     {
         state = State.Dying;
         DisableLight();
-        DestroyObject();
         deathParticles.Play();
         Invoke("LoadFirstLevel", levelLoadDelay);
         thrustParticles.Stop();
         ManageAudio(deathSound);
+        DestroyObject();
     }
 
     // stop current audioSource (thrusting), play death/finish clip, fade out audio death/finish clip in same time as level transcend
@@ -157,13 +157,22 @@ public class Missile : MonoBehaviour
         }
     }
 
-    // TODO working on this system
+    // TODO working on this system, disable light function still necessary???
     private void DestroyObject()
     {
         Vector3 deathPosition = transform.position;
         Quaternion deathRotation = transform.rotation;
-        Instantiate(rocketParts, deathPosition, deathRotation);
-        Destroy(gameObject);
+        Instantiate(rocketPartsObject, deathPosition, deathRotation);
+        DisableMesh();
+    }
+
+    private void DisableMesh()
+    {
+        GameObject[] objectMeshes = GameObject.FindGameObjectsWithTag("RocketPart");
+        foreach (var item in objectMeshes)
+        {
+            item.GetComponent<Renderer>().enabled = false;
+        }
     }
 
     // Fade out audioSource to avoid clip after .Stop()

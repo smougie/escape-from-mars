@@ -382,7 +382,7 @@ GameObject:
   - component: {fileID: 5686950069093788220}
   m_Layer: 8
   m_Name: Rocket Boost 4
-  m_TagString: Untagged
+  m_TagString: RocketPart
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -476,7 +476,7 @@ GameObject:
   - component: {fileID: 5686950069165568569}
   m_Layer: 8
   m_Name: Rocket Body
-  m_TagString: Untagged
+  m_TagString: RocketPart
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -604,7 +604,7 @@ GameObject:
   - component: {fileID: 5686950069525291597}
   m_Layer: 8
   m_Name: Rocket Boost 2
-  m_TagString: Untagged
+  m_TagString: RocketPart
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -698,7 +698,7 @@ GameObject:
   - component: {fileID: 5686950069571199886}
   m_Layer: 8
   m_Name: Rocket Body Ring 3
-  m_TagString: Untagged
+  m_TagString: RocketPart
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -791,7 +791,7 @@ GameObject:
   - component: {fileID: 5686950069674190693}
   m_Layer: 8
   m_Name: Rocket Body Top
-  m_TagString: Untagged
+  m_TagString: RocketPart
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -871,7 +871,7 @@ GameObject:
   - component: {fileID: 5686950069904109041}
   m_Layer: 8
   m_Name: Rocket Body Ring 1
-  m_TagString: Untagged
+  m_TagString: RocketPart
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -965,7 +965,7 @@ GameObject:
   - component: {fileID: 5686950069982430892}
   m_Layer: 8
   m_Name: Rocket Body Ring 4
-  m_TagString: Untagged
+  m_TagString: RocketPart
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1131,6 +1131,8 @@ MonoBehaviour:
   - {fileID: 1333347459}
   - {fileID: 1398506768}
   - {fileID: 483499290}
+  rocketPartsObject: {fileID: 7957141074272736497, guid: a24fe941bf9b8e3419ddf6cc617ed4b3,
+    type: 3}
 --- !u!82 &2011556143
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1241,7 +1243,7 @@ GameObject:
   - component: {fileID: 5686950070207554750}
   m_Layer: 8
   m_Name: Rocket Boost 1
-  m_TagString: Untagged
+  m_TagString: RocketPart
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1335,7 +1337,7 @@ GameObject:
   - component: {fileID: 5686950070351613822}
   m_Layer: 8
   m_Name: Rocket Body Ring 2
-  m_TagString: Untagged
+  m_TagString: RocketPart
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1429,7 +1431,7 @@ GameObject:
   - component: {fileID: 5686950070695264735}
   m_Layer: 8
   m_Name: Rocket Boost 3
-  m_TagString: Untagged
+  m_TagString: RocketPart
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
