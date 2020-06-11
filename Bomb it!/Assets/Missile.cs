@@ -19,8 +19,10 @@ public class Missile : MonoBehaviour
     [SerializeField] ParticleSystem thrustParticles = null;
     [SerializeField] ParticleSystem deathParticles = null;
     [SerializeField] ParticleSystem finishParticles = null;
+
     [SerializeField] Light[] objectLights = null;
 
+    [SerializeField] GameObject rocketParts = null;
 
     enum State { Alive, Transcending, Dying};
     State state = State.Alive;
@@ -75,6 +77,7 @@ public class Missile : MonoBehaviour
     {
         state = State.Dying;
         DisableLight();
+        DestroyObject();
         deathParticles.Play();
         Invoke("LoadFirstLevel", levelLoadDelay);
         thrustParticles.Stop();
@@ -152,6 +155,15 @@ public class Missile : MonoBehaviour
         {
             item.enabled = false;
         }
+    }
+
+    // TODO working on this system
+    private void DestroyObject()
+    {
+        Vector3 deathPosition = transform.position;
+        Quaternion deathRotation = transform.rotation;
+        Instantiate(rocketParts, deathPosition, deathRotation);
+        Destroy(gameObject);
     }
 
     // Fade out audioSource to avoid clip after .Stop()
