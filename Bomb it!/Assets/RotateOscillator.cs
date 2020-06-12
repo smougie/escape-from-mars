@@ -8,6 +8,7 @@ public class RotateOscillator : MonoBehaviour
     [SerializeField] float angle;
     [SerializeField][Range(0, 1)] float movementFactor;
     [SerializeField] float period = 2f;
+    [SerializeField] float delayTime = 0f;
 
     Quaternion startingRotation;
 
@@ -18,7 +19,14 @@ public class RotateOscillator : MonoBehaviour
 
     void Update()
     {
-        MovePlatform();
+        if (delayTime > 0)
+        {
+            delayTime -= Time.deltaTime;
+        }
+        else
+        {
+            MovePlatform();
+        }
     }
 
     private void MovePlatform()

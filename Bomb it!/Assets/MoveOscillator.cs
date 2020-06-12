@@ -8,6 +8,7 @@ public class MoveOscillator : MonoBehaviour
     [SerializeField] Vector3 movementVector;
     [SerializeField][Range(0, 1)] float movementFactor;
     [SerializeField] float period = 2f;
+    [SerializeField] float delayTime = 0f;
 
     Vector3 startingPosition;
 
@@ -18,16 +19,22 @@ public class MoveOscillator : MonoBehaviour
 
     void Update()
     {
-        MovePlatform();
+        if (delayTime > 0)  // delay for start MovePlatform() method
+        {
+            delayTime -= Time.deltaTime;
+        }
+        else
+        {
+            MovePlatform();
+        }
     }
 
     private void MovePlatform()
     {
-        if (period <= Mathf.Epsilon)
+        if (period <= Mathf.Epsilon)  // if period is less than 0, avoid dividing by 0
         {
             return;
         }
-        // TODO protect from period equal to 0
         float cycles = Time.time / period;  // number of cycles as decimal number, from starting the game
         const float tau = Mathf.PI * 2f;  // tau is equal to 2x PI number, so just raw number 6.28(...)
 

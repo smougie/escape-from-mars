@@ -24,6 +24,8 @@ public class Missile : MonoBehaviour
 
     [SerializeField] GameObject rocketPartsObject = null;
 
+    [SerializeField] bool destroyOnDeath = true;
+
     enum State { Alive, Transcending, Dying};
     State state = State.Alive;
 
@@ -76,12 +78,18 @@ public class Missile : MonoBehaviour
     private void StartDeathSequence()
     {
         state = State.Dying;
-        DisableLight();
         deathParticles.Play();
         Invoke("LoadFirstLevel", levelLoadDelay);
         thrustParticles.Stop();
         ManageAudio(deathSound);
-        DestroyObject();
+        if (!destroyOnDeath)
+        {
+            DisableLight();
+        }
+        if (destroyOnDeath)
+        {
+            DestroyObject();
+        }
     }
 
     // stop current audioSource (thrusting), play death/finish clip, fade out audio death/finish clip in same time as level transcend
@@ -149,6 +157,7 @@ public class Missile : MonoBehaviour
         }
     }
 
+    // TODO still need??? Make destroyOnDeath in inspector if destroyOnDeath than dont disable light
     private void DisableLight()
     {
         foreach (var item in objectLights)

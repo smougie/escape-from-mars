@@ -235,6 +235,8 @@ MonoBehaviour:
   finishParticles: {fileID: 4879000749663432507}
   objectLights:
   - {fileID: 127481279}
+  rocketPartsObject: {fileID: 0}
+  destroyOnDeath: 0
 --- !u!136 &4007837944048727740
 CapsuleCollider:
   m_ObjectHideFlags: 0
