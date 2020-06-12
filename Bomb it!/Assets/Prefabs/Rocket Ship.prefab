@@ -1135,9 +1135,9 @@ MonoBehaviour:
   rcsThrust: 200
   mainThrust: 1000
   levelLoadDelay: 1.5
-  thrustSound: {fileID: 8300000, guid: 1b1b1842657d5c54e835130112010cc0, type: 3}
-  deathSound: {fileID: 8300000, guid: f1e3eb8cab82d6641a71d9d4a1741472, type: 3}
-  finishSound: {fileID: 8300000, guid: 593cf8157a4894a4ab43b1a0a5a7451e, type: 3}
+  thrustSound: {fileID: 8300000, guid: d52f257a42277574ba4225802203201e, type: 3}
+  deathSound: {fileID: 8300000, guid: 72a345471509a8047a702c71e801df2b, type: 3}
+  finishSound: {fileID: 8300000, guid: 69a5c766bdf101e4e9de239a1cc30653, type: 3}
   thrustParticles: {fileID: 464178776282568813}
   deathParticles: {fileID: 2730476062390118897}
   finishParticles: {fileID: 3298692190940383444}

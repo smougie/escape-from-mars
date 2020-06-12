@@ -1938,6 +1938,7 @@ MonoBehaviour:
   angle: 50
   movementFactor: 0
   period: 2
+  delayTime: 0
 --- !u!4 &989966931 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1698417310696964478, guid: 3cbcce6b1b6367f45a4338175f6fb762,
@@ -2173,6 +2174,7 @@ MonoBehaviour:
   movementVector: {x: 0, y: 14, z: 0}
   movementFactor: 0
   period: 500
+  delayTime: 0
 --- !u!1 &1203656044
 GameObject:
   m_ObjectHideFlags: 0
@@ -4914,6 +4916,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd82f6bb9dad07249a752fa0e2649668, type: 3}
+--- !u!1 &3111446555759860105 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3111446554693024284, guid: fd82f6bb9dad07249a752fa0e2649668,
+    type: 3}
+  m_PrefabInstance: {fileID: 3111446555759860104}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3111446555759860106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3111446555759860105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a012272fd158a01448ab45348f5999f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeLevel: 0.1
 --- !u!1001 &3463672208010166933
 PrefabInstance:
   m_ObjectHideFlags: 0

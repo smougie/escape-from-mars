@@ -7,6 +7,7 @@ public class Missile : MonoBehaviour
 {
     Rigidbody rigidBody;
     AudioSource audioSource;
+    float startVolume;
 
     [SerializeField] float rcsThrust = 200f;
     [SerializeField] float mainThrust = 1000f;
@@ -33,6 +34,7 @@ public class Missile : MonoBehaviour
     {
         rigidBody = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
+        startVolume = audioSource.volume;
     }
 
     void Update()
@@ -60,7 +62,6 @@ public class Missile : MonoBehaviour
                 break;
             default:
                 StartDeathSequence();
-                // destroy player gameObject
                 break;
         }
     }
@@ -80,8 +81,8 @@ public class Missile : MonoBehaviour
         state = State.Dying;
         deathParticles.Play();
         Invoke("LoadFirstLevel", levelLoadDelay);
-        thrustParticles.Stop();
         ManageAudio(deathSound);
+        thrustParticles.Stop();
         if (!destroyOnDeath)
         {
             DisableLight();
@@ -96,6 +97,7 @@ public class Missile : MonoBehaviour
     private void ManageAudio(AudioClip audioClip)
     {
         StopAllCoroutines();  // stop FadeOut coroutine which can fadeout finish/death audio clip
+        audioSource.volume = startVolume;
         audioSource.Stop();
         audioSource.PlayOneShot(audioClip);
         StartCoroutine(FadeOut(audioSource, levelLoadDelay));
@@ -188,7 +190,6 @@ public class Missile : MonoBehaviour
     IEnumerator FadeOut(AudioSource audioSource, float fadingTime)
     {
         float fadeTime = fadingTime;
-        float startVolume = audioSource.volume;
         while (audioSource.volume > 0)
         {
             audioSource.volume -= startVolume * Time.deltaTime / fadeTime;
