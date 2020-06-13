@@ -5,10 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class Missile : MonoBehaviour
 {
-    Rigidbody rigidBody;
-    AudioSource audioSource;
-    float startVolume;
-
     [SerializeField] float rcsThrust = 200f;
     [SerializeField] float mainThrust = 1000f;
     [SerializeField] float levelLoadDelay = 1.5f;
@@ -21,13 +17,18 @@ public class Missile : MonoBehaviour
     [SerializeField] ParticleSystem deathParticles = null;
     [SerializeField] ParticleSystem finishParticles = null;
 
-    [SerializeField] Light[] objectLights = null;
-
     [SerializeField] GameObject rocketPartsObject = null;
     [SerializeField] GameObject levelLandingPad = null;
 
+    [SerializeField] Light[] objectLights = null;
+
     [SerializeField] bool destroyOnDeath = true;
+
+    Rigidbody rigidBody;
+    AudioSource audioSource;
+    float startVolume;
     bool landing = false;
+    bool collisionsEnabled = true;
 
     enum State { Alive, Transcending, Dying};
     State state = State.Alive;
@@ -50,11 +51,28 @@ public class Missile : MonoBehaviour
         {
             LandingSequence();
         }
+        if (Debug.isDebugBuild)
+        {
+            DebugKeys();
+        }
+    }
+
+    private void DebugKeys()
+    {
+        Collider[] objectsColliders = GetComponentsInChildren<Collider>();
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            LoadNextLevel();
+        }
+        else if (Input.GetKeyDown(KeyCode.C))
+        {
+            collisionsEnabled = !collisionsEnabled;  // simple toggle
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (state != State.Alive)  // ignore collisions if not in Alive state
+        if (state != State.Alive || !collisionsEnabled)  // ignore collisions if not in Alive state
         {
             return;
         }
@@ -74,23 +92,21 @@ public class Missile : MonoBehaviour
 
     private void StartSuccessSequence()
     {
-        // TODO freeze ship position to avoid falling down from landing platform
-        rigidBody.constraints = RigidbodyConstraints.FreezeAll;
-        landing = true;
         state = State.Transcending;
-        finishParticles.Play();
-        Invoke("LoadNextLevel", levelLoadDelay);
-        thrustParticles.Stop();
-        ManageAudio(finishSound);
+        landing = true;  // raise landing flag which is tracked inside Update(), if true start LandingSequence
+        finishParticles.Play();  // play level finish particles
+        thrustParticles.Stop();  // stop playing thrusting particles
+        Invoke("LoadNextLevel", levelLoadDelay);  // load next level after delay
+        ManageAudio(finishSound);  // control audio
     }
 
     private void StartDeathSequence()
     {
         state = State.Dying;
         deathParticles.Play();
+        thrustParticles.Stop();
         Invoke("LoadFirstLevel", levelLoadDelay);
         ManageAudio(deathSound);
-        thrustParticles.Stop();
         if (!destroyOnDeath)
         {
             DisableLight();
@@ -117,6 +133,7 @@ public class Missile : MonoBehaviour
         var currentRotation = transform.rotation;
         Vector3 rocketStartingPosition = transform.position;
         var landingPadPosition = levelLandingPad.transform.position.y;
+        rigidBody.constraints = RigidbodyConstraints.FreezeAll;
         if (transform.rotation.z <= -.01f || transform.rotation.z >= .01f)
         {
             transform.Rotate(-Vector3.forward * transform.rotation.z * (levelLoadDelay * landingInheritAndSpeed));
@@ -135,7 +152,17 @@ public class Missile : MonoBehaviour
 
     private void LoadNextLevel()
     {
-        SceneManager.LoadScene(1);  // TODO allow for more that just 2 levels
+        int sceneIndex = SceneManager.GetActiveScene().buildIndex;
+        int nextSceneIndex = sceneIndex + 1;
+        if (sceneIndex == SceneManager.sceneCountInBuildSettings - 1)  // if sceneIndex is equal to last scene, load first level (loop)
+        {
+            LoadFirstLevel();
+        }
+        else
+        {
+            SceneManager.LoadScene(nextSceneIndex);
+        }
+
     }
 
     // Rotate object, reacting only to one statement at time
@@ -184,7 +211,6 @@ public class Missile : MonoBehaviour
         }
     }
 
-    // TODO still need??? Make destroyOnDeath in inspector if destroyOnDeath than dont disable light
     private void DisableLight()
     {
         foreach (var item in objectLights)
@@ -193,7 +219,6 @@ public class Missile : MonoBehaviour
         }
     }
 
-    // TODO working on this system, disable light function still necessary???
     private void DestroyObject()
     {
         Vector3 deathPosition = transform.position;
