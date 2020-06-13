@@ -29,9 +29,7 @@ public class Missile : MonoBehaviour
     float startVolume;
     bool landing = false;
     bool collisionsEnabled = true;
-
-    enum State { Alive, Transcending, Dying};
-    State state = State.Alive;
+    bool isTransitioning = false;
 
     void Start()
     {
@@ -42,7 +40,7 @@ public class Missile : MonoBehaviour
 
     void Update()
     {
-        if (state == State.Alive)
+        if (!isTransitioning)
         {
             RespondToRotateInput();
             RespondToThrustInput();
@@ -72,7 +70,7 @@ public class Missile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (state != State.Alive || !collisionsEnabled)  // ignore collisions if not in Alive state
+        if (isTransitioning || !collisionsEnabled)  // ignore collisions if not in Alive state
         {
             return;
         }
@@ -92,7 +90,7 @@ public class Missile : MonoBehaviour
 
     private void StartSuccessSequence()
     {
-        state = State.Transcending;
+        isTransitioning = true;
         landing = true;  // raise landing flag which is tracked inside Update(), if true start LandingSequence
         finishParticles.Play();  // play level finish particles
         thrustParticles.Stop();  // stop playing thrusting particles
@@ -102,7 +100,7 @@ public class Missile : MonoBehaviour
 
     private void StartDeathSequence()
     {
-        state = State.Dying;
+        isTransitioning = true;
         deathParticles.Play();
         thrustParticles.Stop();
         Invoke("LoadFirstLevel", levelLoadDelay);
@@ -154,7 +152,7 @@ public class Missile : MonoBehaviour
     {
         int sceneIndex = SceneManager.GetActiveScene().buildIndex;
         int nextSceneIndex = sceneIndex + 1;
-        if (sceneIndex == SceneManager.sceneCountInBuildSettings - 1)  // if sceneIndex is equal to last scene, load first level (loop)
+        if (nextSceneIndex == SceneManager.sceneCountInBuildSettings)  // if sceneIndex is equal to last scene, load first level (loop)
         {
             LoadFirstLevel();
         }
@@ -169,8 +167,8 @@ public class Missile : MonoBehaviour
     private void RespondToRotateInput()
     {
         float rotationThisFrame = rcsThrust * Time.deltaTime;  // rotate speed
-        rigidBody.freezeRotation = true;  // take manual control of rotation
-
+        rigidBody.angularVelocity = Vector3.zero;  // remove rotation due to physics
+  
         if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
         {
             transform.Rotate(Vector3.forward * rotationThisFrame);
@@ -179,8 +177,6 @@ public class Missile : MonoBehaviour
         {
             transform.Rotate(-Vector3.forward * rotationThisFrame);
         }
-
-        rigidBody.freezeRotation = false;  // resume physics control of rotation
     }
 
     // Accelerate object, play audio sound of thrusting while pressing button
@@ -193,9 +189,14 @@ public class Missile : MonoBehaviour
         }
         else if (Input.GetKeyUp(KeyCode.Space))  // stop playing audio by fading out audio sound
         {
-            StartCoroutine(FadeOut(audioSource, .5f));
-            thrustParticles.Stop();
+            StopThrusting();
         }
+    }
+
+    private void StopThrusting()
+    {
+        StartCoroutine(FadeOut(audioSource, .5f));
+        thrustParticles.Stop();
     }
 
     private void ApplyThrust(float thrustThisFrame)

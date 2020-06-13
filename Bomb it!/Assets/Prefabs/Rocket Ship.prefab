@@ -15380,7 +15380,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 120
+  m_Constraints: 56
   m_CollisionDetection: 0
 --- !u!114 &1898214248
 MonoBehaviour:
@@ -15403,13 +15403,14 @@ MonoBehaviour:
   thrustParticles: {fileID: 464178776282568813}
   deathParticles: {fileID: 2730476062390118897}
   finishParticles: {fileID: 3298692190940383444}
+  rocketPartsObject: {fileID: 7957141074272736497, guid: a24fe941bf9b8e3419ddf6cc617ed4b3,
+    type: 3}
+  levelLandingPad: {fileID: 0}
   objectLights:
   - {fileID: 8167212}
   - {fileID: 1333347459}
   - {fileID: 1398506768}
   - {fileID: 483499290}
-  rocketPartsObject: {fileID: 7957141074272736497, guid: a24fe941bf9b8e3419ddf6cc617ed4b3,
-    type: 3}
   destroyOnDeath: 1
 --- !u!82 &2011556143
 AudioSource:
