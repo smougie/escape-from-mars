@@ -113,13 +113,14 @@ public class Missile : MonoBehaviour
 
     private void LandingSequence()
     {
+        float landingInheritAndSpeed = 2f;
         var currentRotation = transform.rotation;
         Vector3 rocketStartingPosition = transform.position;
         var landingPadPosition = levelLandingPad.transform.position.y;
         if (transform.rotation.z <= -.01f || transform.rotation.z >= .01f)
         {
-            transform.Rotate(-Vector3.forward * transform.rotation.z * Time.time / levelLoadDelay);
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(rocketStartingPosition.x, landingPadPosition + 2f, rocketStartingPosition.z), Time.deltaTime / levelLoadDelay);
+            transform.Rotate(-Vector3.forward * transform.rotation.z * (levelLoadDelay * landingInheritAndSpeed));
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(rocketStartingPosition.x, landingPadPosition + landingInheritAndSpeed, rocketStartingPosition.z), Time.deltaTime);
         }
         else
         {
