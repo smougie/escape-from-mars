@@ -8,7 +8,7 @@ public class MoveOscillator : MonoBehaviour
     [SerializeField] Vector3 movementVector;
     [SerializeField][Range(0, 1)] float movementFactor;
     [SerializeField] float period = 2f;
-    [SerializeField] float delayTime = 0f;
+    [SerializeField] float differenceTime = 0f;
 
     Vector3 startingPosition;
 
@@ -19,14 +19,7 @@ public class MoveOscillator : MonoBehaviour
 
     void Update()
     {
-        if (delayTime > 0)  // delay for start MovePlatform() method
-        {
-            delayTime -= Time.deltaTime;
-        }
-        else
-        {
-            MovePlatform();
-        }
+        MovePlatform();
     }
 
     private void MovePlatform()
@@ -35,7 +28,7 @@ public class MoveOscillator : MonoBehaviour
         {
             return;
         }
-        float cycles = Time.time / period;  // number of cycles as decimal number, from starting the game
+        float cycles = Time.time + differenceTime / period;  // number of cycles as decimal number, from starting the game
         const float tau = Mathf.PI * 2f;  // tau is equal to 2x PI number, so just raw number 6.28(...)
 
         // Sine with values from -1 to 1, whole period takes 2 PI or 1 tau, converting number of cycles * tau

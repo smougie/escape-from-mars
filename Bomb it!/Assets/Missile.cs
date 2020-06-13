@@ -24,8 +24,10 @@ public class Missile : MonoBehaviour
     [SerializeField] Light[] objectLights = null;
 
     [SerializeField] GameObject rocketPartsObject = null;
+    [SerializeField] GameObject levelLandingPad = null;
 
     [SerializeField] bool destroyOnDeath = true;
+    bool landing = false;
 
     enum State { Alive, Transcending, Dying};
     State state = State.Alive;
@@ -43,6 +45,10 @@ public class Missile : MonoBehaviour
         {
             RespondToRotateInput();
             RespondToThrustInput();
+        }
+        if (landing)
+        {
+            LandingSequence();
         }
     }
 
@@ -69,6 +75,8 @@ public class Missile : MonoBehaviour
     private void StartSuccessSequence()
     {
         // TODO freeze ship position to avoid falling down from landing platform
+        rigidBody.constraints = RigidbodyConstraints.FreezeAll;
+        landing = true;
         state = State.Transcending;
         finishParticles.Play();
         Invoke("LoadNextLevel", levelLoadDelay);
@@ -101,6 +109,22 @@ public class Missile : MonoBehaviour
         audioSource.Stop();
         audioSource.PlayOneShot(audioClip);
         StartCoroutine(FadeOut(audioSource, levelLoadDelay));
+    }
+
+    private void LandingSequence()
+    {
+        var currentRotation = transform.rotation;
+        Vector3 rocketStartingPosition = transform.position;
+        var landingPadPosition = levelLandingPad.transform.position.y;
+        if (transform.rotation.z <= -.01f || transform.rotation.z >= .01f)
+        {
+            transform.Rotate(-Vector3.forward * transform.rotation.z * Time.time / levelLoadDelay);
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(rocketStartingPosition.x, landingPadPosition + 2f, rocketStartingPosition.z), Time.deltaTime / levelLoadDelay);
+        }
+        else
+        {
+            landing = false;
+        }
     }
 
     private void LoadFirstLevel()
