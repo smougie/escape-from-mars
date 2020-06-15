@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Missile : MonoBehaviour
 {
@@ -32,11 +33,13 @@ public class Missile : MonoBehaviour
     bool isTransitioning = false;
     float padLandingPositionY = 0f;
 
-    private int currentFuel = 0;
-    private int fuel = 100;
+    private int maxFuel = 100;
+    private int currentFuel;
+    [SerializeField] Slider fuelSlider;
 
     void Start()
     {
+        currentFuel = maxFuel;
         rigidBody = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
         startVolume = audioSource.volume;
@@ -57,7 +60,7 @@ public class Missile : MonoBehaviour
         {
             DebugKeys();
         }
-        print(landing);
+        UpdateFuelValue();
     }
 
     private void DebugKeys()
@@ -157,7 +160,7 @@ public class Missile : MonoBehaviour
         rigidBody.constraints = RigidbodyConstraints.FreezeAll;
         if (transform.rotation.z <= -.01f || transform.rotation.z >= .01f)
         {
-            transform.Rotate(-Vector3.forward * transform.rotation.z * (levelLoadDelay * landingInheritAndSpeed));
+            transform.Rotate(-Vector3.forward * transform.rotation.z * (levelLoadDelay * landingInheritAndSpeed));  // TODO bugged
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(rocketStartingPosition.x, padLandingPositionY + landingInheritAndSpeed, rocketStartingPosition.z), Time.deltaTime);
         }
         else
@@ -206,10 +209,10 @@ public class Missile : MonoBehaviour
     // Accelerate object, play audio sound of thrusting while pressing button
     private void RespondToThrustInput()
     {
-        float thrustThisFrame = mainThrust * Time.deltaTime;
         if (Input.GetKey(KeyCode.Space))  // can adjust speed while rotating
         {
-            ApplyThrust(thrustThisFrame);
+            ApplyThrust();
+            UseFuel();
         }
         else if (Input.GetKeyUp(KeyCode.Space))  // stop playing audio by fading out audio sound
         {
@@ -223,8 +226,9 @@ public class Missile : MonoBehaviour
         thrustParticles.Stop();
     }
 
-    private void ApplyThrust(float thrustThisFrame)
+    private void ApplyThrust()
     {
+        float thrustThisFrame = mainThrust * Time.deltaTime;
         rigidBody.AddRelativeForce(Vector3.up * thrustThisFrame);
         if (!audioSource.isPlaying)
         {
@@ -234,6 +238,24 @@ public class Missile : MonoBehaviour
         {
             thrustParticles.Play();
         }
+    }
+
+    private float fuelCounter = 0f;
+    [SerializeField] float fuelUseSpeed = 1f;
+    private void UseFuel()
+    {
+        fuelCounter += fuelUseSpeed * Time.deltaTime;
+        print(fuelCounter);
+    }
+
+    private void UpdateFuelValue()
+    {
+        if (fuelCounter >= 1f)
+        {
+            fuelCounter -= 1f;
+            currentFuel -= 1;
+        }
+        fuelSlider.value = currentFuel;
     }
 
     private void DisableLight()
