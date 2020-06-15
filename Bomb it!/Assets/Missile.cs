@@ -30,6 +30,10 @@ public class Missile : MonoBehaviour
     bool landing = false;
     bool collisionsEnabled = true;
     bool isTransitioning = false;
+    float padLandingPositionY = 0f;
+
+    private int currentFuel = 0;
+    private int fuel = 100;
 
     void Start()
     {
@@ -40,19 +44,20 @@ public class Missile : MonoBehaviour
 
     void Update()
     {
-        if (!isTransitioning)
+        if (!isTransitioning && !landing)
         {
             RespondToRotateInput();
             RespondToThrustInput();
         }
         if (landing)
         {
-            LandingSequence();
+            StartLandingSequence();
         }
         if (Debug.isDebugBuild)
         {
             DebugKeys();
         }
+        print(landing);
     }
 
     private void DebugKeys()
@@ -80,12 +85,26 @@ public class Missile : MonoBehaviour
             case "Friendly":
                 break;
             case "Finish":
+                AssignPadPosition(collision);
                 StartSuccessSequence();
+                break;
+            case "Refuel":
+                // TODO put refuel method here
+                AssignPadPosition(collision);
+                landing = true;
+                thrustParticles.Stop();
+                StopThrusting();
                 break;
             default:
                 StartDeathSequence();
                 break;
         }
+    }
+
+    private void AssignPadPosition(Collision collision)
+    {
+        padLandingPositionY = collision.gameObject.transform.position.y;
+        print(collision.gameObject.transform.position.y);
     }
 
     private void StartSuccessSequence()
@@ -115,6 +134,11 @@ public class Missile : MonoBehaviour
         }
     }
 
+    private void StartRefuelSequence()
+    {
+        // TODO start refuel sequence
+    }
+
     // stop current audioSource (thrusting), play death/finish clip, fade out audio death/finish clip in same time as level transcend
     private void ManageAudio(AudioClip audioClip)
     {
@@ -125,21 +149,21 @@ public class Missile : MonoBehaviour
         StartCoroutine(FadeOut(audioSource, levelLoadDelay));
     }
 
-    private void LandingSequence()
+    private void StartLandingSequence()
     {
         float landingInheritAndSpeed = 2f;
         var currentRotation = transform.rotation;
         Vector3 rocketStartingPosition = transform.position;
-        var landingPadPosition = levelLandingPad.transform.position.y;
         rigidBody.constraints = RigidbodyConstraints.FreezeAll;
         if (transform.rotation.z <= -.01f || transform.rotation.z >= .01f)
         {
             transform.Rotate(-Vector3.forward * transform.rotation.z * (levelLoadDelay * landingInheritAndSpeed));
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(rocketStartingPosition.x, landingPadPosition + landingInheritAndSpeed, rocketStartingPosition.z), Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(rocketStartingPosition.x, padLandingPositionY + landingInheritAndSpeed, rocketStartingPosition.z), Time.deltaTime);
         }
         else
         {
             landing = false;
+            rigidBody.constraints = RigidbodyConstraints.None;
         }
     }
 

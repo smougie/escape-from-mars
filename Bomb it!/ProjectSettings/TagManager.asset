@@ -7,6 +7,7 @@ TagManager:
   - Friendly
   - Fuel
   - RocketPart
+  - Refuel
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - Launch Pad
   - Obstacle
   - Ground
-  - 
+  - Refuel Pad
   - 
   - 
   - 
