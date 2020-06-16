@@ -13,6 +13,7 @@ public class Missile : MonoBehaviour
     [SerializeField] AudioClip thrustSound = null;
     [SerializeField] AudioClip deathSound = null;
     [SerializeField] AudioClip finishSound = null;
+    [SerializeField] AudioClip emptyFuelSound = null;
 
     [SerializeField] ParticleSystem thrustParticles = null;
     [SerializeField] ParticleSystem deathParticles = null;
@@ -33,12 +34,16 @@ public class Missile : MonoBehaviour
     bool isTransitioning = false;
     float padLandingPositionY = 0f;
 
-    private int maxFuel = 100;
-    private int currentFuel;
+    [SerializeField] float fuelUseSpeed = 1f;
     [SerializeField] Slider fuelSlider;
+    [SerializeField] int maxFuel = 100;
+    private int currentFuel;
+    private float fuelCounter = 0f;
+    private bool noFuel = false;
 
     void Start()
     {
+        fuelSlider.maxValue = maxFuel;
         currentFuel = maxFuel;
         rigidBody = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
@@ -104,12 +109,6 @@ public class Missile : MonoBehaviour
         }
     }
 
-    private void AssignPadPosition(Collision collision)
-    {
-        padLandingPositionY = collision.gameObject.transform.position.y;
-        print(collision.gameObject.transform.position.y);
-    }
-
     private void StartSuccessSequence()
     {
         isTransitioning = true;
@@ -170,6 +169,12 @@ public class Missile : MonoBehaviour
         }
     }
 
+    private void AssignPadPosition(Collision collision)
+    {
+        padLandingPositionY = collision.gameObject.transform.position.y;
+        print(collision.gameObject.transform.position.y);
+    }
+
     private void LoadFirstLevel()
     {
         SceneManager.LoadScene(0);
@@ -209,14 +214,17 @@ public class Missile : MonoBehaviour
     // Accelerate object, play audio sound of thrusting while pressing button
     private void RespondToThrustInput()
     {
-        if (Input.GetKey(KeyCode.Space))  // can adjust speed while rotating
+        if (!noFuel)  // if fuel is not empty
         {
-            ApplyThrust();
-            UseFuel();
-        }
-        else if (Input.GetKeyUp(KeyCode.Space))  // stop playing audio by fading out audio sound
-        {
-            StopThrusting();
+            if (Input.GetKey(KeyCode.Space))  // can adjust speed while rotating
+            {
+                ApplyThrust();
+                UseFuel();
+            }
+            else if (Input.GetKeyUp(KeyCode.Space))  // stop playing audio by fading out audio sound
+            {
+                StopThrusting();
+            }
         }
     }
 
@@ -240,20 +248,32 @@ public class Missile : MonoBehaviour
         }
     }
 
-    private float fuelCounter = 0f;
-    [SerializeField] float fuelUseSpeed = 1f;
     private void UseFuel()
     {
-        fuelCounter += fuelUseSpeed * Time.deltaTime;
-        print(fuelCounter);
+        if (currentFuel > 0)
+        {
+            fuelCounter += fuelUseSpeed * Time.deltaTime;
+        }
+        else if (currentFuel <= 0f)
+        {
+            noFuel = true;
+            StartNoFuelSequence();
+        }
+    }
+
+    private void StartNoFuelSequence()
+    {
+        thrustParticles.Stop();
+        ManageAudio(emptyFuelSound);
     }
 
     private void UpdateFuelValue()
     {
-        if (fuelCounter >= 1f)
+        var decreaseValue = 1;
+        if (fuelCounter >= decreaseValue)
         {
-            fuelCounter -= 1f;
-            currentFuel -= 1;
+            fuelCounter -= decreaseValue;
+            currentFuel -= decreaseValue;
         }
         fuelSlider.value = currentFuel;
     }
