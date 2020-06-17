@@ -8,7 +8,7 @@ public class Missile : MonoBehaviour
 {
     [SerializeField] float rcsThrust = 200f;
     [SerializeField] float mainThrust = 1000f;
-    [SerializeField] float levelLoadDelay = 1.5f;
+    [SerializeField] float levelLoadDelay = 3f;
 
     [SerializeField] AudioClip thrustSound = null;
     [SerializeField] AudioClip deathSound = null;
@@ -32,7 +32,7 @@ public class Missile : MonoBehaviour
     bool landing = false;
     bool collisionsEnabled = true;
     bool isTransitioning = false;
-    float padLandingPositionY = 0f;
+    Vector3 landingPosition;
 
     [SerializeField] float fuelUseSpeed = 1f;
     [SerializeField] Slider fuelSlider;
@@ -41,8 +41,11 @@ public class Missile : MonoBehaviour
     private float fuelCounter = 0f;
     private bool noFuel = false;
 
+    private Quaternion startingRotation;
+
     void Start()
     {
+        startingRotation = gameObject.transform.rotation;
         fuelSlider.maxValue = maxFuel;
         currentFuel = maxFuel;
         rigidBody = GetComponent<Rigidbody>();
@@ -98,6 +101,7 @@ public class Missile : MonoBehaviour
                 break;
             case "Refuel":
                 // TODO put refuel method here
+                Vector3 dupa = collision.transform.position;
                 AssignPadPosition(collision);
                 landing = true;
                 thrustParticles.Stop();
@@ -151,28 +155,37 @@ public class Missile : MonoBehaviour
         StartCoroutine(FadeOut(audioSource, levelLoadDelay));
     }
 
+    
     private void StartLandingSequence()
     {
-        float landingInheritAndSpeed = 2f;
-        var currentRotation = transform.rotation;
-        Vector3 rocketStartingPosition = transform.position;
         rigidBody.constraints = RigidbodyConstraints.FreezeAll;
-        if (transform.rotation.z <= -.01f || transform.rotation.z >= .01f)
+        if (transform.rotation.z >= .01f || transform.rotation.z <= -.01f)
         {
-            transform.Rotate(-Vector3.forward * transform.rotation.z * (levelLoadDelay * landingInheritAndSpeed));  // TODO bugged
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(rocketStartingPosition.x, padLandingPositionY + landingInheritAndSpeed, rocketStartingPosition.z), Time.deltaTime);
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, 0), .02f);
+            transform.position = Vector3.Lerp(transform.position, landingPosition, .02f);
         }
         else
         {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
             landing = false;
             rigidBody.constraints = RigidbodyConstraints.None;
         }
     }
 
+    private void Landing()
+    {
+
+    }
+
     private void AssignPadPosition(Collision collision)
     {
-        padLandingPositionY = collision.gameObject.transform.position.y;
-        print(collision.gameObject.transform.position.y);
+        Vector3 padPosition = collision.gameObject.transform.position;
+        // TODO decide which is better: landing in the center or landing in rocket position
+        // code below for landing in the center of pad
+        padPosition.y = padPosition.y + 2;
+        landingPosition = padPosition;
+        //landingPosition = transform.position;
+        //landingPosition.y = padPosition.y + 2;
     }
 
     private void LoadFirstLevel()
