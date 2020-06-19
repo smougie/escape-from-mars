@@ -31,10 +31,10 @@ public class Missile : MonoBehaviour
     float startVolume;
     bool landing = false;
     bool collisionsEnabled = true;
-    bool isTransitioning = false;
     Vector3 landingPosition;
 
     [SerializeField] float fuelUseSpeed = 1f;
+    [SerializeField] float refuelingSpeed = 1f;
     [SerializeField] Slider fuelSlider;
     [SerializeField] int maxFuel = 100;
     private int currentFuel;
@@ -42,6 +42,12 @@ public class Missile : MonoBehaviour
     private bool noFuel = false;
 
     private Quaternion startingRotation;
+    private bool refueling;
+    private bool rocketOnRefuelingPad;
+
+    enum State { Flying, Refueling, Transistioning};
+    State state;
+    
 
     void Start()
     {
@@ -55,14 +61,21 @@ public class Missile : MonoBehaviour
 
     void Update()
     {
-        if (!isTransitioning && !landing)
+        if (state != State.Transistioning && !landing && !rocketOnRefuelingPad)
         {
             RespondToRotateInput();
+        }
+        if (state != State.Transistioning && !landing)
+        {
             RespondToThrustInput();
         }
         if (landing)
         {
             StartLandingSequence();
+        }
+        if (refueling)
+        {
+            RefuelingRocket();
         }
         if (Debug.isDebugBuild)
         {
@@ -86,7 +99,7 @@ public class Missile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (isTransitioning || !collisionsEnabled)  // ignore collisions if not in Alive state
+        if (state == State.Transistioning || !collisionsEnabled)  // ignore collisions if not in Alive state
         {
             return;
         }
@@ -100,12 +113,8 @@ public class Missile : MonoBehaviour
                 StartSuccessSequence();
                 break;
             case "Refuel":
-                // TODO put refuel method here
-                Vector3 dupa = collision.transform.position;
                 AssignPadPosition(collision);
-                landing = true;
-                thrustParticles.Stop();
-                StopThrusting();
+                StartRefuelSequence();
                 break;
             default:
                 StartDeathSequence();
@@ -113,9 +122,25 @@ public class Missile : MonoBehaviour
         }
     }
 
+    private void OnCollisionExit(Collision collision)
+    {
+        if (state != State.Refueling)
+        {
+
+        }
+        switch (collision.gameObject.tag)
+        {
+            case "Refuel":
+                rocketOnRefuelingPad = false;
+                break;
+            default:
+                break;
+        }
+    }
+
     private void StartSuccessSequence()
     {
-        isTransitioning = true;
+        state = State.Transistioning;
         landing = true;  // raise landing flag which is tracked inside Update(), if true start LandingSequence
         finishParticles.Play();  // play level finish particles
         thrustParticles.Stop();  // stop playing thrusting particles
@@ -125,7 +150,7 @@ public class Missile : MonoBehaviour
 
     private void StartDeathSequence()
     {
-        isTransitioning = true;
+        state = State.Transistioning;
         deathParticles.Play();
         thrustParticles.Stop();
         Invoke("LoadFirstLevel", levelLoadDelay);
@@ -140,9 +165,72 @@ public class Missile : MonoBehaviour
         }
     }
 
+    private void StartNoFuelSequence()
+    {
+        // TODO add state to control situtation when there is no fuel but player still live - for example blocked somewhere, start death sequence after X seconds
+        thrustParticles.Stop();
+        ManageAudio(emptyFuelSound);
+    }
+
     private void StartRefuelSequence()
     {
-        // TODO start refuel sequence
+        landing = true;
+        refueling = true;
+        rocketOnRefuelingPad = true;
+        state = State.Refueling;
+        thrustParticles.Stop();
+        StopThrusting();
+    }
+
+    private void RefuelingRocket()
+    {
+        if (currentFuel < maxFuel)
+        {
+            fuelCounter += refuelingSpeed * Time.deltaTime; // increase fuelCounter
+        }
+        else
+        {
+            refueling = false;
+            state = State.Flying;
+        }
+    }
+
+    private void UseFuel()
+    {
+        if (currentFuel > 0)
+        {
+            fuelCounter += fuelUseSpeed * Time.deltaTime;  // increase fuelCounter value while pressing Thrust button (around 0.03 to 0.1 per space hit)
+        }
+        else if (currentFuel <= 0f)
+        {
+            noFuel = true;
+            StartNoFuelSequence();
+        }
+    }
+
+    private void UpdateFuelValue()
+    {
+        var counterUpdateValue = 1;
+        if (fuelCounter >= counterUpdateValue)  // if fuel counter hit value 1 (used 1 fuel unit) than decrase bar by unit and reset counter
+        {
+            fuelCounter -= counterUpdateValue;  // reset counter value from hitted 1 to 0
+
+            switch (state)  // switch on state if flying -> decrase currentFuel, if refueling -> increase currentFuel
+            {
+                case State.Flying:
+                    currentFuel -= counterUpdateValue;  // update fuel value
+                    break;
+                case State.Refueling:
+                    currentFuel += counterUpdateValue;  // update fuel value
+                    break;
+                case State.Transistioning:
+                    break;
+                default:
+                    break;
+            }
+
+        }
+        fuelSlider.value = currentFuel;  // update bar value
     }
 
     // stop current audioSource (thrusting), play death/finish clip, fade out audio death/finish clip in same time as level transcend
@@ -259,36 +347,6 @@ public class Missile : MonoBehaviour
         {
             thrustParticles.Play();
         }
-    }
-
-    private void UseFuel()
-    {
-        if (currentFuel > 0)
-        {
-            fuelCounter += fuelUseSpeed * Time.deltaTime;
-        }
-        else if (currentFuel <= 0f)
-        {
-            noFuel = true;
-            StartNoFuelSequence();
-        }
-    }
-
-    private void StartNoFuelSequence()
-    {
-        thrustParticles.Stop();
-        ManageAudio(emptyFuelSound);
-    }
-
-    private void UpdateFuelValue()
-    {
-        var decreaseValue = 1;
-        if (fuelCounter >= decreaseValue)
-        {
-            fuelCounter -= decreaseValue;
-            currentFuel -= decreaseValue;
-        }
-        fuelSlider.value = currentFuel;
     }
 
     private void DisableLight()

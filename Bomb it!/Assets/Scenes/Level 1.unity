@@ -5725,7 +5725,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DisableAfterLaunch: 1
-  fadeTime: 2
+  fadeTime: 1
 --- !u!1001 &1986423607
 PrefabInstance:
   m_ObjectHideFlags: 0
