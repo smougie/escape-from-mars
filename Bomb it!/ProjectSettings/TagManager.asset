@@ -8,6 +8,7 @@ TagManager:
   - Fuel
   - RocketPart
   - Refuel
+  - Rocket
   layers:
   - Default
   - TransparentFX

@@ -798,8 +798,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -383.3, y: -240.6}
-  m_SizeDelta: {x: -1025.0345, y: -460.1627}
+  m_AnchoredPosition: {x: -431.75864, y: -251.9}
+  m_SizeDelta: {x: -1023.5173, y: -460.1627}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &259220141
 MonoBehaviour:
@@ -4437,7 +4437,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_UiScaleMode: 1
-  m_ReferencePixelsPerUnit: 100
+  m_ReferencePixelsPerUnit: 10
   m_ScaleFactor: 0.8
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
@@ -5197,6 +5197,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rocket Ship
       objectReference: {fileID: 0}
+    - target: {fileID: 5686950070206086559, guid: 18d53518e7ac53d43a690fca174dad21,
+        type: 3}
+      propertyPath: m_TagString
+      value: Rocket
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18d53518e7ac53d43a690fca174dad21, type: 3}
 --- !u!1001 &1810795697
@@ -5701,6 +5706,26 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 246909756}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1978814404 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1314114850035544420, guid: 990f5a3df96350240898b64589994983,
+    type: 3}
+  m_PrefabInstance: {fileID: 1314114850182007629}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1978814405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1978814404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 507240e48e352104c840ff8736851d42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DisableAfterLaunch: 1
+  fadeTime: 2
 --- !u!1001 &1986423607
 PrefabInstance:
   m_ObjectHideFlags: 0

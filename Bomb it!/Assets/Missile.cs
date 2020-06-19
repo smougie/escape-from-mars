@@ -161,8 +161,7 @@ public class Missile : MonoBehaviour
         rigidBody.constraints = RigidbodyConstraints.FreezeAll;
         if (transform.rotation.z >= .01f || transform.rotation.z <= -.01f)
         {
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, 0), .02f);
-            transform.position = Vector3.Lerp(transform.position, landingPosition, .02f);
+            Landing();
         }
         else
         {
@@ -174,7 +173,8 @@ public class Missile : MonoBehaviour
 
     private void Landing()
     {
-
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, 0), .02f);
+        transform.position = Vector3.Lerp(transform.position, landingPosition, .02f);
     }
 
     private void AssignPadPosition(Collision collision)
