@@ -15336,7 +15336,7 @@ GameObject:
   - component: {fileID: 2011556143}
   m_Layer: 8
   m_Name: Rocket Ship
-  m_TagString: Untagged
+  m_TagString: Rocket
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15400,18 +15400,26 @@ MonoBehaviour:
   thrustSound: {fileID: 8300000, guid: d52f257a42277574ba4225802203201e, type: 3}
   deathSound: {fileID: 8300000, guid: 72a345471509a8047a702c71e801df2b, type: 3}
   finishSound: {fileID: 8300000, guid: 69a5c766bdf101e4e9de239a1cc30653, type: 3}
+  emptyFuelSound: {fileID: 8300000, guid: b60921c96d5a0994c9723c056b4bdf0d, type: 3}
+  refuelingSound: {fileID: 8300000, guid: 2f928f04f9235e743a4f15e343435d47, type: 3}
   thrustParticles: {fileID: 464178776282568813}
   deathParticles: {fileID: 2730476062390118897}
   finishParticles: {fileID: 3298692190940383444}
   rocketPartsObject: {fileID: 7957141074272736497, guid: a24fe941bf9b8e3419ddf6cc617ed4b3,
     type: 3}
   levelLandingPad: {fileID: 0}
+  refuelingEffect: {fileID: 6429843954540609922, guid: 4892b3494e5aeca4cba11eda1c7af6cd,
+    type: 3}
   objectLights:
   - {fileID: 8167212}
   - {fileID: 1333347459}
   - {fileID: 1398506768}
   - {fileID: 483499290}
   destroyOnDeath: 1
+  fuelUseSpeed: 4
+  refuelingSpeed: 4
+  fuelSlider: {fileID: 0}
+  maxFuel: 100
 --- !u!82 &2011556143
 AudioSource:
   m_ObjectHideFlags: 0

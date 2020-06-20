@@ -14,6 +14,7 @@ public class Missile : MonoBehaviour
     [SerializeField] AudioClip deathSound = null;
     [SerializeField] AudioClip finishSound = null;
     [SerializeField] AudioClip emptyFuelSound = null;
+    [SerializeField] AudioClip refuelingSound = null;
 
     [SerializeField] ParticleSystem thrustParticles = null;
     [SerializeField] ParticleSystem deathParticles = null;
@@ -21,6 +22,7 @@ public class Missile : MonoBehaviour
 
     [SerializeField] GameObject rocketPartsObject = null;
     [SerializeField] GameObject levelLandingPad = null;
+    [SerializeField] GameObject refuelingEffect = null;
 
     [SerializeField] Light[] objectLights = null;
 
@@ -44,8 +46,9 @@ public class Missile : MonoBehaviour
     private Quaternion startingRotation;
     private bool refueling;
     private bool rocketOnRefuelingPad;
+    GameObject activeRefuelingEffect;
 
-    enum State { Flying, Refueling, Transistioning};
+    enum State { Flying, Refueling, Transistioning, Launching};
     State state;
     
 
@@ -57,17 +60,22 @@ public class Missile : MonoBehaviour
         rigidBody = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
         startVolume = audioSource.volume;
+        state = State.Launching;
     }
 
     void Update()
     {
-        if (state != State.Transistioning && !landing && !rocketOnRefuelingPad)
+        if (state != State.Transistioning && state != State.Launching && !landing && !rocketOnRefuelingPad)
         {
             RespondToRotateInput();
         }
         if (state != State.Transistioning && !landing)
         {
             RespondToThrustInput();
+        }
+        if (state == State.Launching)
+        {
+            StartFlyingSequence();
         }
         if (landing)
         {
@@ -94,6 +102,10 @@ public class Missile : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.C))
         {
             collisionsEnabled = !collisionsEnabled;  // simple toggle
+        }
+        else if (Input.GetKeyDown(KeyCode.Z))
+        {
+            currentFuel = maxFuel / 10;
         }
     }
 
@@ -126,7 +138,7 @@ public class Missile : MonoBehaviour
     {
         if (state != State.Refueling)
         {
-
+            return;
         }
         switch (collision.gameObject.tag)
         {
@@ -178,8 +190,29 @@ public class Missile : MonoBehaviour
         refueling = true;
         rocketOnRefuelingPad = true;
         state = State.Refueling;
-        thrustParticles.Stop();
         StopThrusting();
+        SpawnRefuelEffect();
+    }
+
+    int prefabCount = 0;
+    private void SpawnRefuelEffect()
+    {
+        if (prefabCount == 0)
+        {
+            activeRefuelingEffect = Instantiate(refuelingEffect, new Vector3(0, transform.position.y - 1.8f, 0), Quaternion.Euler(0, 0, 0), transform);
+            prefabCount++;
+        }
+    }
+
+    IEnumerator DelayRefuelEffect()
+    {
+        yield return new WaitForSeconds(1f);
+    }
+
+    private void StopRefuelEffetct()
+    {
+        Destroy(activeRefuelingEffect);
+        prefabCount--;
     }
 
     private void RefuelingRocket()
@@ -192,6 +225,7 @@ public class Missile : MonoBehaviour
         {
             refueling = false;
             state = State.Flying;
+            StartCoroutine(FadeOut(audioSource, 1f));
         }
     }
 
@@ -243,9 +277,18 @@ public class Missile : MonoBehaviour
         StartCoroutine(FadeOut(audioSource, levelLoadDelay));
     }
 
-    
+    private void PlayRefuelSound()
+    {
+        StopAllCoroutines();  // stop FadeOut coroutine which can fadeout finish/death audio clip
+        audioSource.volume = startVolume;
+        audioSource.Stop();
+        audioSource.PlayOneShot(refuelingSound);
+    }
+
     private void StartLandingSequence()
     {
+        var startTime = Time.time;
+
         rigidBody.constraints = RigidbodyConstraints.FreezeAll;
         if (transform.rotation.z >= .01f || transform.rotation.z <= -.01f)
         {
@@ -257,6 +300,9 @@ public class Missile : MonoBehaviour
             landing = false;
             rigidBody.constraints = RigidbodyConstraints.None;
         }
+        var endTime = Time.time;
+        var executionTime = endTime - startTime;
+        print("Execution time: " + executionTime);
     }
 
     private void Landing()
@@ -346,6 +392,14 @@ public class Missile : MonoBehaviour
         if (!thrustParticles.isPlaying)
         {
             thrustParticles.Play();
+        }
+    }
+
+    private void StartFlyingSequence()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            state = State.Flying;
         }
     }
 

@@ -345,7 +345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a012272fd158a01448ab45348f5999f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volumeLevel: 0.3
+  volumeLevel: 1
 --- !u!1 &193422916
 GameObject:
   m_ObjectHideFlags: 0
@@ -5101,10 +5101,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1898214247, guid: 18d53518e7ac53d43a690fca174dad21, type: 3}
-      propertyPath: m_Constraints
-      value: 56
-      objectReference: {fileID: 0}
     - target: {fileID: 1898214248, guid: 18d53518e7ac53d43a690fca174dad21, type: 3}
       propertyPath: levelLandingPad
       value: 
@@ -5113,30 +5109,6 @@ PrefabInstance:
       propertyPath: fuelSlider
       value: 
       objectReference: {fileID: 259220141}
-    - target: {fileID: 1898214248, guid: 18d53518e7ac53d43a690fca174dad21, type: 3}
-      propertyPath: fuelUseSpeed
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1898214248, guid: 18d53518e7ac53d43a690fca174dad21, type: 3}
-      propertyPath: maxFuel
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 1898214248, guid: 18d53518e7ac53d43a690fca174dad21, type: 3}
-      propertyPath: noFuelThrustSound
-      value: 
-      objectReference: {fileID: 8300000, guid: 9db8fb184e7859d409bc852cdd253a87, type: 3}
-    - target: {fileID: 1898214248, guid: 18d53518e7ac53d43a690fca174dad21, type: 3}
-      propertyPath: thrustSound
-      value: 
-      objectReference: {fileID: 8300000, guid: d52f257a42277574ba4225802203201e, type: 3}
-    - target: {fileID: 1898214248, guid: 18d53518e7ac53d43a690fca174dad21, type: 3}
-      propertyPath: emptyFuelSound
-      value: 
-      objectReference: {fileID: 8300000, guid: b60921c96d5a0994c9723c056b4bdf0d, type: 3}
-    - target: {fileID: 1898214248, guid: 18d53518e7ac53d43a690fca174dad21, type: 3}
-      propertyPath: thrustNoFuelSound
-      value: 
-      objectReference: {fileID: 8300000, guid: 187ea3749d52425488b06c0bca7f7e6c, type: 3}
     - target: {fileID: 5686950070206086552, guid: 18d53518e7ac53d43a690fca174dad21,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5196,11 +5168,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Rocket Ship
-      objectReference: {fileID: 0}
-    - target: {fileID: 5686950070206086559, guid: 18d53518e7ac53d43a690fca174dad21,
-        type: 3}
-      propertyPath: m_TagString
-      value: Rocket
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18d53518e7ac53d43a690fca174dad21, type: 3}
