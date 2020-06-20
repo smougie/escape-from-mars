@@ -106,7 +106,7 @@ public class Missile : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Z))
         {
-            currentFuel = maxFuel / 10;
+            currentFuel = 90;
         }
     }
 
@@ -141,6 +141,18 @@ public class Missile : MonoBehaviour
         {
             case "Refuel":
                 rocketOnRefuelingPad = false;
+                if (refueling)
+                {
+                    refueling = false;
+                }
+                if (state == State.Refueling)
+                {
+                    state = State.Flying;
+                }
+                if (prefabCount != 0)
+                {
+                    StopRefuelEffect();
+                }
                 break;
             default:
                 break;
@@ -200,10 +212,19 @@ public class Missile : MonoBehaviour
 
     private void StopRefuelEffect()
     {
-        Destroy(activeRefuelingEffect);
         prefabCount--;
+        StartCoroutine(DestroyRefuelEffect());
     }
 
+    IEnumerator DestroyRefuelEffect()
+    {
+        ParticleSystem currentRefuelEffect = activeRefuelingEffect.GetComponentInChildren<ParticleSystem>();
+        AudioSource currentRefuelSound = activeRefuelingEffect.GetComponentInChildren<AudioSource>();
+        currentRefuelEffect.Stop();
+        currentRefuelSound.Stop();
+        yield return new WaitForSeconds(1f);
+        Destroy(activeRefuelingEffect);
+    }
     private void RefuelingRocket()
     {
         if (currentFuel < maxFuel)
