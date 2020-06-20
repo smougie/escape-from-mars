@@ -46,9 +46,10 @@ public class Missile : MonoBehaviour
     private Quaternion startingRotation;
     private bool refueling;
     private bool rocketOnRefuelingPad;
+    int prefabCount = 0;
     GameObject activeRefuelingEffect;
 
-    enum State { Flying, Refueling, Transistioning, Launching};
+    enum State { Flying, Refueling, Transistioning, Launching, Landing};
     State state;
     
 
@@ -79,9 +80,9 @@ public class Missile : MonoBehaviour
         }
         if (landing)
         {
-            StartLandingSequence();
+            Landing();
         }
-        if (refueling)
+        if (refueling && !landing)
         {
             RefuelingRocket();
         }
@@ -111,7 +112,7 @@ public class Missile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (state == State.Transistioning || !collisionsEnabled)  // ignore collisions if not in Alive state
+        if (state == State.Transistioning || !collisionsEnabled || rocketOnRefuelingPad)  // ignore collisions if not in Alive state
         {
             return;
         }
@@ -136,10 +137,6 @@ public class Missile : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
-        if (state != State.Refueling)
-        {
-            return;
-        }
         switch (collision.gameObject.tag)
         {
             case "Refuel":
@@ -153,7 +150,7 @@ public class Missile : MonoBehaviour
     private void StartSuccessSequence()
     {
         state = State.Transistioning;
-        landing = true;  // raise landing flag which is tracked inside Update(), if true start LandingSequence
+        StartLandingSequence();
         finishParticles.Play();  // play level finish particles
         thrustParticles.Stop();  // stop playing thrusting particles
         Invoke("LoadNextLevel", levelLoadDelay);  // load next level after delay
@@ -186,30 +183,22 @@ public class Missile : MonoBehaviour
 
     private void StartRefuelSequence()
     {
-        landing = true;
-        refueling = true;
         rocketOnRefuelingPad = true;
-        state = State.Refueling;
+        StartLandingSequence();
+        refueling = true;
         StopThrusting();
-        SpawnRefuelEffect();
     }
 
-    int prefabCount = 0;
     private void SpawnRefuelEffect()
     {
         if (prefabCount == 0)
         {
-            activeRefuelingEffect = Instantiate(refuelingEffect, new Vector3(0, transform.position.y - 1.8f, 0), Quaternion.Euler(0, 0, 0), transform);
+            activeRefuelingEffect = Instantiate(refuelingEffect, transform);
             prefabCount++;
         }
     }
 
-    IEnumerator DelayRefuelEffect()
-    {
-        yield return new WaitForSeconds(1f);
-    }
-
-    private void StopRefuelEffetct()
+    private void StopRefuelEffect()
     {
         Destroy(activeRefuelingEffect);
         prefabCount--;
@@ -225,7 +214,7 @@ public class Missile : MonoBehaviour
         {
             refueling = false;
             state = State.Flying;
-            StartCoroutine(FadeOut(audioSource, 1f));
+            StopRefuelEffect();
         }
     }
 
@@ -287,28 +276,53 @@ public class Missile : MonoBehaviour
 
     private void StartLandingSequence()
     {
-        var startTime = Time.time;
-
         rigidBody.constraints = RigidbodyConstraints.FreezeAll;
-        if (transform.rotation.z >= .01f || transform.rotation.z <= -.01f)
+        landing = true;
+        if (state != State.Transistioning)  // when landing is executed something else than finishing level -> executed by refueling
         {
-            Landing();
+            state = State.Landing;
         }
-        else
-        {
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-            landing = false;
-            rigidBody.constraints = RigidbodyConstraints.None;
-        }
-        var endTime = Time.time;
-        var executionTime = endTime - startTime;
-        print("Execution time: " + executionTime);
+        //if (transform.rotation.z >= .01f || transform.rotation.z <= -.01f)
+        //{
+        //    Landing();
+        //}
+        //else
+        //{
+        //    transform.rotation = Quaternion.Euler(0, 0, 0);
+        //    landing = false;
+        //    rigidBody.constraints = RigidbodyConstraints.None;
+        //}
     }
 
     private void Landing()
     {
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, 0), .02f);
-        transform.position = Vector3.Lerp(transform.position, landingPosition, .02f);
+        float landingSpeedFactor = .03f;
+        if (transform.rotation.z >= .01f || transform.rotation.z <= -.01f)
+        {
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, 0), landingSpeedFactor);
+            transform.position = Vector3.Lerp(transform.position, landingPosition, landingSpeedFactor);
+        }
+        else
+        {
+            StopLandingSequence();
+        }
+    }
+
+    private void StopLandingSequence()
+    {
+        transform.rotation = Quaternion.Euler(0, 0, 0);  // finish rotating by set zero values (after previous landing rotation a small nubers near zero was left)
+        rigidBody.constraints = RigidbodyConstraints.None;  // unfreeze rocket object
+        landing = false;  // drop landing flag to cancel rotation
+        ResumeRefuelingSequence();
+    }
+
+    private void ResumeRefuelingSequence()
+    {
+        if (state == State.Landing)
+        {
+            state = State.Refueling;
+            SpawnRefuelEffect();
+        }
     }
 
     private void AssignPadPosition(Collision collision)
