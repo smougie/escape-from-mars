@@ -51,7 +51,7 @@ public class Missile : MonoBehaviour
 
     enum State { Flying, Refueling, Transistioning, Launching, Landing};
     State state;
-    
+    private bool destroyingRefuelEffect = false;
 
     void Start()
     {
@@ -141,15 +141,15 @@ public class Missile : MonoBehaviour
         {
             case "Refuel":
                 rocketOnRefuelingPad = false;
-                if (refueling)
+                if (refueling)  // drop refueling flag
                 {
                     refueling = false;
                 }
-                if (state == State.Refueling)
+                if (state == State.Refueling)  // change state from refueling to flying
                 {
                     state = State.Flying;
                 }
-                if (prefabCount != 0)
+                if (prefabCount != 0)  // if refueling effect is already spawned, stop this effect
                 {
                     StopRefuelEffect();
                 }
@@ -195,47 +195,55 @@ public class Missile : MonoBehaviour
 
     private void StartRefuelSequence()
     {
-        rocketOnRefuelingPad = true;
-        StartLandingSequence();
-        refueling = true;
-        StopThrusting();
+        print("colided with refueling pad");
+        // TODO refueling is bugging in here, printing message, than refueling sequence not starting
+        rocketOnRefuelingPad = true;  // flag used to track if rocket is on landing pad, mainly to control player to not rotate while on landing pad
+        StartLandingSequence();  // start auto landing sequence
+        refueling = true;  // raise refueling flag,
+        StopThrusting();  // stop thrusting when player hit refueling pad
     }
 
     private void SpawnRefuelEffect()
     {
-        if (prefabCount == 0)
+        if (prefabCount == 0)  // check is refueling effect already spawneds
         {
-            activeRefuelingEffect = Instantiate(refuelingEffect, transform);
-            prefabCount++;
+            activeRefuelingEffect = Instantiate(refuelingEffect, transform);  // spawn refueling effect as a child of rocket
+            prefabCount++;  // increase counter
         }
     }
 
     private void StopRefuelEffect()
     {
-        prefabCount--;
-        StartCoroutine(DestroyRefuelEffect());
+        prefabCount--;  // decrease prefab count
+        StartCoroutine(DestroyRefuelEffect());  // genlty stop playing refueling effect, than destroy it
     }
 
     IEnumerator DestroyRefuelEffect()
     {
+        destroyingRefuelEffect = true;
+        var destroyAfter = 1f;
         ParticleSystem currentRefuelEffect = activeRefuelingEffect.GetComponentInChildren<ParticleSystem>();
         AudioSource currentRefuelSound = activeRefuelingEffect.GetComponentInChildren<AudioSource>();
         currentRefuelEffect.Stop();
         currentRefuelSound.Stop();
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(destroyAfter);
+
         Destroy(activeRefuelingEffect);
+        destroyingRefuelEffect = false;
     }
+
+
     private void RefuelingRocket()
     {
-        if (currentFuel < maxFuel)
+        if (currentFuel < maxFuel)  // check if current fuel is less than max fuel
         {
-            fuelCounter += refuelingSpeed * Time.deltaTime; // increase fuelCounter
+            fuelCounter += refuelingSpeed * Time.deltaTime; // increase fuelCounter, fuelCounter is a counter which track current state of fuel
         }
-        else
+        else  // if max fuel
         {
-            refueling = false;
-            state = State.Flying;
-            StopRefuelEffect();
+            refueling = false;  // drop refueling pad
+            state = State.Flying;  //  change state from refueling to flying
+            StopRefuelEffect();  // stop refueling effect
         }
     }
 
@@ -254,7 +262,7 @@ public class Missile : MonoBehaviour
 
     private void UpdateFuelValue()
     {
-        var counterUpdateValue = 1;
+        var counterUpdateValue = 1;  // value responsible for Fuel Bar update rate
         if (fuelCounter >= counterUpdateValue)  // if fuel counter hit value 1 (used 1 fuel unit) than decrase bar by unit and reset counter
         {
             fuelCounter -= counterUpdateValue;  // reset counter value from hitted 1 to 0
@@ -262,10 +270,10 @@ public class Missile : MonoBehaviour
             switch (state)  // switch on state if flying -> decrase currentFuel, if refueling -> increase currentFuel
             {
                 case State.Flying:
-                    currentFuel -= counterUpdateValue;  // update fuel value
+                    currentFuel -= counterUpdateValue;  // update fuel value by decreasing currentFuel value
                     break;
                 case State.Refueling:
-                    currentFuel += counterUpdateValue;  // update fuel value
+                    currentFuel += counterUpdateValue;  // update fuel value by increasing currentFUel value
                     break;
                 case State.Transistioning:
                     break;
@@ -339,7 +347,7 @@ public class Missile : MonoBehaviour
 
     private void ResumeRefuelingSequence()
     {
-        if (state == State.Landing)
+        if (state == State.Landing || state == State.Flying)
         {
             state = State.Refueling;
             SpawnRefuelEffect();
