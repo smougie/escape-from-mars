@@ -85,6 +85,7 @@ public class Missile : MonoBehaviour
         if (refueling && !landing)
         {
             RefuelingRocket();
+            ChangeRefuelSpeed();
         }
         if (Debug.isDebugBuild)
         {
@@ -106,7 +107,7 @@ public class Missile : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Z))
         {
-            currentFuel = 90;
+            currentFuel = 10;
         }
     }
 
@@ -195,7 +196,6 @@ public class Missile : MonoBehaviour
 
     private void StartRefuelSequence()
     {
-        print("colided with refueling pad");
         // TODO refueling is bugging in here, printing message, than refueling sequence not starting
         rocketOnRefuelingPad = true;  // flag used to track if rocket is on landing pad, mainly to control player to not rotate while on landing pad
         StartLandingSequence();  // start auto landing sequence
@@ -215,7 +215,14 @@ public class Missile : MonoBehaviour
     private void StopRefuelEffect()
     {
         prefabCount--;  // decrease prefab count
-        StartCoroutine(DestroyRefuelEffect());  // genlty stop playing refueling effect, than destroy it
+        if (!destroyingRefuelEffect)
+        {
+            StartCoroutine(DestroyRefuelEffect());  // genlty stop playing refueling effect, than destroy it
+        }
+        else
+        {
+            return;
+        }
     }
 
     IEnumerator DestroyRefuelEffect()
@@ -283,6 +290,26 @@ public class Missile : MonoBehaviour
 
         }
         fuelSlider.value = currentFuel;  // update bar value
+    }
+
+    private void ChangeRefuelSpeed()
+    {
+        if (currentFuel >= 90)
+        {
+            refuelingSpeed = 10f;
+        }
+        else if (currentFuel >= 50 && currentFuel < 90)
+        {
+            refuelingSpeed = 25f;
+        }
+        else if (currentFuel >= 30 && currentFuel < 50)
+        {
+            refuelingSpeed = 50f;
+        }
+        else
+        {
+            refuelingSpeed = 75f;
+        }
     }
 
     // stop current audioSource (thrusting), play death/finish clip, fade out audio death/finish clip in same time as level transcend
