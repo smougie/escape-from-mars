@@ -350,6 +350,8 @@ public class Missile : MonoBehaviour
         if (state == State.Landing || state == State.Flying)
         {
             state = State.Refueling;
+            refueling = true;
+            rocketOnRefuelingPad = true;
             SpawnRefuelEffect();
         }
     }
