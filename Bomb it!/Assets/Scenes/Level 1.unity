@@ -3033,7 +3033,7 @@ PrefabInstance:
     - target: {fileID: 2298477837814229943, guid: 7d06a8775178b4546bfd7a56c1d53f44,
         type: 3}
       propertyPath: m_Name
-      value: Refile Pad
+      value: Refueling Pad
       objectReference: {fileID: 0}
     - target: {fileID: 2950679249872680963, guid: 7d06a8775178b4546bfd7a56c1d53f44,
         type: 3}
@@ -4487,6 +4487,12 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1638489658 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2298477837814229943, guid: 7d06a8775178b4546bfd7a56c1d53f44,
+    type: 3}
+  m_PrefabInstance: {fileID: 1220338101}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1642959247 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1698417310696964478, guid: 3cbcce6b1b6367f45a4338175f6fb762,
@@ -5109,6 +5115,14 @@ PrefabInstance:
       propertyPath: fuelSlider
       value: 
       objectReference: {fileID: 259220141}
+    - target: {fileID: 1898214248, guid: 18d53518e7ac53d43a690fca174dad21, type: 3}
+      propertyPath: RefuelingPad
+      value: 
+      objectReference: {fileID: 1638489658}
+    - target: {fileID: 1898214248, guid: 18d53518e7ac53d43a690fca174dad21, type: 3}
+      propertyPath: refuelingPad
+      value: 
+      objectReference: {fileID: 1638489658}
     - target: {fileID: 5686950070206086552, guid: 18d53518e7ac53d43a690fca174dad21,
         type: 3}
       propertyPath: m_LocalPosition.x

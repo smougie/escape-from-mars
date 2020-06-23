@@ -108,8 +108,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87fb297c684f1a34c98209b4a46f7392, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Active: {fileID: 2100000, guid: 7af781e9f220e0d4bbeb1fc3015c3ae8, type: 2}
-  notActive: {fileID: 2100000, guid: 2b9cba03881f76945b6845d2bcdc7ac8, type: 2}
+  activeMaterial: {fileID: 2100000, guid: 7af781e9f220e0d4bbeb1fc3015c3ae8, type: 2}
+  notActiveMaterial: {fileID: 2100000, guid: 2b9cba03881f76945b6845d2bcdc7ac8, type: 2}
 --- !u!1 &1414066289
 GameObject:
   m_ObjectHideFlags: 0
@@ -555,7 +555,7 @@ GameObject:
   - component: {fileID: 2950679249872680963}
   - component: {fileID: 5936160694198984609}
   m_Layer: 13
-  m_Name: Refuel Pad
+  m_Name: Refueling Pad
   m_TagString: Refuel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
