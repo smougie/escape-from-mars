@@ -21,8 +21,11 @@ public class Missile : MonoBehaviour
     [SerializeField] ParticleSystem finishParticles = null;
 
     [SerializeField] GameObject rocketPartsObject = null;
-    [SerializeField] GameObject levelLandingPad = null;
     [SerializeField] GameObject refuelingEffect = null;
+
+    [SerializeField] GameObject refuelingPad = null;
+    private StatusLight statusLight;
+    private Light refuelingPadLight;
 
     [SerializeField] Light[] objectLights = null;
 
@@ -36,12 +39,13 @@ public class Missile : MonoBehaviour
     Vector3 landingPosition;
 
     [SerializeField] float fuelUseSpeed = 1f;
-    [SerializeField] float refuelingSpeed = 1f;
     [SerializeField] Slider fuelSlider;
     [SerializeField] int maxFuel = 100;
+    private float refuelingSpeed;
     private int currentFuel;
     private float fuelCounter = 0f;
     private bool noFuel = false;
+    private bool alreadyRefueled = false;
 
     private Quaternion startingRotation;
     private bool refueling;
@@ -62,15 +66,17 @@ public class Missile : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         startVolume = audioSource.volume;
         state = State.Launching;
+        statusLight = refuelingPad.GetComponentInChildren<StatusLight>();
+        refuelingPadLight = refuelingPad.GetComponentInChildren<Light>();
     }
 
     void Update()
     {
-        if (state != State.Transistioning && state != State.Launching && !landing && !rocketOnRefuelingPad)
+        if (state != State.Transistioning && state != State.Launching && state != State.Refueling && !landing && !rocketOnRefuelingPad)
         {
             RespondToRotateInput();
         }
-        if (state != State.Transistioning && !landing)
+        if (state != State.Transistioning && state != State.Refueling && !landing)
         {
             RespondToThrustInput();
         }
@@ -127,8 +133,15 @@ public class Missile : MonoBehaviour
                 StartSuccessSequence();
                 break;
             case "Refuel":
-                AssignPadPosition(collision);
-                StartRefuelSequence();
+                if (alreadyRefueled && noFuel)  // if player already refuel his rocket once (so refuel pad is not active) and rocket has no fuel threat refueling pad as normal obstacle
+                {
+                    StartDeathSequence();
+                }
+                else  // in other case use refueling pad normally
+                {
+                    AssignPadPosition(collision);
+                    StartRefuelSequence();
+                }
                 break;
             default:
                 StartDeathSequence();
@@ -140,6 +153,7 @@ public class Missile : MonoBehaviour
     {
         switch (collision.gameObject.tag)
         {
+            // TODO check if those statements are still necessary if we already force player refuel to max at once
             case "Refuel":
                 rocketOnRefuelingPad = false;
                 if (refueling)  // drop refueling flag
@@ -197,10 +211,13 @@ public class Missile : MonoBehaviour
     private void StartRefuelSequence()
     {
         // TODO refueling is bugging in here, printing message, than refueling sequence not starting
-        rocketOnRefuelingPad = true;  // flag used to track if rocket is on landing pad, mainly to control player to not rotate while on landing pad
+        //rocketOnRefuelingPad = true;  // flag used to track if rocket is on landing pad, mainly to control player to not rotate while on landing pad
+        if (!alreadyRefueled)  // check if player already refuel rocket
+        {
+            state = State.Refueling;
+            refueling = true;  // raise refueling flag,
+        }
         StartLandingSequence();  // start auto landing sequence
-        refueling = true;  // raise refueling flag,
-        StopThrusting();  // stop thrusting when player hit refueling pad
     }
 
     private void SpawnRefuelEffect()
@@ -248,9 +265,12 @@ public class Missile : MonoBehaviour
         }
         else  // if max fuel
         {
+            alreadyRefueled = true;
             refueling = false;  // drop refueling pad
             state = State.Flying;  //  change state from refueling to flying
             StopRefuelEffect();  // stop refueling effect
+            statusLight.TurnOff();  // change color of refueling pad status light to red (not Active refueling pad)
+            refuelingPadLight.gameObject.SetActive(false);  // turn off refueling pad spot light
         }
     }
 
@@ -260,7 +280,7 @@ public class Missile : MonoBehaviour
         {
             fuelCounter += fuelUseSpeed * Time.deltaTime;  // increase fuelCounter value while pressing Thrust button (around 0.03 to 0.1 per space hit)
         }
-        else if (currentFuel <= 0f)
+        else if (currentFuel <= 0)
         {
             noFuel = true;
             StartNoFuelSequence();
@@ -304,11 +324,11 @@ public class Missile : MonoBehaviour
         }
         else if (currentFuel >= 30 && currentFuel < 50)
         {
-            refuelingSpeed = 50f;
+            refuelingSpeed = 40f;
         }
         else
         {
-            refuelingSpeed = 75f;
+            refuelingSpeed = 55f;
         }
     }
 
@@ -332,12 +352,13 @@ public class Missile : MonoBehaviour
 
     private void StartLandingSequence()
     {
+        StopThrusting(); // stop thrusting when player hit pad
         rigidBody.constraints = RigidbodyConstraints.FreezeAll;
         landing = true;
-        if (state != State.Transistioning)  // when landing is executed something else than finishing level -> executed by refueling
-        {
-            state = State.Landing;
-        }
+        //if (state != State.Transistioning)  // when landing is executed something else than finishing level -> executed by refueling
+        //{
+        //    state = State.Landing;
+        //}
         //if (transform.rotation.z >= .01f || transform.rotation.z <= -.01f)
         //{
         //    Landing();
@@ -369,12 +390,21 @@ public class Missile : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, 0);  // finish rotating by set zero values (after previous landing rotation a small nubers near zero was left)
         rigidBody.constraints = RigidbodyConstraints.None;  // unfreeze rocket object
         landing = false;  // drop landing flag to cancel rotation
-        ResumeRefuelingSequence();
+        rocketOnRefuelingPad = true;
+        if (state == State.Refueling)
+        {
+            SpawnRefuelEffect();
+        }
+        else
+        {
+            state = State.Flying;
+        }
+        //ResumeRefuelingSequence();
     }
 
     private void ResumeRefuelingSequence()
     {
-        if (state == State.Landing || state == State.Flying)
+        if (state == State.Landing)
         {
             state = State.Refueling;
             refueling = true;

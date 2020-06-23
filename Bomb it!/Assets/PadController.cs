@@ -6,7 +6,6 @@ public class PadController : MonoBehaviour
 {
     [SerializeField] bool DisableAfterLaunch;
     [SerializeField] float fadeTime;
-    private bool fading = false;
     private Renderer objectRenderer;
     private Material objectMaterial;
     private Color objectColorStart;
@@ -20,22 +19,12 @@ public class PadController : MonoBehaviour
         objectColorEnd = new Color(objectColorStart.r, objectColorStart.g, objectColorStart.b, 0);
     }
 
-    private void Update()
-    {
-        //gameObject.GetComponent<Renderer>().material.color = Color.Lerp(objectRenderer.material.color, objectColor, fadeTime * Time.deltaTime);
-    }
-
     private void OnCollisionExit(Collision collision)
     {
         if (collision.gameObject.tag == "Rocket" && DisableAfterLaunch)
         {
             StartCoroutine(fadeOutPad(objectColorStart, objectColorEnd, fadeTime));
         }
-    }
-
-    private void DisablePad()
-    {
-        Destroy(gameObject);
     }
 
     IEnumerator fadeOutPad(Color startColor, Color endColor, float duration)
