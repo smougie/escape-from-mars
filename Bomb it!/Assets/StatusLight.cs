@@ -14,11 +14,6 @@ public class StatusLight : MonoBehaviour
         renderer = GetComponent<Renderer>();
     }
 
-    void Update()
-    {
-        
-    }
-
     public void TurnOff()
     {
         padActive = false;

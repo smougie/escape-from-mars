@@ -57,6 +57,9 @@ public class Missile : MonoBehaviour
     State state;
     private bool destroyingRefuelEffect = false;
 
+    private GameObject gameManagerObject;
+    private GameManager gameManager;
+
     void Start()
     {
         startingRotation = gameObject.transform.rotation;
@@ -68,6 +71,8 @@ public class Missile : MonoBehaviour
         state = State.Launching;
         statusLight = refuelingPad.GetComponentInChildren<StatusLight>();
         refuelingPadLight = refuelingPad.GetComponentInChildren<Light>();
+        gameManagerObject = GameObject.Find("Game Manager");
+        gameManager = gameManagerObject.GetComponent<GameManager>();
     }
 
     void Update()
