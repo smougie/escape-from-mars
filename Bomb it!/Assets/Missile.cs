@@ -60,6 +60,7 @@ public class Missile : MonoBehaviour
     private GameObject gameManagerObject;
     private GameManager gameManager;
 
+
     void Start()
     {
         startingRotation = gameObject.transform.rotation;
@@ -173,6 +174,23 @@ public class Missile : MonoBehaviour
                 {
                     StopRefuelEffect();
                 }
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void OnTriggerEnter(Collider trigger)
+    {
+        switch (trigger.transform.tag)
+        {
+            case "Life":
+                DestroyCollectible(trigger);
+                gameManager.IncreaseLife();
+                break;
+            case "Collectible":
+                DestroyCollectible(trigger);
+                gameManager.IncreaseCollectiblesCount();
                 break;
             default:
                 break;
@@ -503,6 +521,11 @@ public class Missile : MonoBehaviour
         {
             item.GetComponent<Renderer>().enabled = false;
         }
+    }
+
+    private void DestroyCollectible(Collider collision)
+    {
+        Destroy(collision.gameObject);
     }
 
     // Fade out audioSource to avoid clip after .Stop()

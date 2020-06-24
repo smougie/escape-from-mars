@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    static int maxLife = 3;
-    static int currentLife;
+    public static int maxLife = 3;
+    public static int currentLife;
     private bool alive = true;
-    static int maxLevelCollectibles;
-    static int currentCollectiblesValue = 0;
-    static int totalCollectibles = 0;
+    public static int maxLevelCollectibles;
+    public static int currentCollectiblesValue = 0;
+    public static int totalCollectibles = 0;
 
     void Start()
     {
@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        print($"Life: {currentLife}/{maxLife}\nTotal C: {totalCollectibles}");
+        print($"Collectibles: {currentCollectiblesValue}/{maxLevelCollectibles}");
         if (alive)
         {
             CheckLifeStatus();
