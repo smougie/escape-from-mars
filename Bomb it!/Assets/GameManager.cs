@@ -48,7 +48,10 @@ public class GameManager : MonoBehaviour
 
     public void IncreaseLife()
     {
-        currentLife += 1;
+        if (CanCollectLife())
+        {
+            currentLife += 1;
+        }
     }
 
     public void IncreaseCollectiblesCount()
