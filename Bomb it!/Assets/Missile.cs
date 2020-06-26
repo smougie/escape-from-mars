@@ -219,6 +219,7 @@ public class Missile : MonoBehaviour
         DestroyRocket();
         gameManager.DecreaseLife();
         Invoke("RespawnRocket", levelLoadDelay);
+        gameManager.CalculateLevelScore();
     }
 
     private void RespawnRocket()

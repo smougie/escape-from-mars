@@ -10,6 +10,10 @@ public class GameManager : MonoBehaviour
     public static int maxLevelCollectibles;
     public static int currentCollectiblesValue = 0;
     public static int totalCollectibles = 0;
+    private float lifeScore = 0;
+    private float collectiblesScore = 0;
+    private float levelScore = 0;
+    private float totalScore = 0;
 
     void Start()
     {
@@ -20,8 +24,8 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        print($"Life: {currentLife}/{maxLife}\nTotal C: {totalCollectibles}");
-        print($"Collectibles: {currentCollectiblesValue}/{maxLevelCollectibles}");
+        //print($"Life: {currentLife}/{maxLife}\nTotal C: {totalCollectibles}");
+        //print($"Collectibles: {currentCollectiblesValue}/{maxLevelCollectibles}");
         if (alive)
         {
             CheckLifeStatus();
@@ -64,5 +68,27 @@ public class GameManager : MonoBehaviour
     public void ResetLevelCollectiblesCount()
     {
         currentCollectiblesValue = 0;
+    }
+
+    public void CalculateLevelScore()
+    {
+        collectiblesScore = (float)currentCollectiblesValue / (float)maxLevelCollectibles;
+        lifeScore = (float)currentLife / (float)maxLife;
+        levelScore = Mathf.Round(((collectiblesScore + lifeScore) / 2f) * 100f);
+
+        UpdateTotalScore();
+        ResetScoreValues();
+    }
+
+    private void UpdateTotalScore()
+    {
+        totalScore += levelScore;
+    }
+
+    private void ResetScoreValues()
+    {
+        collectiblesScore = 0f;
+        lifeScore = 0f;
+        levelScore = 0f;
     }
 }
