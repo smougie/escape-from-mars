@@ -9887,6 +9887,7 @@ GameObject:
   - component: {fileID: 7165998090399854369}
   - component: {fileID: 4996428363023680526}
   - component: {fileID: 5609495942191304811}
+  - component: {fileID: 4002678291384724977}
   m_Layer: 8
   m_Name: Rocket Top
   m_TagString: RocketPart
@@ -9955,6 +9956,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!136 &4002678291384724977
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2982625613514548056}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3387561094115281704
 GameObject:
   m_ObjectHideFlags: 0
@@ -14720,6 +14735,7 @@ GameObject:
   - component: {fileID: 5686950069093788195}
   - component: {fileID: 5686950069093788222}
   - component: {fileID: 5686950069093788221}
+  - component: {fileID: 5686950069093788220}
   m_Layer: 8
   m_Name: Rocket Boost 4
   m_TagString: RocketPart
@@ -14788,6 +14804,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!136 &5686950069093788220
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5686950069093788194}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5000001
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1 &5686950069165568575
 GameObject:
   m_ObjectHideFlags: 0
@@ -14799,6 +14829,7 @@ GameObject:
   - component: {fileID: 5686950069165568568}
   - component: {fileID: 5686950069165568571}
   - component: {fileID: 5686950069165568570}
+  - component: {fileID: 5686950069165568569}
   m_Layer: 8
   m_Name: Rocket Body
   m_TagString: RocketPart
@@ -14867,6 +14898,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!136 &5686950069165568569
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5686950069165568575}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5000001
+  m_Height: 2.988897
+  m_Direction: 1
+  m_Center: {x: 0.000000059604645, y: 0.49444622, z: -0.00000011920929}
 --- !u!1 &5686950069363908433
 GameObject:
   m_ObjectHideFlags: 0
@@ -14912,6 +14957,7 @@ GameObject:
   - component: {fileID: 5686950069525291596}
   - component: {fileID: 5686950069525291599}
   - component: {fileID: 5686950069525291598}
+  - component: {fileID: 5686950069525291597}
   m_Layer: 8
   m_Name: Rocket Boost 2
   m_TagString: RocketPart
@@ -14980,6 +15026,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!136 &5686950069525291597
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5686950069525291635}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5000001
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1 &5686950069571199884
 GameObject:
   m_ObjectHideFlags: 0
@@ -14991,6 +15051,7 @@ GameObject:
   - component: {fileID: 5686950069571199885}
   - component: {fileID: 5686950069571199880}
   - component: {fileID: 5686950069571199887}
+  - component: {fileID: 5686950069571199886}
   m_Layer: 8
   m_Name: Rocket Body Ring 3
   m_TagString: RocketPart
@@ -15059,6 +15120,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!136 &5686950069571199886
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5686950069571199884}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5686950069904109047
 GameObject:
   m_ObjectHideFlags: 0
@@ -15070,6 +15145,7 @@ GameObject:
   - component: {fileID: 5686950069904109040}
   - component: {fileID: 5686950069904109043}
   - component: {fileID: 5686950069904109042}
+  - component: {fileID: 5686950069904109041}
   m_Layer: 8
   m_Name: Rocket Body Ring 1
   m_TagString: RocketPart
@@ -15138,6 +15214,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!136 &5686950069904109041
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5686950069904109047}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5686950069982429522
 GameObject:
   m_ObjectHideFlags: 0
@@ -15149,6 +15239,7 @@ GameObject:
   - component: {fileID: 5686950069982429523}
   - component: {fileID: 5686950069982430894}
   - component: {fileID: 5686950069982430893}
+  - component: {fileID: 5686950069982430892}
   m_Layer: 8
   m_Name: Rocket Body Ring 4
   m_TagString: RocketPart
@@ -15217,6 +15308,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!136 &5686950069982430892
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5686950069982429522}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5686950070206086559
 GameObject:
   m_ObjectHideFlags: 0
@@ -15229,9 +15334,8 @@ GameObject:
   - component: {fileID: 1898214247}
   - component: {fileID: 1898214248}
   - component: {fileID: 2011556143}
-  - component: {fileID: 1989593877025388486}
   m_Layer: 8
-  m_Name: Rocket Ship 1 Collider
+  m_Name: Rocket Ship
   m_TagString: Rocket
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15303,9 +15407,9 @@ MonoBehaviour:
   finishParticles: {fileID: 3298692190940383444}
   rocketPartsObject: {fileID: 7957141074272736497, guid: a24fe941bf9b8e3419ddf6cc617ed4b3,
     type: 3}
+  levelLandingPad: {fileID: 0}
   refuelingEffect: {fileID: 6429843954540609922, guid: 4892b3494e5aeca4cba11eda1c7af6cd,
     type: 3}
-  refuelingPad: {fileID: 0}
   objectLights:
   - {fileID: 8167212}
   - {fileID: 1333347459}
@@ -15313,6 +15417,7 @@ MonoBehaviour:
   - {fileID: 483499290}
   destroyOnDeath: 1
   fuelUseSpeed: 4
+  refuelingSpeed: 4
   fuelSlider: {fileID: 0}
   maxFuel: 100
 --- !u!82 &2011556143
@@ -15411,19 +15516,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!65 &1989593877025388486
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5686950070206086559}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 3.65, z: 1}
-  m_Center: {x: 0, y: 0.33, z: 0}
 --- !u!1 &5686950070207554748
 GameObject:
   m_ObjectHideFlags: 0
@@ -15435,6 +15527,7 @@ GameObject:
   - component: {fileID: 5686950070207554749}
   - component: {fileID: 5686950070207554744}
   - component: {fileID: 5686950070207554751}
+  - component: {fileID: 5686950070207554750}
   m_Layer: 8
   m_Name: Rocket Boost 1
   m_TagString: RocketPart
@@ -15503,6 +15596,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!136 &5686950070207554750
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5686950070207554748}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5000001
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1 &5686950070351613820
 GameObject:
   m_ObjectHideFlags: 0
@@ -15514,6 +15621,7 @@ GameObject:
   - component: {fileID: 5686950070351613821}
   - component: {fileID: 5686950070351613816}
   - component: {fileID: 5686950070351613823}
+  - component: {fileID: 5686950070351613822}
   m_Layer: 8
   m_Name: Rocket Body Ring 2
   m_TagString: RocketPart
@@ -15582,6 +15690,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!136 &5686950070351613822
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5686950070351613820}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5686950070695264733
 GameObject:
   m_ObjectHideFlags: 0
@@ -15593,6 +15715,7 @@ GameObject:
   - component: {fileID: 5686950070695264734}
   - component: {fileID: 5686950070695264729}
   - component: {fileID: 5686950070695264728}
+  - component: {fileID: 5686950070695264735}
   m_Layer: 8
   m_Name: Rocket Boost 3
   m_TagString: RocketPart
@@ -15661,6 +15784,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!136 &5686950070695264735
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5686950070695264733}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5000001
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1 &5686950070807325933
 GameObject:
   m_ObjectHideFlags: 0
