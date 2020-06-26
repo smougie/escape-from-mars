@@ -35,6 +35,17 @@ public class PadController : MonoBehaviour
             gameObject.GetComponent<Renderer>().material.color = Color.Lerp(startColor, endColor, normalizedTime);
             yield return null;
         }
-        Destroy(gameObject);
+        PadActive(false);
+        ResetPadColor();
+    }
+
+    public void PadActive(bool active)
+    {
+        gameObject.SetActive(active);
+    }
+
+    private void ResetPadColor()
+    {
+        gameObject.GetComponent<Renderer>().material.color = objectColorStart;
     }
 }

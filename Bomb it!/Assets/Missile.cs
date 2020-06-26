@@ -22,6 +22,8 @@ public class Missile : MonoBehaviour
 
     [SerializeField] GameObject rocketPartsObject = null;
     [SerializeField] GameObject refuelingEffect = null;
+    [SerializeField] GameObject launchPadObject = null;
+    private PadController padControllerRef;
 
     [SerializeField] GameObject refuelingPad = null;
     private StatusLight statusLight;
@@ -60,6 +62,7 @@ public class Missile : MonoBehaviour
     private GameObject gameManagerObject;
     private GameManager gameManager;
 
+    private Vector3 rocketStartingPosition;
 
     void Start()
     {
@@ -74,6 +77,8 @@ public class Missile : MonoBehaviour
         refuelingPadLight = refuelingPad.GetComponentInChildren<Light>();
         gameManagerObject = GameObject.Find("Game Manager");
         gameManager = gameManagerObject.GetComponent<GameManager>();
+        rocketStartingPosition = transform.position;
+        padControllerRef = launchPadObject.GetComponent<PadController>();
     }
 
     void Update()
@@ -119,7 +124,7 @@ public class Missile : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Z))
         {
-            currentFuel = 10;
+            RespawnRocket();
         }
     }
 
@@ -162,18 +167,6 @@ public class Missile : MonoBehaviour
             // TODO check if those statements are still necessary if we already force player refuel to max at once
             case "Refuel":
                 rocketOnRefuelingPad = false;
-                if (refueling)  // drop refueling flag
-                {
-                    refueling = false;
-                }
-                if (state == State.Refueling)  // change state from refueling to flying
-                {
-                    state = State.Flying;
-                }
-                if (prefabCount != 0)  // if refueling effect is already spawned, stop this effect
-                {
-                    StopRefuelEffect();
-                }
                 break;
             default:
                 break;
@@ -185,8 +178,11 @@ public class Missile : MonoBehaviour
         switch (trigger.transform.tag)
         {
             case "Life":
-                DestroyCollectible(trigger);
-                gameManager.IncreaseLife();
+                if (gameManager.CanCollectLife())
+                {
+                    DestroyCollectible(trigger);
+                    gameManager.IncreaseLife();
+                }
                 break;
             case "Collectible":
                 DestroyCollectible(trigger);
@@ -208,6 +204,56 @@ public class Missile : MonoBehaviour
     }
 
     private void StartDeathSequence()
+    {
+        state = State.Transistioning;
+        deathParticles.Play();
+        thrustParticles.Stop();
+        ManageAudio(deathSound);
+        if (!destroyOnDeath)
+        {
+            DisableLight();
+        }
+        if (destroyOnDeath)
+        {
+            DestroyObject();
+        }
+        // CURRENT WORK
+        gameManager.DecreaseLife();
+        Invoke("RespawnRocket", levelLoadDelay);
+    }
+
+    private void RespawnRocket()
+    {
+        FreezeRigidbody(true);  // to avoid situation when rocket collides with pad and forces push rocket in weird positions
+        padControllerRef.PadActive(true);
+        transform.position = rocketStartingPosition;
+        transform.rotation = Quaternion.Euler(0, 0, 0);
+        state = State.Launching;
+        RenderMesh(true);
+        ClearRocketParts();
+        FreezeRigidbody(false);
+    }
+
+    private void FreezeRigidbody(bool freeze)
+    {
+        if (freeze)
+        {
+            rigidBody.constraints = RigidbodyConstraints.FreezeAll;
+        }
+        else
+        {
+            rigidBody.constraints = RigidbodyConstraints.None;
+        }
+    }
+
+    private void ClearRocketParts()
+    {
+        var rocketParts = GameObject.Find("Rocket Ship Parts(Clone)");
+        Destroy(rocketParts);
+    }
+
+    // TODO this methos is previous StartDeathSequence
+    private void StartGameOverSequence()
     {
         state = State.Transistioning;
         deathParticles.Play();
@@ -375,7 +421,7 @@ public class Missile : MonoBehaviour
     private void StartLandingSequence()
     {
         StopThrusting(); // stop thrusting when player hit pad
-        rigidBody.constraints = RigidbodyConstraints.FreezeAll;
+        FreezeRigidbody(true);
         landing = true;
     }
 
@@ -396,7 +442,7 @@ public class Missile : MonoBehaviour
     private void StopLandingSequence()
     {
         transform.rotation = Quaternion.Euler(0, 0, 0);  // finish rotating by set zero values (after previous landing rotation a small nubers near zero was left)
-        rigidBody.constraints = RigidbodyConstraints.None;  // unfreeze rocket object
+        FreezeRigidbody(false);  // unfreeze rocket object
         landing = false;  // drop landing flag to cancel rotation
         rocketOnRefuelingPad = true;
         if (state == State.Refueling)
@@ -511,15 +557,25 @@ public class Missile : MonoBehaviour
         Vector3 deathPosition = transform.position;
         Quaternion deathRotation = transform.rotation;
         Instantiate(rocketPartsObject, deathPosition, deathRotation);
-        DisableMesh();
+        RenderMesh(false);
     }
 
-    private void DisableMesh()
+    private void RenderMesh(bool renderMesh)
     {
         GameObject[] objectMeshes = GameObject.FindGameObjectsWithTag("RocketPart");
         foreach (var item in objectMeshes)
         {
-            item.GetComponent<Renderer>().enabled = false;
+            switch (renderMesh)
+            {
+                case true:
+                    item.GetComponent<Renderer>().enabled = true;
+                    break;
+                case false:
+                    item.GetComponent<Renderer>().enabled = false;
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
