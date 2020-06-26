@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] GameObject life1;
+    [SerializeField] GameObject life2;
+    [SerializeField] GameObject life3;
+
     public static int maxLife = 3;
     public static int currentLife;
     private bool alive = true;
@@ -30,6 +34,7 @@ public class GameManager : MonoBehaviour
         {
             CheckLifeStatus();
         }
+        UpdateLifeBar();
     }
     
     private void CheckLifeStatus()
@@ -38,6 +43,33 @@ public class GameManager : MonoBehaviour
         {
             // TODO game over, think about moving this check method to StartDeathSequence() to check it just once
             print("GAME OVER");
+        }
+    }
+
+    private void UpdateLifeBar()
+    {
+        switch (currentLife)
+        {
+            case 1:
+                life1.SetActive(true);
+                life2.SetActive(false);
+                life3.SetActive(false);
+                break;
+            case 2:
+                life1.SetActive(true);
+                life2.SetActive(true);
+                life3.SetActive(false);
+                break;
+            case 3:
+                life1.SetActive(true);
+                life2.SetActive(true);
+                life3.SetActive(true);
+                break;
+            default:
+                life1.SetActive(false);
+                life2.SetActive(false);
+                life3.SetActive(false);
+                break;
         }
     }
 
