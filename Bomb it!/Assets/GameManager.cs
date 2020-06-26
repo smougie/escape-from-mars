@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
         if (currentLife <= 0)
         {
             // TODO game over, think about moving this check method to StartDeathSequence() to check it just once
+            print("GAME OVER");
         }
     }
 

@@ -29,10 +29,6 @@ public class Missile : MonoBehaviour
     private StatusLight statusLight;
     private Light refuelingPadLight;
 
-    [SerializeField] Light[] objectLights = null;
-
-    [SerializeField] bool destroyOnDeath = true;
-
     Rigidbody rigidBody;
     AudioSource audioSource;
     float startVolume;
@@ -199,8 +195,19 @@ public class Missile : MonoBehaviour
         StartLandingSequence();
         finishParticles.Play();  // play level finish particles
         thrustParticles.Stop();  // stop playing thrusting particles
-        Invoke("LoadNextLevel", levelLoadDelay);  // load next level after delay
         ManageAudio(finishSound);  // control audio
+        Invoke("LoadNextLevel", levelLoadDelay);  // load next level after delay
+    }
+
+    // TODO this method is previous StartDeathSequence
+    private void StartGameOverSequence()
+    {
+        state = State.Transistioning;
+        deathParticles.Play();
+        thrustParticles.Stop();
+        Invoke("LoadFirstLevel", levelLoadDelay);
+        ManageAudio(deathSound);
+        DestroyRocket();
     }
 
     private void StartDeathSequence()
@@ -209,15 +216,7 @@ public class Missile : MonoBehaviour
         deathParticles.Play();
         thrustParticles.Stop();
         ManageAudio(deathSound);
-        if (!destroyOnDeath)
-        {
-            DisableLight();
-        }
-        if (destroyOnDeath)
-        {
-            DestroyObject();
-        }
-        // CURRENT WORK
+        DestroyRocket();
         gameManager.DecreaseLife();
         Invoke("RespawnRocket", levelLoadDelay);
     }
@@ -225,13 +224,13 @@ public class Missile : MonoBehaviour
     private void RespawnRocket()
     {
         FreezeRigidbody(true);  // to avoid situation when rocket collides with pad and forces push rocket in weird positions
-        padControllerRef.PadActive(true);
-        transform.position = rocketStartingPosition;
-        transform.rotation = Quaternion.Euler(0, 0, 0);
-        state = State.Launching;
-        RenderMesh(true);
-        ClearRocketParts();
-        FreezeRigidbody(false);
+        padControllerRef.PadActive(true);  // respawn launch pad
+        transform.position = rocketStartingPosition;  // move rocket object to starting position
+        transform.rotation = Quaternion.Euler(0, 0, 0);  // set rotation to 0
+        state = State.Launching;  // change game state
+        RenderMesh(true);  // render rocket object (stopped rendering mesh of rocket object in DestroyRocket() method)
+        ClearRocketParts();  // Destroy Rocket Parts Object
+        FreezeRigidbody(false);  // unfreeze rocket
     }
 
     private void FreezeRigidbody(bool freeze)
@@ -250,24 +249,6 @@ public class Missile : MonoBehaviour
     {
         var rocketParts = GameObject.Find("Rocket Ship Parts(Clone)");
         Destroy(rocketParts);
-    }
-
-    // TODO this methos is previous StartDeathSequence
-    private void StartGameOverSequence()
-    {
-        state = State.Transistioning;
-        deathParticles.Play();
-        thrustParticles.Stop();
-        Invoke("LoadFirstLevel", levelLoadDelay);
-        ManageAudio(deathSound);
-        if (!destroyOnDeath)
-        {
-            DisableLight();
-        }
-        if (destroyOnDeath)
-        {
-            DestroyObject();
-        }
     }
 
     private void StartNoFuelSequence()
@@ -544,15 +525,7 @@ public class Missile : MonoBehaviour
         }
     }
 
-    private void DisableLight()
-    {
-        foreach (var item in objectLights)
-        {
-            item.enabled = false;
-        }
-    }
-
-    private void DestroyObject()
+    private void DestroyRocket()
     {
         Vector3 deathPosition = transform.position;
         Quaternion deathRotation = transform.rotation;

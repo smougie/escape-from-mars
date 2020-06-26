@@ -7,7 +7,6 @@ public class StatusLight : MonoBehaviour
     [SerializeField] Material activeMaterial;
     [SerializeField] Material notActiveMaterial;
     private new Renderer renderer;
-    private bool padActive = true;
 
     void Start()
     {
@@ -16,13 +15,11 @@ public class StatusLight : MonoBehaviour
 
     public void TurnOff()
     {
-        padActive = false;
         renderer.material = notActiveMaterial;
     }
 
     public void TurnOn()
     {
-        padActive = true;
         renderer.material = activeMaterial;
     }
 }
