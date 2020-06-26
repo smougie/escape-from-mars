@@ -9,6 +9,8 @@ TagManager:
   - RocketPart
   - Refuel
   - Rocket
+  - Life
+  - Collectible
   layers:
   - Default
   - TransparentFX
