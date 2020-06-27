@@ -65,7 +65,7 @@ public class Missile : MonoBehaviour
     {
         startingRotation = gameObject.transform.rotation;
         fuelSlider.maxValue = maxFuel;
-        currentFuel = maxFuel;
+        SetFuelStartingValue();
         rigidBody = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
         startVolume = audioSource.volume;
@@ -232,6 +232,7 @@ public class Missile : MonoBehaviour
         padControllerRef.PadActive(true);  // respawn launch pad
         transform.position = rocketStartingPosition;  // move rocket object to starting position
         transform.rotation = Quaternion.Euler(0, 0, 0);  // set rotation to 0
+        SetFuelStartingValue();
         state = State.Launching;  // change game state
         RenderMesh(true);  // render rocket object (stopped rendering mesh of rocket object in DestroyRocket() method)
         ClearRocketParts();  // Destroy Rocket Parts Object
@@ -254,6 +255,11 @@ public class Missile : MonoBehaviour
     {
         var rocketParts = GameObject.Find("Rocket Ship Parts(Clone)");
         Destroy(rocketParts);
+    }
+
+    private void SetFuelStartingValue()
+    {
+        currentFuel = maxFuel;
     }
 
     private void StartNoFuelSequence()

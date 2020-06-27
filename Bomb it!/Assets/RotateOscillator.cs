@@ -18,10 +18,10 @@ public class RotateOscillator : MonoBehaviour
 
     void Update()
     {
-        MovePlatform();
+        RotatePlatform();
     }
 
-    private void MovePlatform()
+    private void RotatePlatform()
     {
         if (period <= Mathf.Epsilon)
         {
@@ -35,7 +35,6 @@ public class RotateOscillator : MonoBehaviour
         float rawSinWave = Mathf.Sin(cycles * tau);
 
         movementFactor = Mathf.Sin(cycles * period);  // converting sin values from range(-1,1) to range(0,1) by dividing value by two and adding 0.5f
-        //transform.position = startingRotation + offset;
         transform.rotation = Quaternion.AngleAxis(angle * movementFactor, movementVector);
     }
 }
