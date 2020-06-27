@@ -25,6 +25,7 @@ public class Missile : MonoBehaviour
     [SerializeField] GameObject launchPadObject = null;
     private PadController padControllerRef;
 
+    [SerializeField] bool refuelingOnLevel = false;
     [SerializeField] GameObject refuelingPad = null;
     private StatusLight statusLight;
     private Light refuelingPadLight;
@@ -69,8 +70,11 @@ public class Missile : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         startVolume = audioSource.volume;
         state = State.Launching;
-        statusLight = refuelingPad.GetComponentInChildren<StatusLight>();
-        refuelingPadLight = refuelingPad.GetComponentInChildren<Light>();
+        if (refuelingOnLevel)
+        {
+            statusLight = refuelingPad.GetComponentInChildren<StatusLight>();
+            refuelingPadLight = refuelingPad.GetComponentInChildren<Light>();
+        }
         gameManagerObject = GameObject.Find("Game Manager");
         gameManager = gameManagerObject.GetComponent<GameManager>();
         rocketStartingPosition = transform.position;

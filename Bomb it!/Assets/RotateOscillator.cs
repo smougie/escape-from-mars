@@ -4,6 +4,7 @@
 public class RotateOscillator : MonoBehaviour
 {
     [SerializeField] float angle;
+    [SerializeField] Vector3 movementVector;
     [SerializeField][Range(0, 1)] float movementFactor;
     [SerializeField] float period = 2f;
     [SerializeField] float differenceTime = 0f;
@@ -35,6 +36,6 @@ public class RotateOscillator : MonoBehaviour
 
         movementFactor = Mathf.Sin(cycles * period);  // converting sin values from range(-1,1) to range(0,1) by dividing value by two and adding 0.5f
         //transform.position = startingRotation + offset;
-        transform.rotation = Quaternion.AngleAxis(angle * movementFactor, Vector3.forward);
+        transform.rotation = Quaternion.AngleAxis(angle * movementFactor, movementVector);
     }
 }
