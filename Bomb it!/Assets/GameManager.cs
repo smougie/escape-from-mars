@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public static int maxLife = 3;
     public static int currentLife;
     private bool alive = true;
+    private bool collectibles = false;
     public static int maxLevelCollectibles;
     public static int currentCollectiblesValue = 0;
     public static int totalCollectibles = 0;
@@ -30,7 +31,10 @@ public class GameManager : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
         currentLife = maxLife;
-        maxLevelCollectibles = GameObject.Find("Collectibles").transform.childCount;
+        if (collectibles)
+        {
+            maxLevelCollectibles = GameObject.Find("Collectibles").transform.childCount;
+        }
         life1Image = life1.GetComponent<Image>();
         life2Image = life2.GetComponent<Image>();
         life3Image = life3.GetComponent<Image>();

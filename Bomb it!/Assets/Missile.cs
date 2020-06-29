@@ -200,7 +200,7 @@ public class Missile : MonoBehaviour
         finishParticles.Play();  // play level finish particles
         thrustParticles.Stop();  // stop playing thrusting particles
         ManageAudio(finishSound);  // control audio
-        Invoke("LoadNextLevel", levelLoadDelay);  // load next level after delay
+        //Invoke("LoadNextLevel", levelLoadDelay);  // load next level after delay
     }
 
     // TODO this method is previous StartDeathSequence
@@ -440,6 +440,10 @@ public class Missile : MonoBehaviour
         if (state == State.Refueling)
         {
             SpawnRefuelEffect();
+        }
+        if (state == State.Transistioning)
+        {
+            // do nothin -> leave state == State.Transistioning
         }
         else
         {
