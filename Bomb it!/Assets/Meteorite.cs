@@ -82,13 +82,11 @@ public class Meteorite : MonoBehaviour
     private void SetRandomRespawnTime()
     {
         respawnTime = Random.Range(respawMinRange, respawnMaxRange);
-        print(respawnTime);
     }
 
     private void SetRandomSpeed()
     {
         speed = Random.Range(speedMinRange, speedMaxRange);
-        print(speed);
     }
 
     IEnumerator MovingDelay()
