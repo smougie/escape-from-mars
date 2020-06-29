@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject life1;
     [SerializeField] GameObject life2;
     [SerializeField] GameObject life3;
+    [SerializeField] bool collectibles = false;
     private Image life1Image;
     private Image life2Image;
     private Image life3Image;
@@ -18,7 +19,6 @@ public class GameManager : MonoBehaviour
     public static int maxLife = 3;
     public static int currentLife;
     private bool alive = true;
-    private bool collectibles = false;
     public static int maxLevelCollectibles;
     public static int currentCollectiblesValue = 0;
     public static int totalCollectibles = 0;
