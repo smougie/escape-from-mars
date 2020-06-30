@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Meteorite : MonoBehaviour
 {
+    [SerializeField] GameObject destinationPoint = null;
     [SerializeField] float delayTime = 0f;
     [SerializeField] float speed = 25f;
     [SerializeField] bool randomizeSpeed = false;
@@ -24,7 +25,7 @@ public class Meteorite : MonoBehaviour
     {
         yield return new WaitForSeconds(delayTime);
         startPosition = transform.position;
-        endPosition = transform.Find("endPosition").transform.position;  // prefab Meteorite(parent), inside Meteorite child named "endPosition" which represent end point
+        endPosition = destinationPoint.transform.position;
         if (randomizeRespawnTime)
         {
             SetRandomRespawnTime();

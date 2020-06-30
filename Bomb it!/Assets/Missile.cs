@@ -126,6 +126,10 @@ public class Missile : MonoBehaviour
         {
             RespawnRocket();
         }
+        else if (Input.GetKeyDown(KeyCode.X))
+        {
+            currentFuel = 10;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -439,9 +443,10 @@ public class Missile : MonoBehaviour
         rocketOnRefuelingPad = true;
         if (state == State.Refueling)
         {
+            state = State.Refueling;
             SpawnRefuelEffect();
         }
-        if (state == State.Transistioning)
+        else if (state == State.Transistioning)
         {
             // do nothin -> leave state == State.Transistioning
         }
