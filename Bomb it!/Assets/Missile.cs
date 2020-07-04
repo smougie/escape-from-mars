@@ -240,6 +240,10 @@ public class Missile : MonoBehaviour
         state = State.Launching;  // change game state
         RenderMesh(true);  // render rocket object (stopped rendering mesh of rocket object in DestroyRocket() method)
         ClearRocketParts();  // Destroy Rocket Parts Object
+        if (noFuel)
+        {
+            noFuel = false;
+        }
         FreezeRigidbody(false);  // unfreeze rocket
     }
 
