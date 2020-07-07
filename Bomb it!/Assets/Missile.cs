@@ -27,6 +27,8 @@ public class Missile : MonoBehaviour
 
     [SerializeField] bool refuelingOnLevel = false;
     [SerializeField] GameObject refuelingPad = null;
+    [SerializeField] bool checkPoint = false;
+    private bool checkPointReached = false;
     private StatusLight statusLight;
     private Light refuelingPadLight;
 
@@ -60,6 +62,7 @@ public class Missile : MonoBehaviour
     private GameManager gameManager;
 
     private Vector3 rocketStartingPosition;
+    private Vector3 checkPointPosition;
 
     void Start()
     {
@@ -155,6 +158,8 @@ public class Missile : MonoBehaviour
                 else  // in other case use refueling pad normally
                 {
                     AssignPadPosition(collision);
+                    AssignCheckPointPosition();
+                    VerifyCheckPointStatus();
                     StartRefuelSequence();
                 }
                 break;
@@ -233,8 +238,15 @@ public class Missile : MonoBehaviour
     private void RespawnRocket()
     {
         FreezeRigidbody(true);  // to avoid situation when rocket collides with pad and forces push rocket in weird positions
+        if (checkPointReached)
+        {
+            transform.position = checkPointPosition;
+        }
+        else
+        {
         padControllerRef.PadActive(true);  // respawn launch pad
         transform.position = rocketStartingPosition;  // move rocket object to starting position
+        }
         transform.rotation = Quaternion.Euler(0, 0, 0);  // set rotation to 0
         SetFuelStartingValue();
         state = State.Launching;  // change game state
@@ -279,12 +291,27 @@ public class Missile : MonoBehaviour
 
     private void StartRefuelSequence()
     {
+        VerifyCheckPointStatus();
+        AssignCheckPointPosition();
         if (!alreadyRefueled)  // check if player already refuel rocket
         {
             state = State.Refueling;
             refueling = true;  // raise refueling flag,
         }
         StartLandingSequence();  // start auto landing sequence
+    }
+
+    private void VerifyCheckPointStatus()
+    {
+        if (checkPoint && !checkPointReached)
+        {
+            checkPointReached = true;
+        }
+    }
+
+    private void AssignCheckPointPosition()
+    {
+        checkPointPosition = landingPosition;
     }
 
     private void SpawnRefuelEffect()
