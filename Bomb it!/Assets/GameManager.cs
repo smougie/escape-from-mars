@@ -3,12 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] GameObject life1;
     [SerializeField] GameObject life2;
     [SerializeField] GameObject life3;
+    [SerializeField] TMP_Text textMeshProText;
     [SerializeField] bool collectibles = false;
     private Image life1Image;
     private Image life2Image;
@@ -34,6 +36,7 @@ public class GameManager : MonoBehaviour
         if (collectibles)
         {
             maxLevelCollectibles = GameObject.Find("Collectibles").transform.childCount;
+            textMeshProText.text = $"{currentCollectiblesValue}/{maxLevelCollectibles}";
         }
         life1Image = life1.GetComponent<Image>();
         life2Image = life2.GetComponent<Image>();
@@ -42,14 +45,18 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        //print($"Life: {currentLife}/{maxLife}\nTotal C: {totalCollectibles}");
-        print($"Collectibles: {currentCollectiblesValue}/{maxLevelCollectibles}");
         if (alive)
         {
             CheckLifeStatus();
         }
     }
-    
+
+
+    private void UpdateCollectiblesCount()
+    {
+        textMeshProText.text = $"{currentCollectiblesValue}/{maxLevelCollectibles}";
+    }
+
     private void CheckLifeStatus()
     {
         if (currentLife <= 0)

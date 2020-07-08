@@ -61,6 +61,8 @@ public class Missile : MonoBehaviour
     private GameObject gameManagerObject;
     private GameManager gameManager;
 
+    private CheckPointFlag checkPointFlag;
+
     private Vector3 rocketStartingPosition;
     private Vector3 checkPointPosition;
 
@@ -78,6 +80,7 @@ public class Missile : MonoBehaviour
             statusLight = refuelingPad.GetComponentInChildren<StatusLight>();
             refuelingPadLight = refuelingPad.GetComponentInChildren<Light>();
         }
+        checkPointFlag = refuelingPad.GetComponentInChildren<CheckPointFlag>();
         gameManagerObject = GameObject.Find("Game Manager");
         gameManager = gameManagerObject.GetComponent<GameManager>();
         rocketStartingPosition = transform.position;
@@ -184,6 +187,11 @@ public class Missile : MonoBehaviour
 
     private void OnTriggerEnter(Collider trigger)
     {
+        if (state == State.Transistioning)
+        {
+            return;
+        }
+
         switch (trigger.transform.tag)
         {
             case "Life":
@@ -306,6 +314,7 @@ public class Missile : MonoBehaviour
         if (checkPoint && !checkPointReached)
         {
             checkPointReached = true;
+            checkPointFlag.RaiseFlag();
         }
     }
 
