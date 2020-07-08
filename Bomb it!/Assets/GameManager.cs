@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         //print($"Life: {currentLife}/{maxLife}\nTotal C: {totalCollectibles}");
-        //print($"Collectibles: {currentCollectiblesValue}/{maxLevelCollectibles}");
+        print($"Collectibles: {currentCollectiblesValue}/{maxLevelCollectibles}");
         if (alive)
         {
             CheckLifeStatus();
