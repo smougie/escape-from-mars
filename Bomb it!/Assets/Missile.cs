@@ -40,8 +40,8 @@ public class Missile : MonoBehaviour
     Vector3 landingPosition;
 
     [SerializeField] float fuelUseSpeed = 1f;
-    [SerializeField] Slider fuelSlider;
     [SerializeField] int maxFuel = 100;
+    private Slider fuelSlider;
     private float refuelingSpeed;
     private int currentFuel;
     private float fuelCounter = 0f;
@@ -68,6 +68,7 @@ public class Missile : MonoBehaviour
 
     void Start()
     {
+        fuelSlider = GameObject.Find("Fuel Bar").GetComponent<Slider>();
         startingRotation = gameObject.transform.rotation;
         fuelSlider.maxValue = maxFuel;
         SetFuelStartingValue();
@@ -80,11 +81,16 @@ public class Missile : MonoBehaviour
             statusLight = refuelingPad.GetComponentInChildren<StatusLight>();
             refuelingPadLight = refuelingPad.GetComponentInChildren<Light>();
         }
-        checkPointFlag = refuelingPad.GetComponentInChildren<CheckPointFlag>();
+        if (checkPoint)
+        {
+            checkPointFlag = refuelingPad.GetComponentInChildren<CheckPointFlag>();
+        }
         gameManagerObject = GameObject.Find("Game Manager");
         gameManager = gameManagerObject.GetComponent<GameManager>();
         rocketStartingPosition = transform.position;
         padControllerRef = launchPadObject.GetComponent<PadController>();
+
+        gameManager.ResetLevelValues();  // reset and update level values (life, collectibles) and bar status on level start
     }
 
     void Update()
@@ -204,6 +210,7 @@ public class Missile : MonoBehaviour
             case "Collectible":
                 DestroyCollectible(trigger);
                 gameManager.IncreaseCollectiblesCount();
+                gameManager.UpdateCollectiblesStatus();
                 break;
             default:
                 break;

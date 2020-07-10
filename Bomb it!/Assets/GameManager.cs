@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject life3;
     [SerializeField] TMP_Text textMeshProText;
     [SerializeField] bool collectibles = false;
+    [SerializeField] GameObject canvasObject;
+    [SerializeField] GameObject eventSystemObject;
     private Image life1Image;
     private Image life2Image;
     private Image life3Image;
@@ -28,22 +30,38 @@ public class GameManager : MonoBehaviour
     private float collectiblesScore = 0;
     private float levelScore = 0;
     private float totalScore = 0;
+    private string collectiblesStatusText;
+    private GameObject collectiblesBarUI;
+    public bool newGame = false;
 
     void Start()
     {
-        DontDestroyOnLoad(gameObject);
-        currentLife = maxLife;
-        life1Image = life1.GetComponent<Image>();
-        life2Image = life2.GetComponent<Image>();
-        life3Image = life3.GetComponent<Image>();
-        if (collectibles)
+        if (newGame)
         {
-            maxLevelCollectibles = GameObject.Find("Collectibles").transform.childCount;
-            textMeshProText.text = $"{currentCollectiblesValue}/{maxLevelCollectibles}";
+            DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(canvasObject);
+            DontDestroyOnLoad(eventSystemObject);
+            currentLife = maxLife;
+            life1Image = life1.GetComponent<Image>();
+            life2Image = life2.GetComponent<Image>();
+            life3Image = life3.GetComponent<Image>();
+            collectiblesBarUI = GameObject.Find("Alien Bar");
+            if (collectibles)
+            {
+                maxLevelCollectibles = GameObject.Find("Collectibles").transform.childCount;
+                textMeshProText.text = collectiblesStatusText;
+                UpdateCollectiblesStatus();
+            }
+            else
+            {
+                DisableCollectiblesUI();
+            }
         }
         else
         {
-            textMeshProText.text = "";
+            canvasObject.SetActive(false);
+            eventSystemObject.SetActive(false);
+            gameObject.SetActive(false);
         }
     }
 
@@ -55,10 +73,49 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
-    private void UpdateCollectiblesCount()
+    public void SetNewGame()
     {
-        textMeshProText.text = $"{currentCollectiblesValue}/{maxLevelCollectibles}";
+        newGame = true;
+    }
+
+    public void SetGameIsRunning()
+    {
+        newGame = false;
+    }
+
+    private void EnableCollectiblesUI()
+    {
+        collectiblesBarUI.SetActive(true);
+    }
+
+    private void DisableCollectiblesUI()
+    {
+        collectiblesBarUI.SetActive(false);
+    }
+
+    public void UpdateCollectiblesStatus()
+    {
+        collectiblesStatusText = $"{currentCollectiblesValue}/{maxLevelCollectibles}";
+        textMeshProText.text = collectiblesStatusText;
+    }
+
+    public void ResetCollectibles()
+    {
+        currentCollectiblesValue = 0;
+        maxLevelCollectibles = GameObject.Find("Collectibles").transform.childCount;
+    }
+
+    public void ResetLifes()
+    {
+        currentLife = maxLife;
+    }
+
+    public void ResetLevelValues()
+    {
+        ResetCollectibles();
+        ResetLifes();
+        UpdateCollectiblesStatus();
+        UpdateLifeBar();
     }
 
     private void CheckLifeStatus()
@@ -72,6 +129,7 @@ public class GameManager : MonoBehaviour
 
     private void FadeOutImage(Image image, bool fadeOut)
     {
+        float alphaValue = .3f;
         if (fadeOut)
         {
             image.color = new Color(image.color.r, image.color.g, image.color.b, alphaValue);
@@ -81,8 +139,8 @@ public class GameManager : MonoBehaviour
             image.color = new Color(image.color.r, image.color.g, image.color.b, 1f);
         }
     }
-    private float alphaValue = .3f;
-    private void UpdateLifeBar()
+    
+    public void UpdateLifeBar()
     {
         switch (currentLife)
         {
@@ -189,7 +247,7 @@ public class GameManager : MonoBehaviour
         var imageXvalue = startSize.x;
         var imageYvalue = startSize.y;
 
-        for(float time = 0f; time < duration / 2; time += Time.deltaTime)
+        for (float time = 0f; time < duration / 2; time += Time.deltaTime)
         {
             float normalizedTime = time / duration;
             imageXvalue = Mathf.Lerp(startSize.x, endSize.x, normalizedTime);
