@@ -33,14 +33,18 @@ public class GameManager : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
         currentLife = maxLife;
+        life1Image = life1.GetComponent<Image>();
+        life2Image = life2.GetComponent<Image>();
+        life3Image = life3.GetComponent<Image>();
         if (collectibles)
         {
             maxLevelCollectibles = GameObject.Find("Collectibles").transform.childCount;
             textMeshProText.text = $"{currentCollectiblesValue}/{maxLevelCollectibles}";
         }
-        life1Image = life1.GetComponent<Image>();
-        life2Image = life2.GetComponent<Image>();
-        life3Image = life3.GetComponent<Image>();
+        else
+        {
+            textMeshProText.text = "";
+        }
     }
 
     void Update()
