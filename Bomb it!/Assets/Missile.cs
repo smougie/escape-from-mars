@@ -10,11 +10,15 @@ public class Missile : MonoBehaviour
     [SerializeField] float mainThrust = 1000f;
     [SerializeField] float levelLoadDelay = 3f;
 
+    [SerializeField] AudioSource audioSource1;  // thrust, refuel, finish, death, nofuel
+    [SerializeField] AudioSource audioSource2;  // pick up
     [SerializeField] AudioClip thrustSound = null;
     [SerializeField] AudioClip deathSound = null;
     [SerializeField] AudioClip finishSound = null;
     [SerializeField] AudioClip emptyFuelSound = null;
     [SerializeField] AudioClip refuelingSound = null;
+    [SerializeField] AudioClip lifePickUpSound = null;
+    [SerializeField] AudioClip alienPickUpSound = null;
 
     [SerializeField] ParticleSystem thrustParticles = null;
     [SerializeField] ParticleSystem deathParticles = null;
@@ -33,7 +37,6 @@ public class Missile : MonoBehaviour
     private Light refuelingPadLight;
 
     Rigidbody rigidBody;
-    AudioSource audioSource;
     float startVolume;
     bool landing = false;
     bool collisionsEnabled = true;
@@ -73,8 +76,9 @@ public class Missile : MonoBehaviour
         fuelSlider.maxValue = maxFuel;
         SetFuelStartingValue();
         rigidBody = GetComponent<Rigidbody>();
-        audioSource = GetComponent<AudioSource>();
-        startVolume = audioSource.volume;
+        audioSource1 = GetComponent<AudioSource>();
+        startVolume = audioSource1.volume;
+
         state = State.Launching;
         if (refuelingOnLevel)
         {
@@ -205,12 +209,15 @@ public class Missile : MonoBehaviour
                 {
                     DestroyCollectible(trigger);
                     gameManager.IncreaseLife();
+                    audioSource2.PlayOneShot(lifePickUpSound);
+
                 }
                 break;
             case "Collectible":
                 DestroyCollectible(trigger);
                 gameManager.IncreaseCollectiblesCount();
                 gameManager.UpdateCollectiblesStatus();
+                audioSource2.PlayOneShot(alienPickUpSound);
                 break;
             default:
                 break;
@@ -447,18 +454,18 @@ public class Missile : MonoBehaviour
     private void ManageAudio(AudioClip audioClip)
     {
         StopAllCoroutines();  // stop FadeOut coroutine which can fadeout finish/death audio clip
-        audioSource.volume = startVolume;
-        audioSource.Stop();
-        audioSource.PlayOneShot(audioClip);
-        StartCoroutine(FadeOut(audioSource, levelLoadDelay));
+        audioSource1.volume = startVolume;
+        audioSource1.Stop();
+        audioSource1.PlayOneShot(audioClip);
+        StartCoroutine(FadeOut(audioSource1, levelLoadDelay));
     }
 
     private void PlayRefuelSound()
     {
         StopAllCoroutines();  // stop FadeOut coroutine which can fadeout finish/death audio clip
-        audioSource.volume = startVolume;
-        audioSource.Stop();
-        audioSource.PlayOneShot(refuelingSound);
+        audioSource1.volume = startVolume;
+        audioSource1.Stop();
+        audioSource1.PlayOneShot(refuelingSound);
     }
 
     private void StartLandingSequence()
@@ -566,7 +573,7 @@ public class Missile : MonoBehaviour
 
     private void StopThrusting()
     {
-        StartCoroutine(FadeOut(audioSource, .5f));
+        StartCoroutine(FadeOut(audioSource1, .5f));
         thrustParticles.Stop();
     }
 
@@ -574,9 +581,9 @@ public class Missile : MonoBehaviour
     {
         float thrustThisFrame = mainThrust * Time.deltaTime;
         rigidBody.AddRelativeForce(Vector3.up * thrustThisFrame);
-        if (!audioSource.isPlaying)
+        if (!audioSource1.isPlaying)
         {
-            audioSource.PlayOneShot(thrustSound);
+            audioSource1.PlayOneShot(thrustSound);
         }
         if (!thrustParticles.isPlaying)
         {
