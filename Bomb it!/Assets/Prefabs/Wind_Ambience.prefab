@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6015479452475771423}
   - component: {fileID: 6015479452475771488}
+  - component: {fileID: 941345894}
   m_Layer: 0
   m_Name: Wind_Ambience
   m_TagString: Untagged
@@ -43,7 +44,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: fc9024d4ebfc8fa4ab7a0ac8005eeaa3, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -127,3 +128,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &941345894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6015479452475771489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a57179190d4c70547bae4e018382af9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -71,6 +71,7 @@ public class Missile : MonoBehaviour
 
     void Start()
     {
+        UpdateSoundEffectsVolume();
         fuelSlider = GameObject.Find("Fuel Bar").GetComponent<Slider>();
         startingRotation = gameObject.transform.rotation;
         fuelSlider.maxValue = maxFuel;
@@ -95,6 +96,7 @@ public class Missile : MonoBehaviour
         padControllerRef = launchPadObject.GetComponent<PadController>();
 
         gameManager.ResetLevelValues();  // reset and update level values (life, collectibles) and bar status on level start
+        UpdateSoundEffectsVolume();  // Update sound levels
     }
 
     void Update()
@@ -134,17 +136,22 @@ public class Missile : MonoBehaviour
         {
             LoadNextLevel();
         }
-        else if (Input.GetKeyDown(KeyCode.C))
-        {
-            collisionsEnabled = !collisionsEnabled;  // simple toggle
-        }
         else if (Input.GetKeyDown(KeyCode.Z))
         {
             RespawnRocket();
         }
+        else if (Input.GetKeyDown(KeyCode.C))
+        {
+            collisionsEnabled = !collisionsEnabled;  // simple toggle
+        }
         else if (Input.GetKeyDown(KeyCode.X))
         {
             currentFuel = 10;
+        }
+        else if (Input.GetKeyDown(KeyCode.R))
+        {
+            PlayerPrefs.SetInt("FirstPlay", 0);
+            print("First Play - RESET");
         }
     }
 
@@ -458,6 +465,12 @@ public class Missile : MonoBehaviour
         audioSource1.Stop();
         audioSource1.PlayOneShot(audioClip);
         StartCoroutine(FadeOut(audioSource1, levelLoadDelay));
+    }
+
+    private void UpdateSoundEffectsVolume()
+    {
+        audioSource1.volume = OptionsValues.loadedSoundEffectsVolumeValue;
+        audioSource2.volume = OptionsValues.loadedSoundEffectsVolumeValue;
     }
 
     private void PlayRefuelSound()
