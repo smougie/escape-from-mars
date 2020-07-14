@@ -469,8 +469,13 @@ public class Missile : MonoBehaviour
 
     private void UpdateSoundEffectsVolume()
     {
-        audioSource1.volume = OptionsValues.loadedSoundEffectsVolumeValue;
-        audioSource2.volume = OptionsValues.loadedSoundEffectsVolumeValue;
+        audioSource1.volume = SoundEffectsVolume();
+        audioSource2.volume = SoundEffectsVolume();
+    }
+
+    private float SoundEffectsVolume()
+    {
+        return PlayerPrefs.GetFloat(OptionsValues.soundEffectsVolumeStr);
     }
 
     private void PlayRefuelSound()

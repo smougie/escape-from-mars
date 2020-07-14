@@ -22,20 +22,25 @@ public class OptionsValues : MonoBehaviour
         if (mainMenu)
         {
             DisableOptionsUI();  // set options UI inactive after loading volumes level
-        }
-        print("Start Script: " + PlayerPrefs.GetInt(firstPlayStr));  // TODO delete print
-        firstPlayInt = PlayerPrefs.GetInt(firstPlayStr);
-        if (firstPlayInt == 0)
-        {
-            PlayerPrefs.SetInt(firstPlayStr, 1);
-            print("First Play statement: " + PlayerPrefs.GetInt(firstPlayStr));  // TODO delete print
-            SetDefaultVolume();
-            ReadAudioValues();
-            UpdateSliderValues();
+            print("Start Script: " + PlayerPrefs.GetInt(firstPlayStr));  // TODO delete print
+            firstPlayInt = PlayerPrefs.GetInt(firstPlayStr);
+            if (firstPlayInt == 0)
+            {
+                PlayerPrefs.SetInt(firstPlayStr, 1);
+                print("First Play statement: " + PlayerPrefs.GetInt(firstPlayStr));  // TODO delete print
+                SetDefaultVolume();
+                ReadAudioValues();
+                UpdateSliderValues();
+            }
+            else
+            {
+                print("!NOT! First Play statement: " + PlayerPrefs.GetInt(firstPlayStr));  // TODO delete print
+                ReadAudioValues();
+                UpdateSliderValues();
+            }
         }
         else
         {
-            print("!NOT! First Play statement: " + PlayerPrefs.GetInt(firstPlayStr));  // TODO delete print
             ReadAudioValues();
             UpdateSliderValues();
         }
@@ -79,7 +84,7 @@ public class OptionsValues : MonoBehaviour
         SetSoundEffectsVolume(defaulVolumeValue);
     }
 
-    private void ReadAudioValues()
+    public void ReadAudioValues()
     {
         LoadMasterVolume();
         LoadBackgroundVolume();

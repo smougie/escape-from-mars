@@ -4,9 +4,14 @@ public class MasterVolume : MonoBehaviour
 {
     void Update()
     {
-        if (AudioListener.volume != OptionsValues.loadedMasterVolumeValue)
+        if (AudioListener.volume != MasterVolumeValue())
         {
-            AudioListener.volume = OptionsValues.loadedMasterVolumeValue;
+            AudioListener.volume = MasterVolumeValue();
         }
+    }
+
+    private float MasterVolumeValue()
+    {
+        return PlayerPrefs.GetFloat(OptionsValues.masterVolumeStr);
     }
 }

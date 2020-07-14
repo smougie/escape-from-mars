@@ -11,9 +11,14 @@ public class BackgroundVolume : MonoBehaviour
 
     void Update()
     {
-        if (audioSource.volume != OptionsValues.loadedBackgroundVolumeValue)
+        if (audioSource.volume != BackgroundVolumeValue())
         {
-            audioSource.volume = OptionsValues.loadedBackgroundVolumeValue;
+            audioSource.volume = BackgroundVolumeValue();
         }
+    }
+
+    private float BackgroundVolumeValue()
+    {
+        return PlayerPrefs.GetFloat(OptionsValues.backgroundVolumeStr);
     }
 }
