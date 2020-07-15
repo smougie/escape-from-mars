@@ -1,24 +1,20 @@
 ﻿using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 
 public class PauseMenu : MonoBehaviour
 {
     public static bool gameIsPaused = false;
     [SerializeField] GameObject pauseMenu;
-
-    void Start()
-    {
-    }
+    [HideInInspector] public bool updateSoundValues = false;
+    [SerializeField] GameObject mainMenu;
+    [SerializeField] GameObject optionsMenu;
+    private bool optionsWindow = false;
 
     void Update()
     {
         SwitchPauseState();
-    }
-
-    public void DUPA()
-    {
-        print("DUPA W CHUJ");
     }
 
     public void Resume()
@@ -26,6 +22,7 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(false);
         UnfreezeGame();
         gameIsPaused = false;
+        updateSoundValues = true;
     }
 
     private void Pause()
@@ -33,6 +30,32 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(true);
         FreezeGame();
         gameIsPaused = true;
+    }
+
+    public void OptionWindowIsActive()
+    {
+        optionsWindow = true;
+    }
+
+    public void DisableOptionsWindow()
+    {
+        optionsWindow = false;
+        optionsMenu.SetActive(false);
+    }
+
+    public void DisableMenuWindow()
+    {
+        mainMenu.SetActive(false);
+    }
+
+    public void EnableOptionsWindow()
+    {
+        optionsMenu.SetActive(true);
+    }
+
+    public void EnableMenuWindow()
+    {
+        mainMenu.SetActive(true);
     }
 
     private void FreezeGame()
@@ -51,20 +74,38 @@ public class PauseMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (gameIsPaused)
+            if (!optionsWindow)
             {
-                Resume();
+                if (gameIsPaused)
+                {
+                    Resume();
+                }
+                else
+                {
+                    Pause();
+                }
             }
             else
             {
-                Pause();
+                DisableOptionsWindow();
+                EnableMenuWindow();
             }
+
         }
     }
 
     public void LoadMainMenu()
     {
+        Resume();
+        DestroyLeftObjects();
         SceneManager.LoadScene("Main Menu");
+    }
+
+    private void DestroyLeftObjects()
+    {
+        Destroy(FindObjectOfType<GameManager>().gameObject);
+        Destroy(FindObjectOfType<Canvas>().gameObject);
+        Destroy(FindObjectOfType<EventSystem>().gameObject);
     }
 
     public void QuitGame()

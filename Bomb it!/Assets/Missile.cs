@@ -36,6 +36,8 @@ public class Missile : MonoBehaviour
     private StatusLight statusLight;
     private Light refuelingPadLight;
 
+    [SerializeField] PauseMenu pauseMenuRef;
+
     Rigidbody rigidBody;
     float startVolume;
     bool landing = false;
@@ -127,6 +129,7 @@ public class Missile : MonoBehaviour
             DebugKeys();
         }
         UpdateFuelValue();
+        CheckSoundChanges();
     }
 
     private void DebugKeys()
@@ -467,15 +470,24 @@ public class Missile : MonoBehaviour
         StartCoroutine(FadeOut(audioSource1, levelLoadDelay));
     }
 
-    private void UpdateSoundEffectsVolume()
+    public void UpdateSoundEffectsVolume()
     {
-        audioSource1.volume = SoundEffectsVolume();
+        startVolume = SoundEffectsVolume();
         audioSource2.volume = SoundEffectsVolume();
     }
 
     private float SoundEffectsVolume()
     {
         return PlayerPrefs.GetFloat(OptionsValues.soundEffectsVolumeStr);
+    }
+
+    private void CheckSoundChanges()
+    {   
+        if (pauseMenuRef.updateSoundValues)
+        {
+            UpdateSoundEffectsVolume();
+            pauseMenuRef.updateSoundValues = false;
+        }
     }
 
     private void PlayRefuelSound()
