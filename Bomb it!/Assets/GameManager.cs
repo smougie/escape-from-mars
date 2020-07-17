@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -76,11 +74,6 @@ public class GameManager : MonoBehaviour
     public void SetNewGame()
     {
         newGame = true;
-    }
-
-    public void SetGameIsRunning()
-    {
-        newGame = false;
     }
 
     private void EnableCollectiblesUI()
@@ -219,9 +212,9 @@ public class GameManager : MonoBehaviour
 
     public void CalculateLevelScore()
     {
-        collectiblesScore = (float)currentCollectiblesValue / (float)maxLevelCollectibles;
-        lifeScore = (float)currentLife / (float)maxLife;
-        levelScore = Mathf.Round(((collectiblesScore + lifeScore) / 2f) * 100f);
+        collectiblesScore = (float)currentCollectiblesValue / (float)maxLevelCollectibles;  // calculate collectibles percentage value (1/2 collectibles == .5f score)
+        lifeScore = (float)currentLife / (float)maxLife;  // calculate life percentage value (1/3 collectibles == .33f score)
+        levelScore = Mathf.Round(((collectiblesScore + lifeScore) / 2f) * 100f);  // calculate level percentage score (average from collectibles and life score)
 
         UpdateTotalScore();
         ResetScoreValues();

@@ -4711,6 +4711,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 900570358}
   updateSoundValues: 0
+  mainMenu: {fileID: 0}
+  optionsMenu: {fileID: 0}
 --- !u!1001 &894290181
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9715,7 +9717,7 @@ PrefabInstance:
     - target: {fileID: 3977287266733744560, guid: 9e02f19cc0865844eb9de361569edccf,
         type: 3}
       propertyPath: newGame
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5271241471296856332, guid: 9e02f19cc0865844eb9de361569edccf,
         type: 3}

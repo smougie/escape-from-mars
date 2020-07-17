@@ -242,6 +242,7 @@ public class Missile : MonoBehaviour
         thrustParticles.Stop();  // stop playing thrusting particles
         ManageAudio(finishSound);  // control audio
         Invoke("LoadNextLevel", levelLoadDelay);  // load next level after delay
+        gameManager.CalculateLevelScore();
     }
 
     // TODO this method is previous StartDeathSequence
