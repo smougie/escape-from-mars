@@ -73,7 +73,7 @@ public class Missile : MonoBehaviour
     private Vector3 checkPointPosition;
 
     void Start()
-    {
+    {   
         UpdateSoundEffectsVolume();
         fuelSlider = GameObject.Find("Fuel Bar").GetComponent<Slider>();
         startingRotation = gameObject.transform.rotation;
@@ -98,7 +98,6 @@ public class Missile : MonoBehaviour
         rocketStartingPosition = transform.position;
         padControllerRef = launchPadObject.GetComponent<PadController>();
 
-        gameManager.ResetLevelValues();  // reset and update level values (life, collectibles) and bar status on level start
         UpdateSoundEffectsVolume();  // Update sound levels
     }
 
@@ -244,8 +243,8 @@ public class Missile : MonoBehaviour
         ManageAudio(finishSound);  // control audio
         //Invoke("LoadNextLevel", levelLoadDelay);  // TODO load next level with delay after player press next level button
         // TODO show end level window
-        gameManager.CalculateLevelScore();
-        StartCoroutine(EndLevelWindowDelay());
+        gameManager.CalculateLevelScore();  // calculate level score without saving them
+        StartCoroutine(EndLevelWindowDelay());  // show endLevelWindow with delay
     }
 
     // TODO this method is previous StartDeathSequence
@@ -567,6 +566,8 @@ public class Missile : MonoBehaviour
         }
         else
         {
+            gameManager.SaveScores();
+            endLevelRef.DisableEndLevelWindow();
             SceneManager.LoadScene(nextSceneIndex);
         }
     }

@@ -239,6 +239,7 @@ public class GameManager : MonoBehaviour
     {
         collectiblesScore = 0f;
         lifeScore = 0f;
+        levelPercentageScore = 0f;
         levelScore = 0f;
     }
 
