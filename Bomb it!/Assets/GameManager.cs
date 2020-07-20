@@ -26,11 +26,11 @@ public class GameManager : MonoBehaviour
     public static int maxLevelCollectibles;
     public static int currentCollectiblesValue = 0;
     public static int totalCollectibles = 0;
-    private float lifeScore = 0;
-    private float collectiblesScore = 0;
-    public float levelScore = 0;
-    public float totalScore = 0;
-    public float levelPercentageScore = 0;
+    private float lifeScore = 0f;
+    private float collectiblesScore = 0f;
+    public float levelScore = 0f;
+    public float totalScore = 0f;
+    public float levelPercentageScore = 0f;
     private string collectiblesStatusText;
     private GameObject collectiblesBarUI;
     public bool newGame = false;

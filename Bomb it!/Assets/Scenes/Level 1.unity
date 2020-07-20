@@ -7169,6 +7169,10 @@ MonoBehaviour:
   statusText: {fileID: 663680630}
   continueButton: {fileID: 1259971394}
   continueButtonShadow: {fileID: 929858462}
+  planetsImages:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &1638489658 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2298477837814229943, guid: 7d06a8775178b4546bfd7a56c1d53f44,
