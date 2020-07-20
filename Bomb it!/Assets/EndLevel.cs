@@ -35,7 +35,7 @@ public class EndLevel : MonoBehaviour
         endLevelWindow.SetActive(true);
     }
 
-    private void DisableEndLevelWindow()
+    public void DisableEndLevelWindow()
     {
         endLevelWindow.SetActive(false);
     }

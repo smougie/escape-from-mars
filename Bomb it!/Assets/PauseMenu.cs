@@ -101,7 +101,7 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene("Main Menu");
     }
 
-    private void DestroyLeftObjects()
+    public void DestroyLeftObjects()
     {
         Destroy(FindObjectOfType<GameManager>().gameObject);
         Destroy(FindObjectOfType<Canvas>().gameObject);

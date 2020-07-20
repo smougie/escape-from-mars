@@ -554,7 +554,7 @@ public class Missile : MonoBehaviour
 
     private void LoadFirstLevel()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 
     public void LoadNextLevel()
@@ -573,7 +573,9 @@ public class Missile : MonoBehaviour
 
     public void RepeatLevel()
     {
-        print("repeating");
+        endLevelRef.DisableEndLevelWindow();
+        pauseMenuRef.DestroyLeftObjects();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     // Rotate object, reacting only to one statement at time
