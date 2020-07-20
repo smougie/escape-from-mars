@@ -4339,7 +4339,7 @@ GameObject:
   - component: {fileID: 929858465}
   - component: {fileID: 929858464}
   m_Layer: 5
-  m_Name: Next Level Shadow
+  m_Name: Continue Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5433,7 +5433,7 @@ GameObject:
   - component: {fileID: 1259971397}
   - component: {fileID: 1259971396}
   m_Layer: 5
-  m_Name: Next Level
+  m_Name: Continue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7166,6 +7166,9 @@ MonoBehaviour:
   endLevelWindow: {fileID: 1141178302}
   percentageScoreText: {fileID: 571395527}
   levelScoreText: {fileID: 251838478}
+  statusText: {fileID: 663680630}
+  continueButton: {fileID: 1259971394}
+  continueButtonShadow: {fileID: 929858462}
 --- !u!1 &1638489658 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2298477837814229943, guid: 7d06a8775178b4546bfd7a56c1d53f44,

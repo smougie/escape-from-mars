@@ -23,7 +23,6 @@ public class GameManager : MonoBehaviour
 
     public static int maxLife = 3;
     public static int currentLife;
-    private bool alive = true;
     public static int maxLevelCollectibles;
     public static int currentCollectiblesValue = 0;
     public static int totalCollectibles = 0;
@@ -68,14 +67,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        if (alive)
-        {
-            CheckLifeStatus();
-        }
-    }
-
     public void SetNewGame()
     {
         newGame = true;
@@ -116,12 +107,15 @@ public class GameManager : MonoBehaviour
         UpdateLifeBar();
     }
 
-    private void CheckLifeStatus()
+    public bool Alive()
     {
         if (currentLife <= 0)
         {
-            // TODO game over, think about moving this check method to StartDeathSequence() to check it just once
-            print("GAME OVER");
+            return false;
+        }
+        else
+        {
+            return true;
         }
     }
 

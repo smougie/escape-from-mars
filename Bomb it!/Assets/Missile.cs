@@ -244,7 +244,7 @@ public class Missile : MonoBehaviour
         //Invoke("LoadNextLevel", levelLoadDelay);  // TODO load next level with delay after player press next level button
         // TODO show end level window
         gameManager.CalculateLevelScore();  // calculate level score without saving them
-        StartCoroutine(EndLevelWindowDelay());  // show endLevelWindow with delay
+        StartCoroutine(EndLevelWindowDelay(false));  // show endLevelWindow with delay
     }
 
     // TODO this method is previous StartDeathSequence
@@ -253,21 +253,29 @@ public class Missile : MonoBehaviour
         state = State.Transistioning;
         deathParticles.Play();
         thrustParticles.Stop();
-        Invoke("LoadFirstLevel", levelLoadDelay);
         ManageAudio(deathSound);
+        StartCoroutine(EndLevelWindowDelay(true));  // show endLevelWindow with delay
         DestroyRocket();
+        Invoke("ClearRocketParts", levelLoadDelay);
     }
 
     private void StartDeathSequence()
     {
-        state = State.Transistioning;
-        deathParticles.Play();
-        thrustParticles.Stop();
-        ManageAudio(deathSound);
-        DestroyRocket();
         gameManager.DecreaseLife();
-        Invoke("RespawnRocket", levelLoadDelay);
-        gameManager.CalculateLevelScore();
+        if (gameManager.Alive())
+        {
+            state = State.Transistioning;
+            deathParticles.Play();
+            thrustParticles.Stop();
+            ManageAudio(deathSound);
+            DestroyRocket();
+            Invoke("RespawnRocket", levelLoadDelay);
+        }
+        else
+        {
+            StartGameOverSequence();
+        }
+        
     }
 
     private void RespawnRocket()
@@ -310,6 +318,15 @@ public class Missile : MonoBehaviour
     {
         var rocketParts = GameObject.Find("Rocket Ship Parts(Clone)");
         Destroy(rocketParts);
+    }
+
+    private void FreezeRocketParts()
+    {
+        var rocketParts = GameObject.Find("Rocket Ship Parts(Clone)");
+        foreach (Transform childObject in rocketParts.transform)
+        {
+            childObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+        }
     }
 
     private void SetFuelStartingValue()
@@ -685,9 +702,9 @@ public class Missile : MonoBehaviour
         audioSource.volume = startVolume;
     }
 
-    IEnumerator EndLevelWindowDelay()
+    IEnumerator EndLevelWindowDelay(bool gameOver)
     {
         yield return new WaitForSeconds(levelLoadDelay);
-        endLevelRef.ShowEndLevelWindow();
+        endLevelRef.ShowEndLevelWindow(gameOver);
     }
 }
