@@ -37,6 +37,7 @@ public class Missile : MonoBehaviour
     private Light refuelingPadLight;
 
     [SerializeField] PauseMenu pauseMenuRef;
+    [SerializeField] EndLevel endLevelRef;
 
     Rigidbody rigidBody;
     float startVolume;
@@ -137,7 +138,7 @@ public class Missile : MonoBehaviour
         Collider[] objectsColliders = GetComponentsInChildren<Collider>();
         if (Input.GetKeyDown(KeyCode.L))
         {
-            LoadNextLevel();
+            StartSuccessSequence();
         }
         else if (Input.GetKeyDown(KeyCode.Z))
         {
@@ -244,6 +245,7 @@ public class Missile : MonoBehaviour
         //Invoke("LoadNextLevel", levelLoadDelay);  // TODO load next level with delay after player press next level button
         // TODO show end level window
         gameManager.CalculateLevelScore();
+        StartCoroutine(EndLevelWindowDelay());
     }
 
     // TODO this method is previous StartDeathSequence
@@ -555,7 +557,7 @@ public class Missile : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
-    private void LoadNextLevel()
+    public void LoadNextLevel()
     {
         int sceneIndex = SceneManager.GetActiveScene().buildIndex;
         int nextSceneIndex = sceneIndex + 1;
@@ -567,7 +569,11 @@ public class Missile : MonoBehaviour
         {
             SceneManager.LoadScene(nextSceneIndex);
         }
+    }
 
+    public void RepeatLevel()
+    {
+        print("repeating");
     }
 
     // Rotate object, reacting only to one statement at time
@@ -674,5 +680,11 @@ public class Missile : MonoBehaviour
         }
         audioSource.Stop();
         audioSource.volume = startVolume;
+    }
+
+    IEnumerator EndLevelWindowDelay()
+    {
+        yield return new WaitForSeconds(levelLoadDelay);
+        endLevelRef.ShowEndLevelWindow();
     }
 }

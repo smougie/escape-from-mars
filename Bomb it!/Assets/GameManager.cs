@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class GameManager : MonoBehaviour
 
     float imageScaleDuration = .25f;
 
+    private float[] levelScoreImportance = new float[] { 100f, 200f, 300f, 400f, 500f, 600f, 700f};  // those values stores int which is added to level score value after completing level, index == level
+
     public static int maxLife = 3;
     public static int currentLife;
     private bool alive = true;
@@ -26,11 +29,13 @@ public class GameManager : MonoBehaviour
     public static int totalCollectibles = 0;
     private float lifeScore = 0;
     private float collectiblesScore = 0;
-    private float levelScore = 0;
-    private float totalScore = 0;
+    public float levelScore = 0;
+    public float totalScore = 0;
+    public float levelPercentageScore = 0;
     private string collectiblesStatusText;
     private GameObject collectiblesBarUI;
     public bool newGame = false;
+    private int currentLevelIndex;
 
     void Start()
     {
@@ -212,12 +217,17 @@ public class GameManager : MonoBehaviour
 
     public void CalculateLevelScore()
     {
+        currentLevelIndex = SceneManager.GetActiveScene().buildIndex;
         collectiblesScore = (float)currentCollectiblesValue / (float)maxLevelCollectibles;  // calculate collectibles percentage value (1/2 collectibles == .5f score)
         lifeScore = (float)currentLife / (float)maxLife;  // calculate life percentage value (1/3 collectibles == .33f score)
-        levelScore = Mathf.Round(((collectiblesScore + lifeScore) / 2f) * 100f);  // calculate level percentage score (average from collectibles and life score)
+        levelPercentageScore = Mathf.Round(((collectiblesScore + lifeScore) / 2f) * 100f);  // calculate level percentage score (average from collectibles and life score)
+        levelScore = levelPercentageScore + levelScoreImportance[currentLevelIndex - 1];
+    }
 
+    public void SaveScores()
+    {
         UpdateTotalScore();
-        ResetScoreValues();
+        ResetScoresValues();
     }
 
     private void UpdateTotalScore()
@@ -225,7 +235,7 @@ public class GameManager : MonoBehaviour
         totalScore += levelScore;
     }
 
-    private void ResetScoreValues()
+    private void ResetScoresValues()
     {
         collectiblesScore = 0f;
         lifeScore = 0f;
