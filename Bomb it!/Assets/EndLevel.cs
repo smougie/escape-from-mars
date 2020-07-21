@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class EndLevel : MonoBehaviour
 {
@@ -129,5 +130,24 @@ public class EndLevel : MonoBehaviour
         UpdateScoreValues();
     }
 
-    
+    private void LoadFirstLevel()
+    {
+        SceneManager.LoadScene(1);
+    }
+
+    public void LoadNextLevel()
+    {
+        int sceneIndex = SceneManager.GetActiveScene().buildIndex;
+        int nextSceneIndex = sceneIndex + 1;
+        if (nextSceneIndex == SceneManager.sceneCountInBuildSettings)  // if sceneIndex is equal to last scene, load first level (loop)
+        {
+            LoadFirstLevel();
+        }
+        else
+        {
+            gameManagerRef.SaveScores();
+            DisableEndLevelWindow();
+            SceneManager.LoadScene(nextSceneIndex);
+        }
+    }
 }

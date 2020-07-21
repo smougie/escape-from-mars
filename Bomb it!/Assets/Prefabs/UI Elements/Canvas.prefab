@@ -1285,8 +1285,33 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2755478191957044939, guid: 71e3c85dd0617a24f926b5f580a77f99,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2755478191957044939, guid: 71e3c85dd0617a24f926b5f580a77f99,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 1102290138708629752}
+    - target: {fileID: 2755478191957044939, guid: 71e3c85dd0617a24f926b5f580a77f99,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadNextLevel
+      objectReference: {fileID: 0}
+    - target: {fileID: 2755478191957044939, guid: 71e3c85dd0617a24f926b5f580a77f99,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2755478191957044939, guid: 71e3c85dd0617a24f926b5f580a77f99,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2755478191957044939, guid: 71e3c85dd0617a24f926b5f580a77f99,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2755478192175329840, guid: 71e3c85dd0617a24f926b5f580a77f99,
         type: 3}
@@ -1406,6 +1431,11 @@ PrefabInstance:
     - target: {fileID: 2755478193786543202, guid: 71e3c85dd0617a24f926b5f580a77f99,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2755478193786543202, guid: 71e3c85dd0617a24f926b5f580a77f99,
+        type: 3}
+      propertyPath: m_TargetGraphic
       value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
