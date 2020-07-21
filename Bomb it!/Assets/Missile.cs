@@ -36,8 +36,9 @@ public class Missile : MonoBehaviour
     private StatusLight statusLight;
     private Light refuelingPadLight;
 
-    [SerializeField] PauseMenu pauseMenuRef;
-    [SerializeField] EndLevel endLevelRef;
+    private PauseMenu pauseMenuRef;
+    private EndLevel endLevelRef;
+    private GameObject canvasObject;
 
     Rigidbody rigidBody;
     float startVolume;
@@ -93,10 +94,15 @@ public class Missile : MonoBehaviour
         {
             checkPointFlag = refuelingPad.GetComponentInChildren<CheckPointFlag>();
         }
+
         gameManagerObject = GameObject.Find("Game Manager");
         gameManager = gameManagerObject.GetComponent<GameManager>();
+        canvasObject = GameObject.Find("Canvas");
+        pauseMenuRef = canvasObject.GetComponent<PauseMenu>();
+        endLevelRef = canvasObject.GetComponent<EndLevel>();
         rocketStartingPosition = transform.position;
         padControllerRef = launchPadObject.GetComponent<PadController>();
+
 
         UpdateSoundEffectsVolume();  // Update sound levels
     }
@@ -568,29 +574,10 @@ public class Missile : MonoBehaviour
         landingPosition = padPosition;
     }
 
-    private void LoadFirstLevel()
-    {
-        SceneManager.LoadScene(1);
-    }
-
-    public void LoadNextLevel()
-    {
-        int sceneIndex = SceneManager.GetActiveScene().buildIndex;
-        int nextSceneIndex = sceneIndex + 1;
-        if (nextSceneIndex == SceneManager.sceneCountInBuildSettings)  // if sceneIndex is equal to last scene, load first level (loop)
-        {
-            LoadFirstLevel();
-        }
-        else
-        {
-            gameManager.SaveScores();
-            endLevelRef.DisableEndLevelWindow();
-            SceneManager.LoadScene(nextSceneIndex);
-        }
-    }
-
     public void RepeatLevel()
     {
+        gameManager.ResetLevelValues();
+        gameManager.ResetScoresValues();
         endLevelRef.DisableEndLevelWindow();
         pauseMenuRef.DestroyLeftObjects();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

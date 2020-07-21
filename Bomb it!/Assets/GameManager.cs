@@ -25,7 +25,6 @@ public class GameManager : MonoBehaviour
     public static int currentLife;
     public static int maxLevelCollectibles;
     public static int currentCollectiblesValue = 0;
-    public static int totalCollectibles = 0;
     private float lifeScore = 0f;
     private float collectiblesScore = 0f;
     public float levelScore = 0f;
@@ -201,7 +200,6 @@ public class GameManager : MonoBehaviour
     public void IncreaseCollectiblesCount()
     {
         currentCollectiblesValue += 1;
-        totalCollectibles += 1;
     }
 
     public void ResetLevelCollectiblesCount()
@@ -229,7 +227,7 @@ public class GameManager : MonoBehaviour
         totalScore += levelScore;
     }
 
-    private void ResetScoresValues()
+    public void ResetScoresValues()
     {
         collectiblesScore = 0f;
         lifeScore = 0f;
