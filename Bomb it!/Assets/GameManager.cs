@@ -68,8 +68,8 @@ public class GameManager : MonoBehaviour
             gameObject.SetActive(false);
             maxLevelCollectibles = GameObject.Find("Collectibles").transform.childCount;  // reset max collectibles value before game manager is inactive
         }
-        CreateRecordBase();
-        //PrintRecords();
+        //CreateRecordBase();
+        PrintRecords();
     }
 
     void Update()
@@ -101,7 +101,7 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i <= levelScenesCount; i++)
         {
-            print($"record number {i+1} " + PlayerPrefs.GetString($"Level {i}"));
+            print($"record number {i+1} " + PlayerPrefs.GetString($"Level {i+1}"));
         }
     }
 
@@ -271,6 +271,7 @@ public class GameManager : MonoBehaviour
     {
         //TODO save scores to PP HERE!!!
         PlayerPrefs.SetString($"Level {GetActiveLevelIndex()}", $"{GetActiveLevelIndex()},{planetScore},{levelPercentageScore},{levelScore}");  // "Level 1" - "1,1,50%,500,"
+        print($"Saving 'Level {GetActiveLevelIndex()}' record with: '{GetActiveLevelIndex()},{planetScore},{levelPercentageScore},{levelScore}'");
         UpdateTotalScore();
         ResetScoresValues();
     }
