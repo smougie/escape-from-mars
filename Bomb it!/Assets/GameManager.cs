@@ -66,7 +66,9 @@ public class GameManager : MonoBehaviour
             canvasObject.SetActive(false);
             eventSystemObject.SetActive(false);
             gameObject.SetActive(false);
-            maxLevelCollectibles = GameObject.Find("Collectibles").transform.childCount;  // reset max collectibles value before game manager is inactive
+            //maxLevelCollectibles = GameObject.Find("Collectibles").transform.childCount;  // reset max collectibles value before game manager is inactive
+            ResetCollectibles();
+            ResetLifes();
         }
         //CreateRecordBase();
         PrintRecords();
@@ -77,6 +79,10 @@ public class GameManager : MonoBehaviour
         if (collectiblesAvailable)
         {
             UpdateCollectiblesStatus();
+        }
+        if (Alive())
+        {
+            UpdateLifeBar();
         }
     }
 
@@ -136,7 +142,6 @@ public class GameManager : MonoBehaviour
     {
         ResetCollectibles();
         ResetLifes();
-        UpdateLifeBar();
     }
     
     private void ReloadCurrentLevel()
@@ -218,7 +223,6 @@ public class GameManager : MonoBehaviour
     public void DecreaseLife()
     {
         currentLife -= 1;
-        UpdateLifeBar();
     }
 
     public void IncreaseLife()
@@ -226,7 +230,6 @@ public class GameManager : MonoBehaviour
         if (CanCollectLife())
         {
             currentLife += 1;
-            UpdateLifeBar();
             ScaleImage();
         }
     }
