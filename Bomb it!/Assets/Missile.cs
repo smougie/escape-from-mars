@@ -105,6 +105,7 @@ public class Missile : MonoBehaviour
 
 
         UpdateSoundEffectsVolume();  // Update sound levels
+        //print(PlayerPrefs.GetString($"Level {SceneManager.GetActiveScene().buildIndex}"));
     }
 
     void Update()
@@ -232,7 +233,6 @@ public class Missile : MonoBehaviour
             case "Collectible":
                 DestroyCollectible(trigger);
                 gameManager.IncreaseCollectiblesCount();
-                gameManager.UpdateCollectiblesStatus();
                 audioSource2.PlayOneShot(alienPickUpSound);
                 break;
             default:

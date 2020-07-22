@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject life2;
     [SerializeField] GameObject life3;
     [SerializeField] TMP_Text textMeshProText;
-    [SerializeField] bool collectibles = false;
     [SerializeField] GameObject canvasObject;
     [SerializeField] GameObject eventSystemObject;
     private Image life1Image;
@@ -29,11 +28,12 @@ public class GameManager : MonoBehaviour
     private float collectiblesScore = 0f;
     public float levelScore = 0f;
     public float totalScore = 0f;
+    public int planetScore = 0;
     public float levelPercentageScore = 0f;
     private string collectiblesStatusText;
     private GameObject collectiblesBarUI;
     public bool newGame = false;
-    private int currentLevelIndex;
+    private bool collectiblesAvailable = true;
 
     void Start()
     {
@@ -42,12 +42,12 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
             DontDestroyOnLoad(canvasObject);
             DontDestroyOnLoad(eventSystemObject);
-            currentLife = maxLife;
             life1Image = life1.GetComponent<Image>();
             life2Image = life2.GetComponent<Image>();
             life3Image = life3.GetComponent<Image>();
+            currentLife = maxLife;
             collectiblesBarUI = GameObject.Find("Alien Bar");
-            if (collectibles)
+            if (GameObject.Find("Collectibles").transform.childCount != 0)
             {
                 maxLevelCollectibles = GameObject.Find("Collectibles").transform.childCount;
                 textMeshProText.text = collectiblesStatusText;
@@ -55,20 +55,54 @@ public class GameManager : MonoBehaviour
             }
             else
             {
+                collectiblesAvailable = false;
                 DisableCollectiblesUI();
             }
+
+            newGame = false;
         }
         else
         {
             canvasObject.SetActive(false);
             eventSystemObject.SetActive(false);
             gameObject.SetActive(false);
+            maxLevelCollectibles = GameObject.Find("Collectibles").transform.childCount;  // reset max collectibles value before game manager is inactive
+        }
+        CreateRecordBase();
+        //PrintRecords();
+    }
+
+    void Update()
+    {
+        if (collectiblesAvailable)
+        {
+            UpdateCollectiblesStatus();
         }
     }
 
     public void SetNewGame()
     {
         newGame = true;
+    }
+
+    private int technicalScenesCount = 2;  // declare how many technical Scene are included (scenes which are not level scenes), this variable is necessary for counting Level Scenes amount
+    private int levelScenesCount;
+
+    private void CreateRecordBase()
+    {
+        levelScenesCount = SceneManager.sceneCountInBuildSettings - technicalScenesCount;  // TODO move to start()\
+        for (int i = 0; i <= levelScenesCount; i++)
+        {
+            PlayerPrefs.SetString($"Level {i}", "");
+        }
+    }
+
+    private void PrintRecords()
+    {
+        for (int i = 0; i <= levelScenesCount; i++)
+        {
+            print($"record number {i+1} " + PlayerPrefs.GetString($"Level {i}"));
+        }
     }
 
     private void EnableCollectiblesUI()
@@ -102,8 +136,26 @@ public class GameManager : MonoBehaviour
     {
         ResetCollectibles();
         ResetLifes();
-        UpdateCollectiblesStatus();
         UpdateLifeBar();
+    }
+    
+    private void ReloadCurrentLevel()
+    {
+        if (GetActiveLevelIndex() != 1)
+        {
+            SceneManager.LoadScene(GetActiveLevelIndex());
+        }
+        else
+        {
+            newGame = true;
+            SceneManager.LoadScene(1);
+        }
+    }
+
+    public void RepeatLevel()
+    {
+        ResetLevelValues();
+        ReloadCurrentLevel();
     }
 
     public bool Alive()
@@ -209,15 +261,16 @@ public class GameManager : MonoBehaviour
 
     public void CalculateLevelScore()
     {
-        currentLevelIndex = SceneManager.GetActiveScene().buildIndex;
         collectiblesScore = (float)currentCollectiblesValue / (float)maxLevelCollectibles;  // calculate collectibles percentage value (1/2 collectibles == .5f score)
         lifeScore = (float)currentLife / (float)maxLife;  // calculate life percentage value (1/3 collectibles == .33f score)
         levelPercentageScore = Mathf.Round(((collectiblesScore + lifeScore) / 2f) * 100f);  // calculate level percentage score (average from collectibles and life score)
-        levelScore = levelPercentageScore + levelScoreImportance[currentLevelIndex - 1];
+        levelScore = levelPercentageScore + levelScoreImportance[GetActiveLevelIndex() - 1];
     }
 
     public void SaveScores()
     {
+        //TODO save scores to PP HERE!!!
+        PlayerPrefs.SetString($"Level {GetActiveLevelIndex()}", $"{GetActiveLevelIndex()},{planetScore},{levelPercentageScore},{levelScore}");  // "Level 1" - "1,1,50%,500,"
         UpdateTotalScore();
         ResetScoresValues();
     }
@@ -229,10 +282,17 @@ public class GameManager : MonoBehaviour
 
     public void ResetScoresValues()
     {
+        currentCollectiblesValue = 0;
         collectiblesScore = 0f;
         lifeScore = 0f;
         levelPercentageScore = 0f;
         levelScore = 0f;
+        planetScore = 0;
+    }
+
+    private int GetActiveLevelIndex()
+    {
+        return SceneManager.GetActiveScene().buildIndex;
     }
 
     IEnumerator ScaleUpImage(Image image, float duration)

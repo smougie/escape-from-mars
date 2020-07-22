@@ -62,24 +62,28 @@ public class EndLevel : MonoBehaviour
             planet1.SetActive(false);
             planet2.SetActive(false);
             planet3.SetActive(false);
+            gameManagerRef.planetScore = 0;
         }
         else if (planetValue == 1)
         {
             planet1.SetActive(true);
             planet2.SetActive(false);
             planet3.SetActive(false);
+            gameManagerRef.planetScore = 1;
         }
         else if (planetValue == 2)
         {
             planet1.SetActive(true);
             planet2.SetActive(true);
             planet3.SetActive(false);
+            gameManagerRef.planetScore = 2;
         }
         else if (planetValue == 3)
         {
             planet1.SetActive(true);
             planet2.SetActive(true);
             planet3.SetActive(true);
+            gameManagerRef.planetScore = 3;
         }
         else
         {
