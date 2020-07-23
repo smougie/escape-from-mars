@@ -6,22 +6,48 @@ using TMPro;
 public class LevelLoader : MonoBehaviour
 {
     [SerializeField] int levelToLoad;
-    [SerializeField] int tempPlanets;
-    [SerializeField] int tempPercentage;
     [SerializeField] TMP_Text levelNumberText;
     [SerializeField] TMP_Text levelPercentageScoreText;
-    [SerializeField] GameObject planet1, planet2, planet3;
+    [SerializeField] GameObject planet1, planet2, planet3, padlock;
+
+    private string levelNumberStr;
+    private string levelRecord;
+    private int planetScore;
+    private int levelPercentageScore;
+    private int levelScore;
+
+    private int planetScoreIndex = 1;
+    private int levelPercentageIndex = 2;
+    private int levelScoreIndex = 3;
 
     void Start()
     {
+        ReadLevelRecord();
+        if (levelRecord == "" || levelRecord == null)
+        {
+            padlock.SetActive(true);
+        }
+        ParseLevelRecord(levelRecord);
+        levelNumberStr = $"Level {levelToLoad}";
         levelNumberText.text = $"{levelToLoad}";
-        levelPercentageScoreText.text = $"{tempPercentage}%";  // TODO add % score from PP
-        ActivatePlanets(tempPlanets);
+        levelPercentageScoreText.text = $"{levelPercentageScore}%";
+        ActivatePlanets(planetScore);
     }
 
-    void Update()
+    private void ReadLevelRecord()
     {
-        
+        levelRecord = PlayerPrefs.GetString(levelNumberStr);
+    }
+
+    private void ParseLevelRecord(string recordToSplit)
+    {
+        if (levelRecord != "")
+        {
+            string[] recordAfterSplit = recordToSplit.Split(',');
+            planetScore = int.Parse(recordAfterSplit[planetScoreIndex]);
+            levelPercentageScore = int.Parse(recordAfterSplit[levelPercentageIndex]);
+            levelScore = int.Parse(recordAfterSplit[levelScoreIndex]);
+        }
     }
 
     private void ActivatePlanets(int planetsCount)

@@ -66,7 +66,6 @@ public class GameManager : MonoBehaviour
             canvasObject.SetActive(false);
             eventSystemObject.SetActive(false);
             gameObject.SetActive(false);
-            //maxLevelCollectibles = GameObject.Find("Collectibles").transform.childCount;  // reset max collectibles value before game manager is inactive
             ResetCollectibles();
             ResetLifes();
         }
@@ -92,15 +91,20 @@ public class GameManager : MonoBehaviour
     }
 
     private int technicalScenesCount = 2;  // declare how many technical Scene are included (scenes which are not level scenes), this variable is necessary for counting Level Scenes amount
-    private int levelScenesCount;
+    private int levelScenesCount = 6;
 
-    private void CreateRecordBase()
+    private void CreateRecordsBase()
     {
         levelScenesCount = SceneManager.sceneCountInBuildSettings - technicalScenesCount;  // TODO move to start()\
         for (int i = 0; i <= levelScenesCount; i++)
         {
             PlayerPrefs.SetString($"Level {i}", "");
         }
+    }
+
+    private void SaveLevelRecord()
+    {
+        PlayerPrefs.SetString($"Level {GetActiveLevelIndex()}", $"{GetActiveLevelIndex()},{planetScore},{levelPercentageScore},{levelScore}");
     }
 
     private void PrintRecords()
@@ -273,10 +277,10 @@ public class GameManager : MonoBehaviour
     public void SaveScores()
     {
         //TODO save scores to PP HERE!!!
-        PlayerPrefs.SetString($"Level {GetActiveLevelIndex()}", $"{GetActiveLevelIndex()},{planetScore},{levelPercentageScore},{levelScore}");  // "Level 1" - "1,1,50%,500,"
         print($"Saving 'Level {GetActiveLevelIndex()}' record with: '{GetActiveLevelIndex()},{planetScore},{levelPercentageScore},{levelScore}'");
-        UpdateTotalScore();
-        ResetScoresValues();
+        SaveLevelRecord();  // send record to PP base
+        UpdateTotalScore();  // update total score
+        ResetScoresValues();  // reset all scores values
     }
 
     private void UpdateTotalScore()
