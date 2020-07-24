@@ -15,6 +15,8 @@ public class LevelLoader : MonoBehaviour
 
     private Button levelBoxButton;
 
+    private PlanetControl planetControlRef;
+
     private GameObject[] gameObjectsToDisable;
     private GameObject levelSectionObj;
     private string levelNumberStr;
@@ -53,7 +55,8 @@ public class LevelLoader : MonoBehaviour
         else
         {
             levelPercentageScoreText.text = $"{levelPercentageScore}%";
-            ActivatePlanets(planetScore);
+            planetControlRef = GetComponent<PlanetControl>();
+            planetControlRef.ActivatePlanets(planetScore);
         }
     }
 
@@ -82,33 +85,6 @@ public class LevelLoader : MonoBehaviour
         else
         {
             return false;
-        }
-    }
-
-    private void ActivatePlanets(int planetsCount)
-    {
-        switch (planetsCount)
-        {
-            case 1:
-                planet1.SetActive(true);
-                planet2.SetActive(false);
-                planet3.SetActive(false);
-                break;
-            case 2:
-                planet1.SetActive(true);
-                planet2.SetActive(true);
-                planet3.SetActive(false);
-                break;
-            case 3:
-                planet1.SetActive(true);
-                planet2.SetActive(true);
-                planet3.SetActive(true);
-                break;
-            default:
-                planet1.SetActive(false);
-                planet2.SetActive(false);
-                planet3.SetActive(false);
-                break;
         }
     }
 
@@ -159,10 +135,13 @@ public class LevelLoader : MonoBehaviour
 
     public void EnableLevelDetails(bool enabled)
     {
+        LevelDetails levelDetailsRef;
         GameObject[] objectsToDisable = { GameObject.Find("Frame"), GameObject.Find("Level Select Title")};
         if (enabled)
         {
             levelDetailsObj.SetActive(true);
+            levelDetailsRef = levelDetailsObj.GetComponent<LevelDetails>();
+            levelDetailsRef.UpdateLevelDetails(levelToLoad, planetScore, levelPercentageScore, levelScore);
             DisableObjects(objectsToDisable);
         }
         else

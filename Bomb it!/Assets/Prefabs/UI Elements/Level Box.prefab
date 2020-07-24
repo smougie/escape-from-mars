@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5911468651391974993}
   - component: {fileID: 7368862195038135295}
+  - component: {fileID: 8247893359728023037}
   - component: {fileID: 3643545663644070112}
   m_Layer: 5
   m_Name: Level Box
@@ -69,6 +70,21 @@ MonoBehaviour:
   levelLabelObj: {fileID: 7242585039252195185}
   planetSelectionObj: {fileID: 8673704569570242452}
   scoreBackgroundObj: {fileID: 7242585038324199907}
+--- !u!114 &8247893359728023037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 523093119757349299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1d9bcabb647c5c45aba916f728e709d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  planet1: {fileID: 8673704568510075537}
+  planet2: {fileID: 8673704568572750226}
+  planet3: {fileID: 8673704569704285403}
 --- !u!114 &3643545663644070112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1473,18 +1489,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 7242585037951689425}
   m_PrefabAsset: {fileID: 0}
---- !u!224 &8673704569570242451 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 2080070261444562242, guid: 40659e2e14b687c4cb21061b1e6789c9,
-    type: 3}
-  m_PrefabInstance: {fileID: 7242585037951689425}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &8673704568510075537 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2080070260451618880, guid: 40659e2e14b687c4cb21061b1e6789c9,
-    type: 3}
-  m_PrefabInstance: {fileID: 7242585037951689425}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8673704568572750226 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2080070260263570243, guid: 40659e2e14b687c4cb21061b1e6789c9,
@@ -1494,6 +1498,18 @@ GameObject:
 --- !u!1 &8673704569704285403 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2080070261310449162, guid: 40659e2e14b687c4cb21061b1e6789c9,
+    type: 3}
+  m_PrefabInstance: {fileID: 7242585037951689425}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8673704568510075537 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2080070260451618880, guid: 40659e2e14b687c4cb21061b1e6789c9,
+    type: 3}
+  m_PrefabInstance: {fileID: 7242585037951689425}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &8673704569570242451 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2080070261444562242, guid: 40659e2e14b687c4cb21061b1e6789c9,
     type: 3}
   m_PrefabInstance: {fileID: 7242585037951689425}
   m_PrefabAsset: {fileID: 0}
