@@ -261,6 +261,12 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 9724421}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &43317757 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2080070261310449162, guid: 8d6219ec80d3d2a4a9d7b904568589d9,
+    type: 3}
+  m_PrefabInstance: {fileID: 9724421}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &74083763
 GameObject:
   m_ObjectHideFlags: 0
@@ -572,7 +578,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 390047282}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 839561885}
+        m_MethodName: RestartLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &390047282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -767,6 +784,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 638098421}
   m_CullTransparentMesh: 0
+--- !u!1 &668072372 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2080070260263570243, guid: 8d6219ec80d3d2a4a9d7b904568589d9,
+    type: 3}
+  m_PrefabInstance: {fileID: 9724421}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &839561883
 GameObject:
   m_ObjectHideFlags: 0
@@ -777,13 +800,15 @@ GameObject:
   m_Component:
   - component: {fileID: 839561884}
   - component: {fileID: 839561885}
+  - component: {fileID: 839561886}
+  - component: {fileID: 839561887}
   m_Layer: 5
   m_Name: Level Details
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &839561884
 RectTransform:
   m_ObjectHideFlags: 0
@@ -825,11 +850,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 086255427ee4e904e9b7af943dbff313, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  percentageScore: {fileID: 0}
-  levelScore: {fileID: 0}
-  planet1: {fileID: 0}
-  planet2: {fileID: 0}
-  planet3: {fileID: 0}
+  levelLabelTxt: {fileID: 992973284}
+  percentageScoreTxt: {fileID: 638098423}
+  levelScoreTxt: {fileID: 328645465}
+--- !u!114 &839561886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 839561883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1d9bcabb647c5c45aba916f728e709d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  planet1: {fileID: 1790158608}
+  planet2: {fileID: 668072372}
+  planet3: {fileID: 43317757}
+--- !u!114 &839561887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 839561883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3f31b67e091f5a41abd57ca34de87a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &992973282
 GameObject:
   m_ObjectHideFlags: 0
@@ -2012,7 +2062,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1455287477
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2542,7 +2592,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1707671371
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2892,6 +2942,12 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1758227736}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1790158608 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2080070260451618880, guid: 8d6219ec80d3d2a4a9d7b904568589d9,
+    type: 3}
+  m_PrefabInstance: {fileID: 9724421}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1791485089
 GameObject:
   m_ObjectHideFlags: 0
@@ -2975,7 +3031,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1794556941
 RectTransform:
   m_ObjectHideFlags: 0

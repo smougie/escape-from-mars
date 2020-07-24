@@ -108,17 +108,14 @@ public class LevelLoader : MonoBehaviour
 
     public void ContinueGame()
     {
+        // TODO set PP flag for continue
+        PlayerPrefs.SetInt("LoadLevelSettings", 1);
         SceneManager.LoadScene(levelToLoad);
     }
 
     private void ButtonNotInteractable()
     {
         levelBoxButton.interactable = false;
-    }
-
-    public void RestartLevel()
-    {
-
     }
 
     public void EnableLevelSection(bool enabled)

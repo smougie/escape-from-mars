@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class GameManager : MonoBehaviour
     private Image life1Image;
     private Image life2Image;
     private Image life3Image;
+    private SaveManager saveManagerRef;
 
     float imageScaleDuration = .25f;
 
@@ -32,12 +34,17 @@ public class GameManager : MonoBehaviour
     public float levelPercentageScore = 0f;
     private string collectiblesStatusText;
     private GameObject collectiblesBarUI;
-    public bool newGame = false;
     private bool collectiblesAvailable = true;
 
     void Start()
     {
-        if (newGame)
+        saveManagerRef = GetComponent<SaveManager>();
+        //print("Settings " + PlayerPrefs.GetInt("LoadLevelSettings"));
+        //print("Restarted " + PlayerPrefs.GetInt("Restarted"));
+        print(saveManagerRef.GetTotalScore());
+        //saveManagerRef.ClearRestartRecord();
+        // TODO read PP level settings flag
+        if (CheckForLevelSettings())
         {
             DontDestroyOnLoad(gameObject);
             DontDestroyOnLoad(canvasObject);
@@ -59,7 +66,8 @@ public class GameManager : MonoBehaviour
                 DisableCollectiblesUI();
             }
 
-            newGame = false;
+            saveManagerRef.LoadLevelSettings(0);
+            //PlayerPrefs.SetInt("LoadLevelSettings", 0);
         }
         else
         {
@@ -71,7 +79,7 @@ public class GameManager : MonoBehaviour
         }
         //CreateRecordsBase();
         //PrintRecords();
-        //ClearRecordBase();
+
     }
 
     void Update()
@@ -86,47 +94,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SetNewGame()
+    private bool CheckForLevelSettings()
     {
-        newGame = true;
-    }
-
-    private int technicalScenesCount = 2;  // declare how many technical Scene are included (scenes which are not level scenes), this variable is necessary for counting Level Scenes amount
-    private int levelScenesCount = 7;
-
-    private void CreateRecordsBase()
-    {
-        levelScenesCount = SceneManager.sceneCountInBuildSettings - technicalScenesCount;  // TODO move to start()\
-        for (int i = 1; i <= levelScenesCount; i++)
+        if (saveManagerRef.ReadLevelSettings() == 1)
         {
-            PlayerPrefs.SetString($"Level {i}", $"{i},0,0,0");
+            return true;
         }
-    }
-
-    private void SaveLevelRecord()
-    {
-        PlayerPrefs.SetString($"Level {GetActiveLevelIndex()}", $"{GetActiveLevelIndex()},{planetScore},{levelPercentageScore},{levelScore}");
-    }
-
-    private void UnlockNextLevel()
-    {
-        int nextLevelIndex = GetActiveLevelIndex() + 1;
-        PlayerPrefs.SetString($"Level {nextLevelIndex}", $"{nextLevelIndex},{0},{0},{0}");
-    }
-
-    private void PrintRecords()
-    {
-        for (int i = 1; i <= levelScenesCount; i++)
+        else
         {
-            print($"record number {i} " + PlayerPrefs.GetString($"Level {i}"));
-        }
-    }
-
-    private void ClearRecordBase()
-    {
-        for (int i = 1; i <= levelScenesCount; i++)
-        {
-            PlayerPrefs.DeleteKey($"Level {i}");
+            return false;
         }
     }
 
@@ -171,7 +147,8 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            newGame = true;
+            // TODO check if code below affects our new load level settings system
+            //newGame = true;
             SceneManager.LoadScene(1);
         }
     }
@@ -291,17 +268,40 @@ public class GameManager : MonoBehaviour
 
     public void SaveScores()
     {
-        //TODO save scores to PP HERE!!!
-        print($"Saving 'Level {GetActiveLevelIndex()}' record with: '{GetActiveLevelIndex()},{planetScore},{levelPercentageScore},{levelScore}'");
-        SaveLevelRecord();  // send record to PP base
+
+        // TODO add saving totalScore here
+        saveManagerRef.SaveLevelRecord(GetActiveLevelIndex(), planetScore, levelPercentageScore, levelScore);  // send record to PP base
         UpdateTotalScore();  // update total score
-        UnlockNextLevel();  // unlock next level for level select scene
+        saveManagerRef.UnlockNextLevel(GetActiveLevelIndex());  // unlock next level for level select scene
         ResetScoresValues();  // reset all scores values
     }
 
     private void UpdateTotalScore()
     {
-        totalScore += levelScore;
+        int currentTotalScore = saveManagerRef.GetTotalScore();
+        if (LevelRestarted())
+        {
+            int oldLevelScore = saveManagerRef.GetOldLevelScore();
+            currentTotalScore = (currentTotalScore - oldLevelScore) + (int)Mathf.Round(levelScore);
+        }
+        else
+        {
+            currentTotalScore = currentTotalScore + (int)Mathf.Round(levelScore);
+        }
+        saveManagerRef.SaveTotalScore(currentTotalScore);
+        
+    }
+
+    private bool LevelRestarted()
+    {
+        if (saveManagerRef.ReadRestartedValue() == 1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public void ResetScoresValues()
@@ -317,6 +317,13 @@ public class GameManager : MonoBehaviour
     private int GetActiveLevelIndex()
     {
         return SceneManager.GetActiveScene().buildIndex;
+    }
+
+    public void DestroyLeftObjects()
+    {
+        Destroy(FindObjectOfType<GameManager>().gameObject);
+        Destroy(FindObjectOfType<Canvas>().gameObject);
+        Destroy(FindObjectOfType<EventSystem>().gameObject);
     }
 
     IEnumerator ScaleUpImage(Image image, float duration)

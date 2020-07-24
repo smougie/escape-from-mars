@@ -5,23 +5,31 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] GameObject continueButton;
+    private SaveManager saveManagerRef;
 
     void Start()
     {
-        ReadFirstLevelRecord();
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            saveManagerRef = GetComponent<SaveManager>();
+            ReadFirstLevelRecord();
+        }
+
     }
 
     private void ReadFirstLevelRecord()
     {
-        string firstLevelRecord = PlayerPrefs.GetString("Level 1");
+        string firstLevelRecord = saveManagerRef.GetLevelRecord(1);
         if (firstLevelRecord == "")
         {
-            DisableContinue();
+            DisableContinueButton();
         }
     }
 
     public void NewGame()
     {
+        saveManagerRef.LoadLevelSettings(1);
+        saveManagerRef.ClearRecordBase();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
@@ -40,7 +48,7 @@ public class MainMenu : MonoBehaviour
         gameObject.SetActive(true);
     }
 
-    private void DisableContinue()
+    private void DisableContinueButton()
     {
         continueButton.SetActive(false);
     }

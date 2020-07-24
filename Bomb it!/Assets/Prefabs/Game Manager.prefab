@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5271241471296856332}
   - component: {fileID: 3977287266733744560}
+  - component: {fileID: 6939104058277012159}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -41,5 +42,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 796e7d391df96e34ea4e97f894b09f0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  life1: {fileID: 0}
+  life2: {fileID: 0}
+  life3: {fileID: 0}
+  textMeshProText: {fileID: 0}
+  canvasObject: {fileID: 0}
+  eventSystemObject: {fileID: 0}
+  levelScore: 0
+  totalScore: 0
+  planetScore: 0
+  levelPercentageScore: 0
+--- !u!114 &6939104058277012159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 474442802893849897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3f31b67e091f5a41abd57ca34de87a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
