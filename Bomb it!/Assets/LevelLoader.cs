@@ -106,9 +106,9 @@ public class LevelLoader : MonoBehaviour
         padlock.SetActive(true);
     }
 
+    // Go! button on Level Box
     public void ContinueGame()
     {
-        // TODO set PP flag for continue
         PlayerPrefs.SetInt("LoadLevelSettings", 1);
         SceneManager.LoadScene(levelToLoad);
     }
