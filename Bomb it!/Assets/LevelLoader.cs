@@ -3,16 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class LevelLoader : MonoBehaviour
 {
     [SerializeField] int levelToLoad;
     [SerializeField] TMP_Text levelNumberText;
     [SerializeField] TMP_Text levelPercentageScoreText;
-    [SerializeField] GameObject planet1, planet2, planet3, padlock, continueButtonObj;
+    [SerializeField] GameObject levelDetailsObj, planet1, planet2, planet3, padlock, continueButtonObj;
     [SerializeField] GameObject levelNumberObj, levelLabelObj, planetSelectionObj, scoreBackgroundObj;
 
+    private Button levelBoxButton;
+
     private GameObject[] gameObjectsToDisable;
+    private GameObject levelSectionObj;
     private string levelNumberStr;
     private string levelUnlockedStr;
     private string levelRecord;
@@ -26,6 +30,8 @@ public class LevelLoader : MonoBehaviour
 
     void Start()
     {
+        levelSectionObj = GameObject.Find("Levels Section");
+        levelBoxButton = GetComponent<Button>();
         GameObject[] gameObjectsToDisable = { levelNumberObj, levelLabelObj, planetSelectionObj, scoreBackgroundObj};
         levelNumberStr = $"Level {levelToLoad}";
         levelUnlockedStr = $"{levelToLoad},0,0,0";
@@ -35,11 +41,13 @@ public class LevelLoader : MonoBehaviour
         if (LevelRecordEmpty())
         {
             DisableObjects(gameObjectsToDisable);
+            ButtonNotInteractable();
             EnablePadlock();
         }
         else if (levelRecord == levelUnlockedStr)
         {
-            DisableObjects(new GameObject[] { scoreBackgroundObj});
+            DisableObjects(new GameObject[] { scoreBackgroundObj, planet1, planet2, planet3});
+            ButtonNotInteractable();
             EnableContinue();
         }
         else
@@ -125,5 +133,41 @@ public class LevelLoader : MonoBehaviour
     public void ContinueGame()
     {
         SceneManager.LoadScene(levelToLoad);
+    }
+
+    private void ButtonNotInteractable()
+    {
+        levelBoxButton.interactable = false;
+    }
+
+    public void RestartLevel()
+    {
+
+    }
+
+    public void EnableLevelSection(bool enabled)
+    {
+        if (enabled)
+        {
+            levelSectionObj.SetActive(true);
+        }
+        else
+        {
+            levelSectionObj.SetActive(false);
+        }
+    }
+
+    public void EnableLevelDetails(bool enabled)
+    {
+        GameObject[] objectsToDisable = { GameObject.Find("Frame"), GameObject.Find("Level Select Title")};
+        if (enabled)
+        {
+            levelDetailsObj.SetActive(true);
+            DisableObjects(objectsToDisable);
+        }
+        else
+        {
+            levelDetailsObj.SetActive(false);
+        }
     }
 }
