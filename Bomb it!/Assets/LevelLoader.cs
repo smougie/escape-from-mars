@@ -9,7 +9,9 @@ public class LevelLoader : MonoBehaviour
     [SerializeField] TMP_Text levelNumberText;
     [SerializeField] TMP_Text levelPercentageScoreText;
     [SerializeField] GameObject planet1, planet2, planet3, padlock;
+    [SerializeField] GameObject levelNumberObj, levelLabelObj, planetSelectionObj, scoreBackgroundObj;
 
+    private GameObject[] gameObjectsToDisable;
     private string levelNumberStr;
     private string levelRecord;
     private int planetScore;
@@ -22,14 +24,17 @@ public class LevelLoader : MonoBehaviour
 
     void Start()
     {
-        ReadLevelRecord();
-        if (levelRecord == "" || levelRecord == null)
-        {
-            padlock.SetActive(true);
-        }
-        ParseLevelRecord(levelRecord);
+
+        GameObject[] gameObjectsToDisable = { levelNumberObj, levelLabelObj, planetSelectionObj, scoreBackgroundObj};
         levelNumberStr = $"Level {levelToLoad}";
         levelNumberText.text = $"{levelToLoad}";
+        ReadLevelRecord();
+        ParseLevelRecord(levelRecord);
+        if (levelRecord == "" || levelRecord == null)
+        {
+            DisableObjects(gameObjectsToDisable);
+            EnablePadlock();
+        }
         levelPercentageScoreText.text = $"{levelPercentageScore}%";
         ActivatePlanets(planetScore);
     }
@@ -75,5 +80,18 @@ public class LevelLoader : MonoBehaviour
                 planet3.SetActive(false);
                 break;
         }
+    }
+
+    private void DisableObjects(GameObject[] gameObjects)
+    {
+        foreach (var item in gameObjects)
+        {
+            item.SetActive(false);
+        }
+    }
+
+    private void EnablePadlock()
+    {
+        padlock.SetActive(true);
     }
 }

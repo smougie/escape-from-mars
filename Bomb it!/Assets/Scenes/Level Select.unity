@@ -2270,11 +2270,5 @@ PrefabInstance:
       propertyPath: levelToLoad
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7368862195038135295, guid: 70a8255e06a7e7a4b85387c3c8b7af67,
-        type: 3}
-      propertyPath: padlock
-      value: 
-      objectReference: {fileID: 4012282384803035625, guid: 8c16ecf89ef0cc148950710405f98594,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 70a8255e06a7e7a4b85387c3c8b7af67, type: 3}
