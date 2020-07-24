@@ -24,19 +24,21 @@ public class LevelLoader : MonoBehaviour
 
     void Start()
     {
-
         GameObject[] gameObjectsToDisable = { levelNumberObj, levelLabelObj, planetSelectionObj, scoreBackgroundObj};
         levelNumberStr = $"Level {levelToLoad}";
         levelNumberText.text = $"{levelToLoad}";
         ReadLevelRecord();
         ParseLevelRecord(levelRecord);
-        if (levelRecord == "" || levelRecord == null)
+        if (LevelRecordEmpty())
         {
             DisableObjects(gameObjectsToDisable);
             EnablePadlock();
         }
-        levelPercentageScoreText.text = $"{levelPercentageScore}%";
-        ActivatePlanets(planetScore);
+        else
+        {
+            levelPercentageScoreText.text = $"{levelPercentageScore}%";
+            ActivatePlanets(planetScore);
+        }
     }
 
     private void ReadLevelRecord()
@@ -52,6 +54,18 @@ public class LevelLoader : MonoBehaviour
             planetScore = int.Parse(recordAfterSplit[planetScoreIndex]);
             levelPercentageScore = int.Parse(recordAfterSplit[levelPercentageIndex]);
             levelScore = int.Parse(recordAfterSplit[levelScoreIndex]);
+        }
+    }
+
+    private bool LevelRecordEmpty()
+    {
+        if (levelRecord == "" || levelRecord == null)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 
