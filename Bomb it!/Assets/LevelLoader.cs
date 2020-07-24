@@ -2,17 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class LevelLoader : MonoBehaviour
 {
     [SerializeField] int levelToLoad;
     [SerializeField] TMP_Text levelNumberText;
     [SerializeField] TMP_Text levelPercentageScoreText;
-    [SerializeField] GameObject planet1, planet2, planet3, padlock;
+    [SerializeField] GameObject planet1, planet2, planet3, padlock, continueButtonObj;
     [SerializeField] GameObject levelNumberObj, levelLabelObj, planetSelectionObj, scoreBackgroundObj;
 
     private GameObject[] gameObjectsToDisable;
     private string levelNumberStr;
+    private string levelUnlockedStr;
     private string levelRecord;
     private int planetScore;
     private int levelPercentageScore;
@@ -26,6 +28,7 @@ public class LevelLoader : MonoBehaviour
     {
         GameObject[] gameObjectsToDisable = { levelNumberObj, levelLabelObj, planetSelectionObj, scoreBackgroundObj};
         levelNumberStr = $"Level {levelToLoad}";
+        levelUnlockedStr = $"{levelToLoad},0,0,0";
         levelNumberText.text = $"{levelToLoad}";
         ReadLevelRecord();
         ParseLevelRecord(levelRecord);
@@ -33,6 +36,11 @@ public class LevelLoader : MonoBehaviour
         {
             DisableObjects(gameObjectsToDisable);
             EnablePadlock();
+        }
+        else if (levelRecord == levelUnlockedStr)
+        {
+            DisableObjects(new GameObject[] { scoreBackgroundObj});
+            EnableContinue();
         }
         else
         {
@@ -104,8 +112,18 @@ public class LevelLoader : MonoBehaviour
         }
     }
 
+    private void EnableContinue()
+    {
+        continueButtonObj.SetActive(true);
+    }
+
     private void EnablePadlock()
     {
         padlock.SetActive(true);
+    }
+
+    public void ContinueGame()
+    {
+        SceneManager.LoadScene(levelToLoad);
     }
 }

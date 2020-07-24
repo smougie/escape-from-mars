@@ -69,8 +69,9 @@ public class GameManager : MonoBehaviour
             ResetCollectibles();
             ResetLifes();
         }
-        //CreateRecordBase();
-        PrintRecords();
+        //CreateRecordsBase();
+        //PrintRecords();
+        //ClearRecordBase();
     }
 
     void Update()
@@ -91,14 +92,14 @@ public class GameManager : MonoBehaviour
     }
 
     private int technicalScenesCount = 2;  // declare how many technical Scene are included (scenes which are not level scenes), this variable is necessary for counting Level Scenes amount
-    private int levelScenesCount = 6;
+    private int levelScenesCount = 7;
 
     private void CreateRecordsBase()
     {
         levelScenesCount = SceneManager.sceneCountInBuildSettings - technicalScenesCount;  // TODO move to start()\
-        for (int i = 0; i <= levelScenesCount; i++)
+        for (int i = 1; i <= levelScenesCount; i++)
         {
-            PlayerPrefs.SetString($"Level {i}", "");
+            PlayerPrefs.SetString($"Level {i}", $"{i},0,0,0");
         }
     }
 
@@ -107,11 +108,25 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetString($"Level {GetActiveLevelIndex()}", $"{GetActiveLevelIndex()},{planetScore},{levelPercentageScore},{levelScore}");
     }
 
+    private void UnlockNextLevel()
+    {
+        int nextLevelIndex = GetActiveLevelIndex() + 1;
+        PlayerPrefs.SetString($"Level {nextLevelIndex}", $"{nextLevelIndex},{0},{0},{0}");
+    }
+
     private void PrintRecords()
     {
-        for (int i = 0; i <= levelScenesCount; i++)
+        for (int i = 1; i <= levelScenesCount; i++)
         {
-            print($"record number {i+1} " + PlayerPrefs.GetString($"Level {i+1}"));
+            print($"record number {i} " + PlayerPrefs.GetString($"Level {i}"));
+        }
+    }
+
+    private void ClearRecordBase()
+    {
+        for (int i = 1; i <= levelScenesCount; i++)
+        {
+            PlayerPrefs.DeleteKey($"Level {i}");
         }
     }
 
@@ -280,6 +295,7 @@ public class GameManager : MonoBehaviour
         print($"Saving 'Level {GetActiveLevelIndex()}' record with: '{GetActiveLevelIndex()},{planetScore},{levelPercentageScore},{levelScore}'");
         SaveLevelRecord();  // send record to PP base
         UpdateTotalScore();  // update total score
+        UnlockNextLevel();  // unlock next level for level select scene
         ResetScoresValues();  // reset all scores values
     }
 
