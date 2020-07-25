@@ -105,7 +105,6 @@ public class Missile : MonoBehaviour
 
 
         UpdateSoundEffectsVolume();  // Update sound levels
-        //print(PlayerPrefs.GetString($"Level {SceneManager.GetActiveScene().buildIndex}"));
     }
 
     void Update()
@@ -247,8 +246,6 @@ public class Missile : MonoBehaviour
         finishParticles.Play();  // play level finish particles
         thrustParticles.Stop();  // stop playing thrusting particles
         ManageAudio(finishSound);  // control audio
-        //Invoke("LoadNextLevel", levelLoadDelay);  // TODO load next level with delay after player press next level button
-        // TODO show end level window
         gameManager.CalculateLevelScore();  // calculate level score without saving them
         StartCoroutine(EndLevelWindowDelay(false));  // show endLevelWindow with delay
     }

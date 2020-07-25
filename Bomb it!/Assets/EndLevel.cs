@@ -17,6 +17,7 @@ public class EndLevel : MonoBehaviour
 
     private GameManager gameManagerRef;
     private SaveManager saveManagerRef;
+    public bool endLevelWindowEnabled = false;
 
     void Start()
     {
@@ -106,6 +107,7 @@ public class EndLevel : MonoBehaviour
 
     private void EnableEndLevelWindow(bool gameOver)
     {
+        endLevelWindowEnabled = true;
         endLevelWindow.SetActive(true);
         UpdatePlanets(gameManagerRef.levelPercentageScore);
         if (gameOver)
@@ -127,6 +129,7 @@ public class EndLevel : MonoBehaviour
 
     public void DisableEndLevelWindow()
     {
+        endLevelWindowEnabled = false;
         endLevelWindow.SetActive(false);
     }
 

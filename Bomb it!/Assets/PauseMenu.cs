@@ -11,6 +11,12 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] GameObject mainMenu;
     [SerializeField] GameObject optionsMenu;
     private bool optionsWindow = false;
+    private EndLevel endLevelRef;
+
+    void Start()
+    {
+        endLevelRef = GetComponent<EndLevel>();
+    }
 
     void Update()
     {
@@ -72,7 +78,7 @@ public class PauseMenu : MonoBehaviour
 
     private void SwitchPauseState()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !endLevelRef.endLevelWindowEnabled)
         {
             if (!optionsWindow)
             {
