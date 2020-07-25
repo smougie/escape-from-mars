@@ -39,11 +39,6 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         saveManagerRef = GetComponent<SaveManager>();
-        //print("Settings " + PlayerPrefs.GetInt("LoadLevelSettings"));
-        //print("Restarted " + PlayerPrefs.GetInt("Restarted"));
-        print(saveManagerRef.GetTotalScore());
-        //saveManagerRef.ClearRestartRecord();
-        // TODO read PP level settings flag
         if (CheckForLevelSettings())
         {
             DontDestroyOnLoad(gameObject);
@@ -67,7 +62,6 @@ public class GameManager : MonoBehaviour
             }
 
             saveManagerRef.LoadLevelSettings(0);
-            //PlayerPrefs.SetInt("LoadLevelSettings", 0);
         }
         else
         {
@@ -77,9 +71,6 @@ public class GameManager : MonoBehaviour
             ResetCollectibles();
             ResetLifes();
         }
-        //CreateRecordsBase();
-        //PrintRecords();
-
     }
 
     void Update()
@@ -147,8 +138,6 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            // TODO check if code below affects our new load level settings system
-            //newGame = true;
             SceneManager.LoadScene(1);
         }
     }
@@ -268,8 +257,6 @@ public class GameManager : MonoBehaviour
 
     public void SaveScores()
     {
-
-        // TODO add saving totalScore here
         saveManagerRef.SaveLevelRecord(GetActiveLevelIndex(), planetScore, levelPercentageScore, levelScore);  // send record to PP base
         UpdateTotalScore();  // update total score
         saveManagerRef.UnlockNextLevel(GetActiveLevelIndex());  // unlock next level for level select scene
