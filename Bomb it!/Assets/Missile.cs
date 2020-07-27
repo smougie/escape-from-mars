@@ -635,7 +635,7 @@ public class Missile : MonoBehaviour
 
     private void StartFlyingSequence()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space))
         {
             state = State.Flying;
         }
