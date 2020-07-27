@@ -144,6 +144,7 @@ public class GameManager : MonoBehaviour
 
     public void RepeatLevel()
     {
+        ResetScoresValues();
         ResetLevelValues();
         ReloadCurrentLevel();
     }

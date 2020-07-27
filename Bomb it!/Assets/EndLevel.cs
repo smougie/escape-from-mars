@@ -18,6 +18,7 @@ public class EndLevel : MonoBehaviour
     private GameManager gameManagerRef;
     private SaveManager saveManagerRef;
     public bool endLevelWindowEnabled = false;
+    private bool gameIsOver = false;
 
     void Start()
     {
@@ -110,25 +111,30 @@ public class EndLevel : MonoBehaviour
         endLevelWindowEnabled = true;
         endLevelWindow.SetActive(true);
         UpdatePlanets(gameManagerRef.levelPercentageScore);
-        if (gameOver)
-        {
-            continueButton.SetActive(false);
-            continueButtonShadow.SetActive(false);
-        }
         if (saveManagerRef.ReadRestartedValue() == 1)
         {
             buttonSection.SetActive(false);
             restartButtonSection.SetActive(true);
         }
+        else if (gameOver)
+        {
+            restartButtonSection.SetActive(false);
+            gameIsOver = true;
+            continueButton.SetActive(false);
+            continueButtonShadow.SetActive(false);
+        }
         else
         {
             buttonSection.SetActive(true);
             restartButtonSection.SetActive(false);
+            continueButton.SetActive(true);
+            continueButtonShadow.SetActive(true);
         }
     }
 
     public void DisableEndLevelWindow()
     {
+        gameIsOver = false;
         endLevelWindowEnabled = false;
         endLevelWindow.SetActive(false);
     }
@@ -172,7 +178,10 @@ public class EndLevel : MonoBehaviour
 
     public void LoadMainMenu()
     {
-        gameManagerRef.SaveScores();
+        if (!gameIsOver)
+        {
+            gameManagerRef.SaveScores();
+        }
         saveManagerRef.LoadLevelSettings(0);
         saveManagerRef.ClearRestartRecord();
         gameManagerRef.DestroyLeftObjects();
