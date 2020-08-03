@@ -6,6 +6,11 @@ public class SaveManager : MonoBehaviour
     private int technicalScenesCount = 2;  // main menu, level selection
     private int levelScenesCount;
 
+    void Start()
+    {
+        levelScenesCount = SceneManager.sceneCountInBuildSettings - technicalScenesCount;    
+    }
+
     public int GetTotalScore()
     {
         return PlayerPrefs.GetInt("TotalScore");
@@ -79,7 +84,6 @@ public class SaveManager : MonoBehaviour
 
     public void CreateRecordsBase()
     {
-        levelScenesCount = SceneManager.sceneCountInBuildSettings - technicalScenesCount;  // TODO move to start()\
         for (int i = 1; i <= levelScenesCount; i++)
         {
             PlayerPrefs.SetString($"Level {i}", $"{i},0,0,0");
