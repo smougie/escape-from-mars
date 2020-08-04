@@ -32,15 +32,15 @@ public class EndLevel : MonoBehaviour
         {
             DisplayPlanets(0);
         }
-        else if (scorePercentage > 0 && scorePercentage <= 33)
+        else if (scorePercentage > 0 && scorePercentage <= 50)
         {
             DisplayPlanets(1);
         }
-        else if (scorePercentage > 33 && scorePercentage <= 66)
+        else if (scorePercentage > 50 && scorePercentage <= 90)
         {
             DisplayPlanets(2);
         }
-        else if (scorePercentage > 66 && scorePercentage <= 100)
+        else if (scorePercentage > 90 && scorePercentage <= 100)
         {
             DisplayPlanets(3);
         }
