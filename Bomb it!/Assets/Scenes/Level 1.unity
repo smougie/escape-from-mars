@@ -6811,6 +6811,13 @@ PrefabInstance:
       propertyPath: m_enableVertexGradient
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2502645523831311923, guid: 22cd19db1d405894ca5f12b353a86a5f,
+        type: 3}
+      propertyPath: m_text
+      value: 'Maximum rocket count.
+
+'
+      objectReference: {fileID: 0}
     - target: {fileID: 2985730336932435606, guid: 22cd19db1d405894ca5f12b353a86a5f,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

@@ -5,7 +5,9 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] GameObject continueButton;
+    [SerializeField] GameObject newGameWarning;
     private SaveManager saveManagerRef;
+    private string firstLevelRecord;
 
     void Start()
     {
@@ -13,20 +15,38 @@ public class MainMenu : MonoBehaviour
         {
             saveManagerRef = GetComponent<SaveManager>();
             ReadFirstLevelRecord();
+            VerifyContinueState();
         }
 
     }
 
-    private void ReadFirstLevelRecord()
+    private void VerifyContinueState()
     {
-        string firstLevelRecord = saveManagerRef.GetLevelRecord(1);
         if (firstLevelRecord == "")
         {
             DisableContinueButton();
         }
     }
 
+    private void ReadFirstLevelRecord()
+    {
+        firstLevelRecord = saveManagerRef.GetLevelRecord(1);
+    }
+
     public void NewGame()
+    {
+        if (firstLevelRecord == "")  // if there is no level records start a new game
+        {
+            StartNewGame();
+        }
+        else  // if there is any record in record base, show new game warning
+        {
+            DisableMainMenu();
+            EnableNewGameWaning();
+        }
+
+    }
+    public void StartNewGame()
     {
         saveManagerRef.LoadLevelSettings(1);
         saveManagerRef.ClearRecordBase();
@@ -36,6 +56,11 @@ public class MainMenu : MonoBehaviour
     public void ContinueGame()
     {
         SceneManager.LoadScene(SceneManager.sceneCountInBuildSettings - 1);  // load last scene in build (level selection)
+    }
+
+    public void EnableNewGameWaning()
+    {
+        newGameWarning.SetActive(true);
     }
 
     public void DisableMainMenu()

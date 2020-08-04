@@ -30,7 +30,6 @@ public class LevelDetails : MonoBehaviour
     {
         saveManagerRef.LoadLevelSettings(1);
         saveManagerRef.SetRestartRecord(currentScore);
-        print(currentScore);
         SceneManager.LoadScene(levelToRestart);
     }
 }

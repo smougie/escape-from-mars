@@ -19,9 +19,9 @@ public class RocketCollectible : MonoBehaviour
     {
         if (other.gameObject.tag == "Rocket")
         {
-            print("triggered");
             if (gameManagerRef.CurrentlyMaxLife())
             {
+                print("dupa");
                 EnableLifePrompt();
             }
         }
