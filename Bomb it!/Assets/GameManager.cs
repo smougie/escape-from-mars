@@ -161,6 +161,18 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public bool CurrentlyMaxLife()
+    {
+        if (currentLife == maxLife)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     private void FadeOutImage(Image image, bool fadeOut)
     {
         float alphaValue = .3f;
