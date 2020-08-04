@@ -5233,6 +5233,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13e0f3f9275b7934c8e5352b9c91160d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1058551541 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3230552551993895053, guid: 22cd19db1d405894ca5f12b353a86a5f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1058551538}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1074548306
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6747,6 +6753,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: RocketCollectible
       objectReference: {fileID: 0}
+    - target: {fileID: 6173695917900106560, guid: 634a526e3e777054fb12d12ef6c62768,
+        type: 3}
+      propertyPath: lifePromptObj
+      value: 
+      objectReference: {fileID: 1058551541}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 634a526e3e777054fb12d12ef6c62768, type: 3}
 --- !u!4 &1416070589 stripped

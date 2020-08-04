@@ -155,9 +155,10 @@ public class EndLevel : MonoBehaviour
     {
         int sceneIndex = SceneManager.GetActiveScene().buildIndex;
         int nextSceneIndex = sceneIndex + 1;
-        if (nextSceneIndex == SceneManager.sceneCountInBuildSettings)  // if sceneIndex is equal to last scene, load first level (loop)
+        if (nextSceneIndex == SceneManager.sceneCountInBuildSettings - 1)  // if sceneIndex is equal to last scene, load first level (loop)
         {
-            LoadFirstLevel();
+            LoadLevelSelect();
+            // TODO show win screen with total score
         }
         else
         {
