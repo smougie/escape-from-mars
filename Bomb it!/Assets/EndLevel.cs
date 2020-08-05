@@ -157,12 +157,11 @@ public class EndLevel : MonoBehaviour
         int nextSceneIndex = sceneIndex + 1;
         if (nextSceneIndex == SceneManager.sceneCountInBuildSettings - 1)  // if sceneIndex is equal to last scene, load first level (loop)
         {
-            gameManagerRef.SaveScores();
             saveManagerRef.SetGameFinished(1);  // set gameFinished value in PlayerPrefs to 1 == true;
+            gameManagerRef.SaveScores();
             saveManagerRef.LoadLevelSettings(0);
-            saveManagerRef.ClearRestartRecord();
             gameManagerRef.DestroyLeftObjects();
-            LoadLevelSelect();
+            SceneManager.LoadScene(SceneManager.sceneCountInBuildSettings - 1);
             // TODO show win screen with total score
             // TODO set PP GameFinished true to read GameFinished when entering level select to enable submit button
         }
@@ -176,6 +175,10 @@ public class EndLevel : MonoBehaviour
 
     public void LoadLevelSelect()
     {
+        gameManagerRef.SaveScores();
+        saveManagerRef.LoadLevelSettings(0);
+        saveManagerRef.ClearRestartRecord();
+        gameManagerRef.DestroyLeftObjects();
         SceneManager.LoadScene(SceneManager.sceneCountInBuildSettings - 1);
     }
 

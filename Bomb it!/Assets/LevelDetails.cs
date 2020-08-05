@@ -5,10 +5,10 @@ using UnityEngine.SceneManagement;
 public class LevelDetails : MonoBehaviour
 {
     [SerializeField] TMP_Text levelLabelTxt, percentageScoreTxt, levelScoreTxt;
-    PlanetControl planetControlRef;
-    SaveManager saveManagerRef;
-    int currentScore;
-    int levelToRestart;
+    private PlanetControl planetControlRef;
+    private SaveManager saveManagerRef;
+    private int currentScore;
+    private int levelToRestart;
 
     void Start()
     {

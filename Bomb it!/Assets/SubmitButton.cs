@@ -17,7 +17,6 @@ public class SubmitButton : MonoBehaviour
     void Update()
     {
         tempButtonColor = button.colors;
-        print(Mathf.PingPong(Time.time, 1f));
         newColor = Color.Lerp(startColor, finishColor, Mathf.PingPong(Time.time, 1f));
         tempButtonColor.normalColor = newColor;
         button.colors = tempButtonColor;

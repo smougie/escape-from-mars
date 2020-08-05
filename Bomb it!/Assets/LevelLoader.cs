@@ -92,7 +92,10 @@ public class LevelLoader : MonoBehaviour
     {
         foreach (var item in gameObjects)
         {
-            item.SetActive(false);
+            if (item != null)
+            {
+                item.SetActive(false);
+            }
         }
     }
 
@@ -133,7 +136,7 @@ public class LevelLoader : MonoBehaviour
     public void EnableLevelDetails(bool enabled)
     {
         LevelDetails levelDetailsRef;
-        GameObject[] objectsToDisable = { GameObject.Find("Frame"), GameObject.Find("Level Select Title")};
+        GameObject[] objectsToDisable = { GameObject.Find("Frame"), GameObject.Find("Level Select Title"), GameObject.Find("Total Score")};
         if (enabled)
         {
             levelDetailsObj.SetActive(true);
