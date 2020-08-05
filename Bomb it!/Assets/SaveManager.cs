@@ -89,4 +89,34 @@ public class SaveManager : MonoBehaviour
             PlayerPrefs.SetString($"Level {i}", $"{i},0,0,0");
         }
     }
+
+    public void SaveHighscore()
+    {
+
+    }
+
+    public void SetGameFinished(int gameFinished)
+    {
+        PlayerPrefs.SetInt("GameFinished", gameFinished);
+    }
+
+    public bool ReadGameFinished()
+    {
+        bool gameFinished = false;
+        int gameFinishedValue = PlayerPrefs.GetInt("GameFinished");
+
+        if (gameFinishedValue == 0)
+        {
+            gameFinished = false;
+        }
+        else if (gameFinishedValue == 1)
+        {
+            gameFinished = true;
+        }
+        else
+        {
+            Debug.LogError("ReadGameFinished() - SaveManager.cs - Value error while reading GameFinishedValue");
+        }
+        return gameFinished;
+    }
 }
