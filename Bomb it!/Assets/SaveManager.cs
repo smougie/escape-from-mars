@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SaveManager : MonoBehaviour
@@ -9,11 +11,6 @@ public class SaveManager : MonoBehaviour
     void Start()
     {
         levelScenesCount = SceneManager.sceneCountInBuildSettings - technicalScenesCount;    
-    }
-
-    public int GetTotalScore()
-    {
-        return PlayerPrefs.GetInt("TotalScore");
     }
 
     public void LoadLevelSettings(int loadSettings)
@@ -90,33 +87,59 @@ public class SaveManager : MonoBehaviour
         }
     }
 
-    public void SaveHighscore()
-    {
-
-    }
-
     public void SetGameFinished(int gameFinished)
     {
         PlayerPrefs.SetInt("GameFinished", gameFinished);
     }
 
-    //public bool ReadGameFinished()
-    //{
-    //    bool gameFinished = false;
-    //    int gameFinishedValue = PlayerPrefs.GetInt("GameFinished");
+    public bool HighscoreRecordEmpty()
+    {
+        bool empty = false;
+        string highscoreRecord = GetHigscoreBase();
+        if (highscoreRecord == "")
+        {
+            empty = true;
+        }
+        else
+        {
+            empty = false;
+        }
+        return empty;
+    }
 
-    //    if (gameFinishedValue == 0)
-    //    {
-    //        gameFinished = false;
-    //    }
-    //    else if (gameFinishedValue == 1)
-    //    {
-    //        gameFinished = true;
-    //    }
-    //    else
-    //    {
-    //        Debug.LogError("ReadGameFinished() - SaveManager.cs - Value error while reading GameFinishedValue");
-    //    }
-    //    return gameFinished;
-    //}
+    public string GetHigscoreBase()
+    {
+        return PlayerPrefs.GetString("Highscores");
+    }
+
+    public int GetTotalScore()
+    {
+        return PlayerPrefs.GetInt("TotalScore");
+    }
+
+    public void InsertHighscoreToRecordBase(string playerName)
+    {
+        string newHighscoreRecord = ReadHighscoreRecord();
+        newHighscoreRecord += $"{playerName},{GetTotalScore()};";
+    }
+
+    private string ReadHighscoreRecord()
+    {
+        return PlayerPrefs.GetString("Highscores");
+    }
+
+    public Dictionary<string, string> GetHighscoresDict()
+    {
+        Dictionary<string, string> highscoreDict = new Dictionary<string, string>();
+        string highscoreRecord = GetHigscoreBase();  // "playerName,playerScore;playerName,playerScore;playerName,playerScore"
+        string[] highscoreRecordSplitted = highscoreRecord.Split(';');  // ["playerName,playerScore", "playerName,playerScore"]
+        foreach (var record in highscoreRecordSplitted)
+        {
+            string[] playerNameAndScore;
+            playerNameAndScore = record.Split(',');  // ["playerName", "playerScore"]
+            highscoreDict.Add(playerNameAndScore[0], playerNameAndScore[1]);  // playerNameAndScore[0] == "playerName" - key || playerNameAndScore[1] == "playerScore" - value
+        }
+
+        return highscoreDict;
+    }
 }

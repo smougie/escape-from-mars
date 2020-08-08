@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class TotalScoreState : MonoBehaviour
 {
@@ -7,7 +6,13 @@ public class TotalScoreState : MonoBehaviour
 
     void Start()
     {
-        totalScoreObject.SetActive(ReadGameFinished());        
+        //EnableTotalScore();     
+        //PlayerPrefs.SetInt("GameFinished", 0);
+    }
+
+    private void OnEnable()
+    {
+        EnableTotalScore();
     }
 
     private bool ReadGameFinished()
@@ -28,11 +33,6 @@ public class TotalScoreState : MonoBehaviour
             Debug.LogError("ReadGameFinished() - SaveManager.cs - Value error while reading GameFinishedValue");
         }
         return gameFinished;
-    }
-
-    private void UpdateTotalScoreValues()
-    {
-
     }
 
     public void EnableTotalScore()
