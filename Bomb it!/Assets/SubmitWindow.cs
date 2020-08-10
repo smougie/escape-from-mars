@@ -94,7 +94,7 @@ public class SubmitWindow : MonoBehaviour
 
     private void SubmitTotalScore()
     {
-        // TODO inser player name and score into highscores record base
+        // TODO insert player name and score into highscores record base
         saveManagerRef.SetGameFinished(0);
         saveManagerRef.InsertHighscoreToRecordBase(playerNameInputField.text);
         saveManagerRef.ClearRecordBase();

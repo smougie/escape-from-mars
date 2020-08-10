@@ -119,26 +119,38 @@ public class SaveManager : MonoBehaviour
 
     public void InsertHighscoreToRecordBase(string playerName)
     {
-        string newHighscoreRecord = ReadHighscoreRecord();
-        newHighscoreRecord += $"{playerName},{GetTotalScore()};";
-    }
-
-    private string ReadHighscoreRecord()
-    {
-        return PlayerPrefs.GetString("Highscores");
+        string newHighscoreRecord = GetHigscoreBase();
+        if (newHighscoreRecord == "")
+        {
+            newHighscoreRecord = $"{playerName},{GetTotalScore()};";
+        }
+        else
+        {
+            newHighscoreRecord += $"{playerName},{GetTotalScore()};";
+        }
+        PlayerPrefs.SetString("Highscores", newHighscoreRecord);
     }
 
     public Dictionary<string, string> GetHighscoresDict()
     {
         Dictionary<string, string> highscoreDict = new Dictionary<string, string>();
         string highscoreRecord = GetHigscoreBase();  // "playerName,playerScore;playerName,playerScore;playerName,playerScore"
+        print("Highscore record: " + highscoreRecord);
         string[] highscoreRecordSplitted = highscoreRecord.Split(';');  // ["playerName,playerScore", "playerName,playerScore"]
-        foreach (var record in highscoreRecordSplitted)
+        print("length:" + highscoreRecordSplitted.Length);
+        for (int i = 0; i < highscoreRecordSplitted.Length; i++)
         {
-            string[] playerNameAndScore;
-            playerNameAndScore = record.Split(',');  // ["playerName", "playerScore"]
-            highscoreDict.Add(playerNameAndScore[0], playerNameAndScore[1]);  // playerNameAndScore[0] == "playerName" - key || playerNameAndScore[1] == "playerScore" - value
+            print($"iteration number - {i}: " + highscoreRecordSplitted[i]);
         }
+
+
+
+        //foreach (var record in highscoreRecordSplitted)
+        //{
+        //    string[] playerNameAndScore;
+        //    playerNameAndScore = record.Split(',');  // ["playerName", "playerScore"]
+        //    highscoreDict.Add(playerNameAndScore[0], playerNameAndScore[1]);  // playerNameAndScore[0] == "playerName" - key || playerNameAndScore[1] == "playerScore" - value
+        //}
 
         return highscoreDict;
     }

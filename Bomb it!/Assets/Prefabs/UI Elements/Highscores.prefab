@@ -64,7 +64,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 111
+  m_text: '111
+
+    1234567891011'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 084faed4a0063a14ca43dc2b70eb22c6, type: 2}
   m_sharedMaterial: {fileID: 7140649601341151515, guid: 084faed4a0063a14ca43dc2b70eb22c6,
@@ -134,12 +136,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 63882106819364407}
-    characterCount: 3
+    characterCount: 17
     spriteCount: 0
-    spaceCount: 0
-    wordCount: 1
+    spaceCount: 1
+    wordCount: 2
     linkCount: 0
-    lineCount: 1
+    lineCount: 2
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -378,7 +380,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ASD
+  m_text: 'ASD
+
+    1234567891011121314'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 084faed4a0063a14ca43dc2b70eb22c6, type: 2}
   m_sharedMaterial: {fileID: 7140649601341151515, guid: 084faed4a0063a14ca43dc2b70eb22c6,
@@ -448,12 +452,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 63882106880644489}
-    characterCount: 3
+    characterCount: 23
     spriteCount: 0
-    spaceCount: 0
-    wordCount: 1
+    spaceCount: 1
+    wordCount: 2
     linkCount: 0
-    lineCount: 1
+    lineCount: 2
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -480,6 +484,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 63882107152506261}
+  - component: {fileID: 333105479141589586}
+  - component: {fileID: 854940246}
   m_Layer: 5
   m_Name: Highscores
   m_TagString: Untagged
@@ -517,6 +523,33 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 505.39832, y: 492.09924}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &333105479141589586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 63882107152506262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6df9fd9b5769f140b9cd414035194d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  places: {fileID: 63882107301462812}
+  names: {fileID: 63882106880644489}
+  scores: {fileID: 63882106819364407}
+--- !u!114 &854940246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 63882107152506262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3f31b67e091f5a41abd57ca34de87a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &63882107301462814
 GameObject:
   m_ObjectHideFlags: 0
@@ -792,18 +825,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 63882107479093239}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 63882107152506262}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &63882107747719941
 GameObject:
   m_ObjectHideFlags: 0
@@ -1089,6 +1111,17 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!1 &63882107975913763
 GameObject:

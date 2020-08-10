@@ -159,8 +159,8 @@ public class Missile : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.R))
         {
-            PlayerPrefs.SetInt("FirstPlay", 0);
-            print("First Play - RESET");
+            print("Clearing Highscores...");
+            PlayerPrefs.DeleteKey("Highscores");
         }
     }
 
