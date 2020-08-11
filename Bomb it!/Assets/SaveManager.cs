@@ -95,7 +95,7 @@ public class SaveManager : MonoBehaviour
     public bool HighscoreRecordEmpty()
     {
         bool empty = false;
-        string highscoreRecord = GetHigscoreBase();
+        string highscoreRecord = GetHighscoreBase();
         if (highscoreRecord == "")
         {
             empty = true;
@@ -107,7 +107,7 @@ public class SaveManager : MonoBehaviour
         return empty;
     }
 
-    public string GetHigscoreBase()
+    public string GetHighscoreBase()
     {
         return PlayerPrefs.GetString("Highscores");
     }
@@ -119,7 +119,7 @@ public class SaveManager : MonoBehaviour
 
     public void InsertHighscoreToRecordBase(string playerName)
     {
-        string newHighscoreRecord = GetHigscoreBase();
+        string newHighscoreRecord = GetHighscoreBase();
         if (newHighscoreRecord == "")
         {
             newHighscoreRecord = $"{playerName},{GetTotalScore()};";
@@ -134,23 +134,16 @@ public class SaveManager : MonoBehaviour
     public Dictionary<string, string> GetHighscoresDict()
     {
         Dictionary<string, string> highscoreDict = new Dictionary<string, string>();
-        string highscoreRecord = GetHigscoreBase();  // "playerName,playerScore;playerName,playerScore;playerName,playerScore"
-        print("Highscore record: " + highscoreRecord);
-        string[] highscoreRecordSplitted = highscoreRecord.Split(';');  // ["playerName,playerScore", "playerName,playerScore"]
-        print("length:" + highscoreRecordSplitted.Length);
-        for (int i = 0; i < highscoreRecordSplitted.Length; i++)
+        string highscoreRecord = GetHighscoreBase();  // "playerName,playerScore;playerName,playerScore;playerName,playerScore;"
+        var splitChars = new Char[] {';'};
+        string[] highscoreRecordSplitted = highscoreRecord.Split(splitChars, StringSplitOptions.RemoveEmptyEntries);  // ["playerName,playerScore", "playerName,playerScore"]
+
+        foreach (var record in highscoreRecordSplitted)
         {
-            print($"iteration number - {i}: " + highscoreRecordSplitted[i]);
+            string[] playerNameAndScore;
+            playerNameAndScore = record.Split(',');  // ["playerName", "playerScore"]
+            highscoreDict.Add(playerNameAndScore[0], playerNameAndScore[1]);  // playerNameAndScore[0] == "playerName" - key || playerNameAndScore[1] == "playerScore" - value
         }
-
-
-
-        //foreach (var record in highscoreRecordSplitted)
-        //{
-        //    string[] playerNameAndScore;
-        //    playerNameAndScore = record.Split(',');  // ["playerName", "playerScore"]
-        //    highscoreDict.Add(playerNameAndScore[0], playerNameAndScore[1]);  // playerNameAndScore[0] == "playerName" - key || playerNameAndScore[1] == "playerScore" - value
-        //}
 
         return highscoreDict;
     }
