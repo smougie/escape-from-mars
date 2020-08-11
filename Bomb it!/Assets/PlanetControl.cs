@@ -17,8 +17,8 @@ public class PlanetControl : MonoBehaviour
                 break;
             case 2:
                 planet1.SetActive(true);
-                planet2.SetActive(true);
-                planet3.SetActive(false);
+                planet2.SetActive(false);
+                planet3.SetActive(true);
                 break;
             case 3:
                 planet1.SetActive(true);

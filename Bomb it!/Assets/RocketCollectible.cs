@@ -21,7 +21,6 @@ public class RocketCollectible : MonoBehaviour
         {
             if (gameManagerRef.CurrentlyMaxLife())
             {
-                print("dupa");
                 EnableLifePrompt();
             }
         }
