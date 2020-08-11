@@ -49,6 +49,7 @@ public class MainMenu : MonoBehaviour
     public void StartNewGame()
     {
         saveManagerRef.LoadLevelSettings(1);
+        saveManagerRef.SetGameFinished(0);
         saveManagerRef.ClearRecordBase();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }

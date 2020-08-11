@@ -19,11 +19,11 @@ public class Highscore : MonoBehaviour
         saveManagerRef = GetComponent<SaveManager>();
         if (saveManagerRef.HighscoreRecordEmpty())
         {
-            ClearColums();  // TODO check when highscore record is empty
+            ClearColums();
         }
         else
         {
-            print(saveManagerRef.GetHighscoreBase());
+            //print(saveManagerRef.GetHighscoreBase());  //TODO remove if no need
             CreateHighscoresLists();
             ClearColums();
             FillPlayerNames();
@@ -106,7 +106,6 @@ public class Highscore : MonoBehaviour
 
     private void FillPlayerPlaces()
     {
-        print("Highscore dict records" + ConvertScoresToInt().Count);
         for (int i = 1; i <= scoresLimit; i++)
         {
             if (i == ConvertScoresToInt().Count)
