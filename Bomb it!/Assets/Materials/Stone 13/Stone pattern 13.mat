@@ -31,4 +31,4 @@ Material:
     - _Shininess: 0.26505843
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _SpecColor: {r: 1, g: 0.010550436, b: 0, a: 1}
+    - _SpecColor: {r: 0.7075472, g: 0.008324086, b: 0, a: 1}
