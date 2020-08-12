@@ -247,6 +247,7 @@ public class Missile : MonoBehaviour
         StartLandingSequence();
         finishParticles.Play();  // play level finish particles
         thrustParticles.Stop();  // stop playing thrusting particles
+        RCSParticlesStop();
         ManageAudio(finishSound);  // control audio
         gameManager.CalculateLevelScore();  // calculate level score without saving them
         StartCoroutine(EndLevelWindowDelay(false));  // show endLevelWindow with delay
@@ -258,6 +259,7 @@ public class Missile : MonoBehaviour
         state = State.Transistioning;
         deathParticles.Play();
         thrustParticles.Stop();
+        RCSParticlesStop();
         ManageAudio(deathSound);
         StartCoroutine(EndLevelWindowDelay(true));  // show endLevelWindow with delay
         DestroyRocket();
@@ -272,6 +274,7 @@ public class Missile : MonoBehaviour
             state = State.Transistioning;
             deathParticles.Play();
             thrustParticles.Stop();
+            RCSParticlesStop();
             ManageAudio(deathSound);
             DestroyRocket();
             Invoke("RespawnRocket", levelLoadDelay);
@@ -526,6 +529,7 @@ public class Missile : MonoBehaviour
     private void StartLandingSequence()
     {
         StopThrusting(); // stop thrusting when player hit pad
+        RCSParticlesStop();
         FreezeRigidbody(true);
         landing = true;
     }
@@ -591,10 +595,22 @@ public class Missile : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
         {
             transform.Rotate(Vector3.forward * rotationThisFrame);
+            RCSParticlesRight.Play();
+            RCSParticlesLeft.Stop();
         }
         else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
         {
             transform.Rotate(-Vector3.forward * rotationThisFrame);
+            RCSParticlesLeft.Play();
+            RCSParticlesRight.Stop();
+        }
+        else if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.A))
+        {
+            RCSParticlesRight.Stop();
+        }
+        else if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.D))
+        {
+            RCSParticlesLeft.Stop();
         }
     }
 
@@ -633,6 +649,12 @@ public class Missile : MonoBehaviour
         {
             thrustParticles.Play();
         }
+    }
+
+    private void RCSParticlesStop()
+    {
+        RCSParticlesLeft.Stop();
+        RCSParticlesRight.Stop();
     }
 
     private void StartFlyingSequence()
