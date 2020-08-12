@@ -21,6 +21,8 @@ public class Missile : MonoBehaviour
     [SerializeField] AudioClip alienPickUpSound = null;
 
     [SerializeField] ParticleSystem thrustParticles = null;
+    [SerializeField] ParticleSystem RCSParticlesLeft = null;
+    [SerializeField] ParticleSystem RCSParticlesRight = null;
     [SerializeField] ParticleSystem deathParticles = null;
     [SerializeField] ParticleSystem finishParticles = null;
 
