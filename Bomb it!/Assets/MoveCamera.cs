@@ -4,18 +4,17 @@ using UnityEngine;
 
 public class MoveCamera : MonoBehaviour
 {
-    [SerializeField] Vector3[] cameraPositions;
+    [SerializeField] Vector3 newCameraPosition;
     [SerializeField] GameObject cameraObj;
-    private int currentCameraIndex = 0;
+    [SerializeField] float cameraMovementSpeed;
+    private Missile missileRef;
+    private MeshRenderer objectRenderer;
 
-    void Start()
+    private void Start()
     {
-        
-    }
-
-    void Update()
-    {
-        
+        missileRef = GameObject.Find("Rocket Ship").GetComponent<Missile>();
+        objectRenderer = GetComponent<MeshRenderer>();
+        //objectRenderer.enabled = false;  // hide object when game start
     }
 
     private void OnTriggerEnter(Collider other)
@@ -34,16 +33,13 @@ public class MoveCamera : MonoBehaviour
     IEnumerator MovingCamera()
     {
         Time.timeScale = 0f;
-        var startTime = Time.time;
-        print("Start:" + startTime);
-        while (cameraObj.transform.position.y <= cameraPositions[currentCameraIndex].y)
+        missileRef.PauseAudio(true);
+        while (cameraObj.transform.position.y <= newCameraPosition.y)
         {
-            cameraObj.transform.position = new Vector3(cameraObj.transform.position.x, cameraObj.transform.position.y + .15f, cameraObj.transform.position.z);
-            //cameraObj.transform.position = Vector3.MoveTowards(cameraObj.transform.position, cameraPositions[currentCameraIndex], Time.unscaledDeltaTime * 50);
+            cameraObj.transform.position = new Vector3(cameraObj.transform.position.x, cameraObj.transform.position.y + cameraMovementSpeed, cameraObj.transform.position.z);
             yield return null;
         }
+        missileRef.PauseAudio(false);
         Time.timeScale = 1f;
-        print("Done in: " + (Time.unscaledTime - startTime));
-        //currentCameraIndex++;
     }
 }

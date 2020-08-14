@@ -697,6 +697,20 @@ public class Missile : MonoBehaviour
         Destroy(collision.gameObject);
     }
 
+    public void PauseAudio(bool pause)
+    {
+        if (pause)
+        {
+            audioSource1.enabled = false;
+            audioSource2.enabled = false;
+        }
+        else
+        {
+            audioSource1.enabled = true;
+            audioSource2.enabled = true;
+        }
+    }
+
     // Fade out audioSource to avoid clip after .Stop()
     IEnumerator FadeOut(AudioSource audioSource, float fadingTime)
     {
