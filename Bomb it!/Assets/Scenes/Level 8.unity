@@ -310,6 +310,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPosition: {x: 0, y: 0, z: 14}
+  closingSpeed: 10
+  openingSpeed: 20
+  lockedPauseTime: 2
+  openedPauseTime: 4
 --- !u!65 &81808637
 BoxCollider:
   m_ObjectHideFlags: 0
