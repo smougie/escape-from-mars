@@ -42,9 +42,9 @@ public class Floodgate : MonoBehaviour
     private void AdjustEndPosition()
     {
         endPosition = startPosition;
-        if (targetPosition.z != 0)
+        if (targetPosition.x != 0)
         {
-            endPosition.z = targetPosition.z;
+            endPosition.x = targetPosition.x;
         }
         if (targetPosition.y != 0)
         {
