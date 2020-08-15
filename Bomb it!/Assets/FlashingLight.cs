@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class FlashingLight : MonoBehaviour
 {
@@ -21,7 +18,6 @@ public class FlashingLight : MonoBehaviour
     void Update()
     {
         lightObject.intensity = minIntensity + Mathf.PingPong(Time.time * flashSpeed, distance);
-
     }
 
 }
