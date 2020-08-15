@@ -14,7 +14,7 @@ public class MoveCamera : MonoBehaviour
     {
         missileRef = GameObject.Find("Rocket Ship").GetComponent<Missile>();
         objectRenderer = GetComponent<MeshRenderer>();
-        //objectRenderer.enabled = false;  // hide object when game start
+        objectRenderer.enabled = false;  // hide object when game start
     }
 
     private void OnTriggerEnter(Collider other)
