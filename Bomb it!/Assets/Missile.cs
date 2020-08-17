@@ -237,6 +237,7 @@ public class Missile : MonoBehaviour
                 audioSource2.PlayOneShot(alienPickUpSound);
                 break;
             default:
+                StartDeathSequence();
                 break;
         }
     }
