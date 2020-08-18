@@ -26,13 +26,13 @@ public class FireNozzle : MonoBehaviour
         var nozzleFireMain = nozzleFireEffect.main;
         var prewarmFireMain = prewarmFireEffect.main;
 
-        nozzleFireMain.duration = activeTime - nozzleFireParticlesLifeTime;
-        prewarmFireMain.duration = prewarmTime - prewarmFireParticlesLifeTime;
+        nozzleFireMain.duration = activeTime;
+        prewarmFireMain.duration = prewarmTime;
 
         StartCoroutine(DelayCoroutine());
     }
 
-    private void PlayPrewarmFire(float counter)
+    private void PlayPrewarmFire()
     {
         if (playingPrewarmFire)
         {
@@ -40,10 +40,9 @@ public class FireNozzle : MonoBehaviour
         }
         playingPrewarmFire = true;
         prewarmFireEffect.Play();
-        print("triggering prewarm Fire " + counter);
     }
 
-    private void PlayNozzleFire(float counter)
+    private void PlayNozzleFire()
     {
         if (playingNozzleFire)
         {
@@ -51,27 +50,23 @@ public class FireNozzle : MonoBehaviour
         }
         playingNozzleFire = true;
         nozzleFireEffect.Play();
-        print("triggering Nozzle Fire " + counter);
     }
 
-    private void StartPause(float counter)
+    private void StartPause()
     {
         if (playingPause)
         {
             return;
         }
         playingPause = true;
-        print("triggering pause " + counter);
     }
 
     IEnumerator DelayCoroutine()
     {
         if (delayTime > 0)
         {
-            print("starting delay");
             yield return new WaitForSeconds(delayTime);
         }
-        print("ending delay");
         StartCoroutine(PlayFireNozzleEffect());
     }
 
@@ -82,30 +77,26 @@ public class FireNozzle : MonoBehaviour
 
         while (true)
         {
-            counter -= Time.fixedDeltaTime;
+            counter -= Time.deltaTime;
             if (counter <= period && !playingNozzleFire)
             {
-
-                PlayPrewarmFire(counter);
+                PlayPrewarmFire();
             }
             if (counter <= period - prewarmTime && !playingNozzleFire)
             {
                 boxCollider.enabled = true;
-                PlayNozzleFire(counter);
+                PlayNozzleFire();
             }
             if (counter <= period - prewarmTime - activeTime && !playingPause)
             {
                 boxCollider.enabled = false;
-                nozzleFireEffect.Stop();
-                StartPause(counter);
+                // Pause in this period of time
             }
             if (counter <= 0)
             {
-
                 counter = period;
                 playingNozzleFire = false;
                 playingPrewarmFire = false;
-                print("reseting counter & flags " + counter);
             }
             yield return null;
         }

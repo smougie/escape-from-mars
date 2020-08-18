@@ -8,6 +8,7 @@ public class Floodgate : MonoBehaviour
     [SerializeField] Vector3 targetPosition;
     private Vector3 startPosition;
     private Vector3 endPosition;
+    [SerializeField] float delayTime;
     [SerializeField] float closingSpeed;
     [SerializeField] float openingSpeed;
     [SerializeField] float lockedPauseTime;
@@ -19,7 +20,14 @@ public class Floodgate : MonoBehaviour
     {
         startPosition = transform.position;
         AdjustEndPosition();
-        StartMovingGate();
+        if (delayTime > 0)
+        {
+            StartCoroutine(StartMovingDelay());
+        }
+        else
+        {
+            StartMovingGate();
+        }
     }
 
     private void StartMovingGate()
@@ -55,6 +63,12 @@ public class Floodgate : MonoBehaviour
         {
             endPosition.z = targetPosition.z;
         }
+    }
+
+    IEnumerator StartMovingDelay()
+    {
+        yield return new WaitForSeconds(delayTime);
+        StartMovingGate();
     }
 
     IEnumerator OpenTheGate()

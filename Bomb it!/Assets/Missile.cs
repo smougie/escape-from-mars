@@ -236,6 +236,8 @@ public class Missile : MonoBehaviour
                 gameManager.IncreaseCollectiblesCount();
                 audioSource2.PlayOneShot(alienPickUpSound);
                 break;
+            case "Camera Trigger":
+                break;
             default:
                 StartDeathSequence();
                 break;
