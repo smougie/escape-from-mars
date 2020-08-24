@@ -69,13 +69,13 @@ public class AnomalyControl : MonoBehaviour
     IEnumerator ScaleDownSphere()
     {
         Vector3 startScale = voidSphereObj.transform.localScale;
-        float scaleDownTime = 5f;
+        float scaleDownTime = 1f;
         for (float currentTime = 0f; currentTime < scaleDownTime; currentTime += Time.deltaTime)
         {
             voidSphereObj.transform.localScale = Vector3.Lerp(voidSphereObj.transform.localScale, new Vector3(0, 0, 0), currentTime / scaleDownTime);
             yield return null;
         }
-        //voidSphereObj.SetActive(false);
+        voidSphereObj.SetActive(false);
         voidSphereObj.transform.localScale = startScale;
     }
 }
