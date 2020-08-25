@@ -12,6 +12,7 @@ TagManager:
   - Life
   - Collectible
   - Camera Trigger
+  - NozzleFire
   layers:
   - Default
   - TransparentFX
