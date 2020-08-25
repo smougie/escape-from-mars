@@ -84,12 +84,14 @@ public class FireNozzle : MonoBehaviour
             }
             if (counter <= period - prewarmTime && !playingNozzleFire)
             {
+                boxCollider.isTrigger = true;
                 boxCollider.enabled = true;
                 PlayNozzleFire();
             }
             if (counter <= period - prewarmTime - activeTime && !playingPause)
             {
-                boxCollider.enabled = false;
+                boxCollider.isTrigger = false;
+                StartCoroutine(DisableColliderInNewFrame());
                 // Pause in this period of time
             }
             if (counter <= 0)
@@ -100,5 +102,11 @@ public class FireNozzle : MonoBehaviour
             }
             yield return null;
         }
+    }
+
+    IEnumerator DisableColliderInNewFrame()
+    {
+        yield return new WaitForFixedUpdate();
+        boxCollider.enabled = false;
     }
 }

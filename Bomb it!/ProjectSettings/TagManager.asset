@@ -13,6 +13,7 @@ TagManager:
   - Collectible
   - Camera Trigger
   - NozzleFire
+  - SqueezeObject
   layers:
   - Default
   - TransparentFX
