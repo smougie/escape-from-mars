@@ -15,8 +15,6 @@ public class SqueezeObject : MonoBehaviour
             StartCoroutine(SpawnEndEffect(randomTimeValue - .1f));
             Destroy(gameObject, randomTimeValue);
 
-            // instantiate end effect after randomtimevalue
-
             GameObject meltingEffectObject = Instantiate(meltingEffect, gameObject.transform.position, Quaternion.Euler(-90, 0, 0)) as GameObject;
             meltingEffectObject.transform.parent = gameObject.transform;
         }

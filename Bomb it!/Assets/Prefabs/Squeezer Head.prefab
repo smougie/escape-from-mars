@@ -566,7 +566,7 @@ GameObject:
   - component: {fileID: 2628301578393526492}
   m_Layer: 0
   m_Name: Squeezer Head
-  m_TagString: Untagged
+  m_TagString: Squeezer Head
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

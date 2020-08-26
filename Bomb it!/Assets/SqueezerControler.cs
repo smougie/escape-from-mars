@@ -28,18 +28,20 @@ public class SqueezerControler : MonoBehaviour
         }
         var difference = Mathf.Abs(SqueezerActuator.transform.localScale.x - xAxisScaleTarget);
         var actuatorLocalScale = SqueezerActuator.transform.localScale;
+        float pushingForwardVelocity = Time.deltaTime * pushingSpeed;
+        float pullingBackVelocity = Time.deltaTime * movingBackSpeed;
 
-        for (float i = 0f; i < difference; i += Time.deltaTime * pushingSpeed)
+        for (float i = 0f; i < difference; i += pushingForwardVelocity)
         {
-            actuatorLocalScale.x += Time.deltaTime * pushingSpeed;
+            actuatorLocalScale.x += pushingForwardVelocity;
             SqueezerActuator.transform.localScale = actuatorLocalScale;
             yield return null;
         }
         yield return null;
 
-        for (float i = 0f; i < difference; i += Time.deltaTime * movingBackSpeed)
+        for (float i = 0f; i < difference; i += pullingBackVelocity)
         {
-            actuatorLocalScale.x -= Time.deltaTime * movingBackSpeed;
+            actuatorLocalScale.x -= pullingBackVelocity;
             SqueezerActuator.transform.localScale = actuatorLocalScale;
             yield return null;
         }

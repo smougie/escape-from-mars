@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2825494738004956549}
   - component: {fileID: 5230066204900651384}
   m_Layer: 0
-  m_Name: Squeezer
+  m_Name: SqueezerLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,10 +76,10 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 126
-  m_CollisionDetection: 1
+  m_CollisionDetection: 3
 --- !u!114 &9193885592637646823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,6 +185,51 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Squeezer Actuator
+      objectReference: {fileID: 0}
+    - target: {fileID: 4430523667867300462, guid: 21b32fdf27ce35f4ebb6fa205368d048,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4430523667867300462, guid: 21b32fdf27ce35f4ebb6fa205368d048,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4430523667867300462, guid: 21b32fdf27ce35f4ebb6fa205368d048,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4430523667867300462, guid: 21b32fdf27ce35f4ebb6fa205368d048,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4430523667867300462, guid: 21b32fdf27ce35f4ebb6fa205368d048,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4430523667867300462, guid: 21b32fdf27ce35f4ebb6fa205368d048,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4430523667867300462, guid: 21b32fdf27ce35f4ebb6fa205368d048,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4430523667867300462, guid: 21b32fdf27ce35f4ebb6fa205368d048,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4430523667867300462, guid: 21b32fdf27ce35f4ebb6fa205368d048,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5055907232264973015, guid: 21b32fdf27ce35f4ebb6fa205368d048,
         type: 3}
