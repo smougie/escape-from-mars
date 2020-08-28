@@ -10,19 +10,21 @@ public class BoxMachineControler : MonoBehaviour
     [SerializeField] GameObject[] boxes;
 
     [SerializeField] bool moveMachine;
+    [SerializeField] bool normalMode, reverseMode, randomMode;
     [SerializeField] GameObject[] stopPoints;
     [SerializeField] float moveSpeed;
     private Vector3 startPosition;
     private Vector3 targetPosition;
     private List<Vector3> dropPoints = new List<Vector3>();
     private int index = 0;
+    private bool createBoxCalled = false;
+    private bool moving = false;
 
     void Start()
     {
         if (moveMachine)
         {
-            startPosition = transform.position;
-            CreateDropPointsList();
+            StartCoroutine(DelayMovingMachine());
         }
         else
         {
@@ -32,10 +34,15 @@ public class BoxMachineControler : MonoBehaviour
 
     void Update()
     {
-        if (moveMachine)
+        if (moving)
         {
             CheckMachinePosition();
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(dropPoints[index].x, transform.position.y, transform.position.z), moveSpeed * Time.deltaTime);
+        }
+        if (createBoxCalled)
+        {
+            createBoxCalled = false;
+            CreateBox();
         }
     }
 
@@ -50,16 +57,59 @@ public class BoxMachineControler : MonoBehaviour
     {
         if (transform.position.x == dropPoints[index].x)
         {
-            if (index < dropPoints.Count - 1)
-            {
-                StartCoroutine(BoxCreationWhileMoving(index+1));
-                print("increasing index value");
-            }
-            else
-            {
-                print("reseting index value");
-                StartCoroutine(BoxCreationWhileMoving(0));
-            }
+            ChangeTargetPoint();
+        }
+    }
+
+    private void ChangeTargetPoint()
+    {
+        moving = false;
+        if (normalMode)
+        {
+            IncreaseIndex();
+        }
+        if (randomMode)
+        {
+            RandomIndex();
+        }
+        if (reverseMode)
+        {
+            ReverseIndex();
+        }
+    }
+
+    private void IncreaseIndex()
+    {
+        if (index < dropPoints.Count - 1)
+        {
+            StartCoroutine(BoxCreationWhileMoving(index + 1));
+        }
+        else
+        {
+            StartCoroutine(BoxCreationWhileMoving(0));
+        }
+    }
+
+    private void RandomIndex()
+    {
+        int previousIndexValue = index;
+        while (index == previousIndexValue)
+        {
+            index = Random.Range(0, dropPoints.Count);
+        }
+        StartCoroutine(BoxCreationWhileMoving(index));
+    }
+
+    private void ReverseIndex()
+    {
+        if (index < dropPoints.Count - 1)
+        {
+            StartCoroutine(BoxCreationWhileMoving(index + 1));
+        }
+        else
+        {
+            dropPoints.Reverse();
+            StartCoroutine(BoxCreationWhileMoving(1));
         }
     }
 
@@ -75,10 +125,32 @@ public class BoxMachineControler : MonoBehaviour
         }
     }
 
+    private void ManageMode()
+    {
+        normalMode = true;  
+        if (randomMode)
+        {
+            reverseMode = false;
+            normalMode = false;
+        }
+        if (reverseMode)
+        {
+            randomMode = false;
+            normalMode = false;
+        }
+        if (normalMode)
+        {
+            randomMode = false;
+            reverseMode = false;
+        }
+    }
+
     IEnumerator BoxCreationWhileMoving(int indexNum)
     {
-        yield return new WaitForSeconds(1.5f);
+        createBoxCalled = true;
+        yield return new WaitForSeconds(1.2f + pauseTime);  // animation wait time
         index = indexNum;
+        moving = true;
     }
 
     IEnumerator BoxCreationInterval()
@@ -89,6 +161,15 @@ public class BoxMachineControler : MonoBehaviour
             CreateBox();
             yield return new WaitForSeconds(pauseTime);
         }
+    }
+
+    IEnumerator DelayMovingMachine()
+    {
+        yield return new WaitForSeconds(delayStartTime);
+        ManageMode();
+        startPosition = transform.position;
+        CreateDropPointsList();
+        moving = true;
     }
 
     IEnumerator EdgeAnimation()
