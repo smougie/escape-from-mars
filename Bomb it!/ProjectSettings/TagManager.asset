@@ -15,6 +15,8 @@ TagManager:
   - NozzleFire
   - SqueezeObject
   - Squeezer Head
+  - NozzleBottom
+  - NozzleInstantFire
   layers:
   - Default
   - TransparentFX

@@ -18,6 +18,11 @@ public class SqueezeObject : MonoBehaviour
             GameObject meltingEffectObject = Instantiate(meltingEffect, gameObject.transform.position, Quaternion.Euler(-90, 0, 0)) as GameObject;
             meltingEffectObject.transform.parent = gameObject.transform;
         }
+        if (other.transform.tag == "NozzleInstantFire")
+        {
+            Instantiate(meltingEffectEnd, gameObject.transform.position, Quaternion.identity);
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerExit(Collider other)

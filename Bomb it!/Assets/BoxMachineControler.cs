@@ -9,9 +9,34 @@ public class BoxMachineControler : MonoBehaviour
     [SerializeField] GameObject edge;
     [SerializeField] GameObject[] boxes;
 
+    [SerializeField] bool moveMachine;
+    [SerializeField] GameObject[] stopPoints;
+    [SerializeField] float moveSpeed;
+    private Vector3 startPosition;
+    private Vector3 targetPosition;
+    private List<Vector3> dropPoints = new List<Vector3>();
+    private int index = 0;
+
     void Start()
     {
-        StartCoroutine(BoxCreationInterval());
+        if (moveMachine)
+        {
+            startPosition = transform.position;
+            CreateDropPointsList();
+        }
+        else
+        {
+            StartCoroutine(BoxCreationInterval());
+        }
+    }
+
+    void Update()
+    {
+        if (moveMachine)
+        {
+            CheckMachinePosition();
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(dropPoints[index].x, transform.position.y, transform.position.z), moveSpeed * Time.deltaTime);
+        }
     }
 
     private void CreateBox()
@@ -19,6 +44,41 @@ public class BoxMachineControler : MonoBehaviour
         var randomNumber = Random.Range(0, 5);
         Instantiate(boxes[randomNumber], transform.position, Quaternion.identity);
         StartCoroutine(EdgeAnimation());
+    }
+
+    private void CheckMachinePosition()
+    {
+        if (transform.position.x == dropPoints[index].x)
+        {
+            if (index < dropPoints.Count - 1)
+            {
+                StartCoroutine(BoxCreationWhileMoving(index+1));
+                print("increasing index value");
+            }
+            else
+            {
+                print("reseting index value");
+                StartCoroutine(BoxCreationWhileMoving(0));
+            }
+        }
+    }
+
+    private void CreateDropPointsList()
+    {
+        dropPoints.Add(startPosition);
+        if (stopPoints.Length > 0)
+        {
+            foreach (var stopPoint in stopPoints)
+            {
+                dropPoints.Add(stopPoint.transform.position);
+            }
+        }
+    }
+
+    IEnumerator BoxCreationWhileMoving(int indexNum)
+    {
+        yield return new WaitForSeconds(1.5f);
+        index = indexNum;
     }
 
     IEnumerator BoxCreationInterval()
