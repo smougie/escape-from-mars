@@ -75,6 +75,10 @@ public class Missile : MonoBehaviour
     private Vector3 rocketStartingPosition;
     private Vector3 checkPointPosition;
 
+    private bool cameraTriggered;
+    private Vector3 cameraTriggerRocketPosition;
+    private Vector3 cameraTriggerLaunchPadPosition;
+
     void Start()
     {   
         UpdateSoundEffectsVolume();
@@ -237,6 +241,12 @@ public class Missile : MonoBehaviour
                 audioSource2.PlayOneShot(alienPickUpSound);
                 break;
             case "Camera Trigger":
+                cameraTriggered = true;
+                cameraTriggerRocketPosition = trigger.transform.position;
+                cameraTriggerRocketPosition.y = cameraTriggerRocketPosition.y + 2;
+                cameraTriggerLaunchPadPosition = trigger.transform.position;
+                // TODO assign vector3 of respawn point rocket/launch pad here
+                // camera trigger object position -> launch pad position and y + 2 rocket position
                 break;
             default:
                 StartDeathSequence();
@@ -295,6 +305,14 @@ public class Missile : MonoBehaviour
         if (checkPointReached)
         {
             transform.position = checkPointPosition;
+        }
+        else if (cameraTriggered)
+        {
+            // TODO if camera trigger -> save vector3 position of camera trigger and assign respawn position for rocket and launch pad, than close floodgate
+            transform.position = cameraTriggerRocketPosition;
+            padControllerRef.gameObject.transform.position = cameraTriggerLaunchPadPosition;
+            padControllerRef.PadActive(true);
+
         }
         else
         {
@@ -427,6 +445,7 @@ public class Missile : MonoBehaviour
             refueling = false;  // drop refueling pad
             state = State.Flying;  //  change state from refueling to flying
             StopRefuelEffect();  // stop refueling effect
+            // TODO access status light while colliding with pad
             statusLight.TurnOff();  // change color of refueling pad status light to red (not Active refueling pad)
             refuelingPadLight.gameObject.SetActive(false);  // turn off refueling pad spot light
             noFuel = false;
@@ -564,7 +583,7 @@ public class Missile : MonoBehaviour
         }
         else if (state == State.Transistioning)
         {
-            // do nothin -> leave state == State.Transistioning
+            // do nothing -> leave state == State.Transistioning
         }
         else
         {

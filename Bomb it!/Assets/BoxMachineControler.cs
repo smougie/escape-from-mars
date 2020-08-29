@@ -22,6 +22,23 @@ public class BoxMachineControler : MonoBehaviour
 
     void Start()
     {
+        //if (moveMachine)
+        //{
+        //    StartCoroutine(DelayMovingMachine());
+        //}
+        //else
+        //{
+        //    StartCoroutine(BoxCreationInterval());
+        //}
+    }
+
+    void OnDisable()
+    {
+        StopAllCoroutines();
+    }
+
+    void OnEnable()
+    {
         if (moveMachine)
         {
             StartCoroutine(DelayMovingMachine());
