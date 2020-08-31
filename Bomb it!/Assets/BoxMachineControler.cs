@@ -13,24 +13,14 @@ public class BoxMachineControler : MonoBehaviour
     [SerializeField] bool normalMode, reverseMode, randomMode;
     [SerializeField] GameObject[] stopPoints;
     [SerializeField] float moveSpeed;
+    [SerializeField] bool applySlow;
+    private float slowFactor = 1f;
     private Vector3 startPosition;
     private Vector3 targetPosition;
     private List<Vector3> dropPoints = new List<Vector3>();
     private int index = 0;
     private bool createBoxCalled = false;
     private bool moving = false;
-
-    void Start()
-    {
-        //if (moveMachine)
-        //{
-        //    StartCoroutine(DelayMovingMachine());
-        //}
-        //else
-        //{
-        //    StartCoroutine(BoxCreationInterval());
-        //}
-    }
 
     void OnDisable()
     {
@@ -54,7 +44,7 @@ public class BoxMachineControler : MonoBehaviour
         if (moving)
         {
             CheckMachinePosition();
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(dropPoints[index].x, transform.position.y, transform.position.z), moveSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(dropPoints[index].x, transform.position.y, transform.position.z), moveSpeed * Time.deltaTime * slowFactor);
         }
         if (createBoxCalled)
         {
@@ -100,10 +90,12 @@ public class BoxMachineControler : MonoBehaviour
         if (index < dropPoints.Count - 1)
         {
             StartCoroutine(BoxCreationWhileMoving(index + 1));
+            slowFactor = 1f;  // reset slow factor to 1f = speed is normal
         }
         else
         {
             StartCoroutine(BoxCreationWhileMoving(0));
+            slowFactor = .25f;  // change slow factor to 10% speed while index is equal to 0 = when moving back
         }
     }
 
