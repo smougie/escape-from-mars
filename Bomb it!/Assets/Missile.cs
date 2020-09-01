@@ -587,10 +587,7 @@ public class Missile : MonoBehaviour
         }
         else
         {
-            // TODO make some notification about already used refueling pad
             state = State.Flying;
-            // TODO CURRENT
-
         }
     }
 

@@ -8,6 +8,7 @@ public class RefueledStatus : MonoBehaviour
     [SerializeField] GameObject refuelingPromptObject;
     [SerializeField] TextMeshProUGUI refuelingPromptText;
     private Missile missileRef;
+    private bool coroutineStarted;
 
     void Start()
     {
@@ -33,6 +34,12 @@ public class RefueledStatus : MonoBehaviour
 
     private void DisplayAlreadyRefueledPrompt()
     {
+        if (refuelingPromptText.alpha != 1f)
+        {
+            var newColor = refuelingPromptText.color;
+            newColor.a = 1f;
+            refuelingPromptText.color = newColor;
+        }
         if (missileRef.AlreadyRefueled())
         {
             refuelingPromptObject.SetActive(true);
@@ -44,26 +51,30 @@ public class RefueledStatus : MonoBehaviour
         refuelingPromptObject.SetActive(false);
     }
 
+    private void ResetAlphaValue()
+    {
+        var newColor = refuelingPromptText.color;
+        newColor.a = 1f;
+        refuelingPromptText.color = newColor;
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Rocket"))
         {
             GetMissileRef(collision);
-            DisplayAlreadyRefueledPrompt();
+            if (!coroutineStarted)
+            {
+                DisplayAlreadyRefueledPrompt();
+                StartCoroutine(FadeOutPrompt(2f, 1f));
+            }
         }
     }
 
-    private void OnCollisionExit(Collision collision)
+    IEnumerator FadeOutPrompt(float fadeOutTime, float delayTime)
     {
-        if (collision.gameObject.CompareTag("Rocket") && missileRef.CanFade())
-        {
-            StartCoroutine(FadeOutPrompt(1f));
-            print("starting fade out prompt");
-        }
-    }
-
-    IEnumerator FadeOutPrompt(float fadeOutTime)
-    {
+        coroutineStarted = true;
+        yield return new WaitForSeconds(delayTime);
         var alpha = refuelingPromptText.alpha;
 
         for (float time = 0f; time < fadeOutTime; time += Time.deltaTime / fadeOutTime)
@@ -72,5 +83,8 @@ public class RefueledStatus : MonoBehaviour
             refuelingPromptText.color = alphaColor;
             yield return null;
         }
+        DisableAlreadyRefueledPrompt();
+        ResetAlphaValue();
+        coroutineStarted = false;
     }
 }

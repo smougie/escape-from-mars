@@ -2380,6 +2380,20 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1265738543}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &321650067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 321650066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a18bd37d7761ffa4dbe84c4e75e0eb92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  refuelingPromptObject: {fileID: 1122195997}
+  refuelingPromptText: {fileID: 1122195996}
 --- !u!1 &340757008
 GameObject:
   m_ObjectHideFlags: 0
@@ -7498,6 +7512,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a1b18cd9b32f754c96f8246b10edd23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1122195995 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3230552551993895053, guid: 22cd19db1d405894ca5f12b353a86a5f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1122195986}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1122195996 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 640618587218158685, guid: 22cd19db1d405894ca5f12b353a86a5f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1122195986}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1122195997 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 293762143205188365, guid: 22cd19db1d405894ca5f12b353a86a5f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1122195986}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1132453339
 GameObject:
   m_ObjectHideFlags: 0
@@ -9510,7 +9548,7 @@ PrefabInstance:
         type: 3}
       propertyPath: lifePromptObj
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1122195995}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 634a526e3e777054fb12d12ef6c62768, type: 3}
 --- !u!4 &1457969386 stripped
