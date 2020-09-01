@@ -34,6 +34,9 @@ public class RocketCollectible : MonoBehaviour
         }
     }
 
+    private GameObject alreadyRefueledPrompt;
+
+
     private void EnableLifePrompt()
     {
         lifePromptObj.SetActive(true);

@@ -398,7 +398,7 @@ public class Missile : MonoBehaviour
 
     private void SpawnRefuelEffect()
     {
-        if (prefabCount == 0)  // check is refueling effect already spawneds
+        if (prefabCount == 0)  // check is refueling effect already spawned
         {
             activeRefuelingEffect = Instantiate(refuelingEffect, transform);  // spawn refueling effect as a child of rocket
             prefabCount++;  // increase counter
@@ -589,7 +589,28 @@ public class Missile : MonoBehaviour
         {
             // TODO make some notification about already used refueling pad
             state = State.Flying;
+            // TODO CURRENT
+
         }
+    }
+
+    public bool AlreadyRefueled()
+    {
+        return alreadyRefueled;
+    }
+
+    public bool CanFade()
+    {
+        bool canFade;
+        if (state == State.Flying)
+        {
+            canFade = true;
+        }
+        else
+        {
+            canFade = false;
+        }
+        return canFade;
     }
 
     private void AssignPadPosition(Collision collision)
