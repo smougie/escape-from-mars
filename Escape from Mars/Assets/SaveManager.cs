@@ -92,6 +92,16 @@ public class SaveManager : MonoBehaviour
         PlayerPrefs.SetInt("GameFinished", gameFinished);
     }
 
+    public void SetShowSubmitScorePrompt()
+    {
+        PlayerPrefs.SetInt("ShowSubmitScorePrompt", PlayerPrefs.GetInt("ShowSubmitScorePrompt") + 1);
+    }
+
+    public void ClearShowSubmitScorePrompt()
+    {
+        PlayerPrefs.DeleteKey("ShowSubmitScorePrompt");
+    }
+
     public bool HighscoreRecordEmpty()
     {
         bool empty = false;

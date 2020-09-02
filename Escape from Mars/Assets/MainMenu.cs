@@ -50,8 +50,9 @@ public class MainMenu : MonoBehaviour
     {
         saveManagerRef.LoadLevelSettings(1);
         saveManagerRef.SetGameFinished(0);
+        saveManagerRef.ClearShowSubmitScorePrompt();
         saveManagerRef.ClearRecordBase();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);        
     }
 
     public void ContinueGame()

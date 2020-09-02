@@ -3,6 +3,7 @@
 public class TotalScoreState : MonoBehaviour
 {
     [SerializeField] GameObject totalScoreObject;
+    [SerializeField] GameObject submitScorePromptObject;
 
     void Start()
     {
@@ -35,8 +36,29 @@ public class TotalScoreState : MonoBehaviour
         return gameFinished;
     }
 
+    private bool ReadShowSubmit()
+    {
+        bool showSubmitScorePrompt = false;
+        int showSubmitScoreValue = PlayerPrefs.GetInt("ShowSubmitScorePrompt");
+
+        if (showSubmitScoreValue == 1)
+        {
+            showSubmitScorePrompt = true;
+        }
+        else if (showSubmitScoreValue > 1)
+        {
+            showSubmitScorePrompt = false;
+        }
+        else
+        {
+            Debug.LogError("ReadShowSubmit() - SaveManager.cs - Value error while reading ShowSubmitScorePrompt");
+        }
+        return showSubmitScorePrompt;
+    }
+
     public void EnableTotalScore()
     {
         totalScoreObject.SetActive(ReadGameFinished());
+        submitScorePromptObject.SetActive(ReadShowSubmit());
     }
 }

@@ -158,6 +158,7 @@ public class EndLevel : MonoBehaviour
         if (nextSceneIndex == SceneManager.sceneCountInBuildSettings - 1)  // if sceneIndex is equal to last scene, load level select
         {
             saveManagerRef.SetGameFinished(1);  // set gameFinished value in PlayerPrefs to 1 == true;
+            saveManagerRef.SetShowSubmitScorePrompt();  // set PlayerPrefs.SetInt("ShowSubmitScorePrompt") += 1
             gameManagerRef.SaveScores();
             saveManagerRef.LoadLevelSettings(0);
             gameManagerRef.DestroyLeftObjects();
@@ -176,6 +177,7 @@ public class EndLevel : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings - 2)  // if current scene is equal to last level scene (-2 because sceneinbuild is calc from 1, -1 is level select, and -2 is last level scene)
         {
             saveManagerRef.SetGameFinished(1);  // set gameFinished value in PlayerPrefs to 1 == true;
+            saveManagerRef.SetShowSubmitScorePrompt();  // set PlayerPrefs.SetInt("ShowSubmitScorePrompt") += 1
         }
         gameManagerRef.SaveScores();
         saveManagerRef.LoadLevelSettings(0);
@@ -189,6 +191,7 @@ public class EndLevel : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings - 2 && !gameIsOver)
         {
             saveManagerRef.SetGameFinished(1);  // set gameFinished value in PlayerPrefs to 1 == true;
+            saveManagerRef.SetShowSubmitScorePrompt();  // set PlayerPrefs.SetInt("ShowSubmitScorePrompt") += 1
         }
         if (!gameIsOver)
         {
