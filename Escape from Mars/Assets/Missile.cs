@@ -573,7 +573,7 @@ public class Missile : MonoBehaviour
     private void StopLandingSequence()
     {
         transform.rotation = Quaternion.Euler(0, 0, 0);  // finish rotating by set zero values (after previous landing rotation a small nubers near zero was left)
-        //FreezeRigidbody(false);  // unfreeze rocket object
+        FreezeRigidbody(false);  // unfreeze rocket object
         landing = false;  // drop landing flag to cancel rotation
         rocketOnRefuelingPad = true;
         if (state == State.Refueling)
@@ -584,6 +584,8 @@ public class Missile : MonoBehaviour
         else if (state == State.Transistioning)
         {
             // do nothing -> leave state == State.Transistioning
+            FreezeRigidbody(true);  // freeze rocket after landing on landing pad
+
         }
         else
         {
