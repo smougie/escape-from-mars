@@ -58,3 +58,8 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+.idea/codeStyles/Project.xml
+.idea/escape-from-mars.iml
+.idea/modules.xml
+.idea/vcs.xml
+.idea/workspace.xml
