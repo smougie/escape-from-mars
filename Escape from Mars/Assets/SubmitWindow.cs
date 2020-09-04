@@ -16,8 +16,6 @@ public class SubmitWindow : MonoBehaviour
     void Start()
     {
         saveManagerRef = GetComponent<SaveManager>();
-        //PlayerPrefs.DeleteKey("Highscores");
-        //saveManagerRef.SetGameFinished(0);
     }
 
     public bool PlayerNameEmpty()
