@@ -20,7 +20,7 @@ Player can adjust master, background and SFX volume here.
 - Quit
 Quit the application
 
-### Level Obstacles
+### Level Obstacles:
 Rocket can only collide with alien collectible, rocket collectible, refueling pad and landing pad.
 - Moving and Rotating rocks, crystals
 - Narrow slits on the road to landing pad
@@ -32,10 +32,12 @@ Rocket can only collide with alien collectible, rocket collectible, refueling pa
 - Mysterious space anomaly
 - Moving lift
 - Metal chests
-- Metal chest machine `this machine is creating metal chests, they are mostly placed at the top of level which causes metal box to fall down until hit the floor`
-- Squeezer `this machine is pushing metal boxes into fire`
+- Metal chest machine 
+`this machine is creating metal chests, they are mostly placed at the top of level which causes metal box to fall down until hit the floor`
+- Squeezer 
+`this machine is pushing metal boxes into fire`
 
-### Core Mechanics
+### Core Mechanics:
 -`Continue` read current player progress from PlayerPrefs and move player into level section where has possibility to restart already passed level to improve total score
 -`New Game` clear all current game progress and start new game
 -`Options` each section - Master Volume, Background Volume, SFX Volume - has own slider to adjust and save sound levels in PlayerPrefs
