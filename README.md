@@ -36,8 +36,8 @@ Rocket can only collide with alien collectible, rocket collectible, refueling pa
 - Squeezer `this machine is pushing metal boxes into fire`
 
 ### Core Mechanics:
--`Continue` read current player progress from PlayerPrefs and move player into level section where has possibility to restart already passed level to improve total score
--`New Game` clear all current game progress and start new game
--`Options` each section - Master Volume, Background Volume, SFX Volume - has own slider to adjust and save sound levels in PlayerPrefs
--`Highscores` read top ten scores from Highscore key stored in PlayerPrefs
--`Refuel and Landing Pad` after colliding with them, rocket is going into auto landing state which places rocket object in the center of pad in vertical position
+- `Continue` read current player progress from PlayerPrefs and move player into level section where has possibility to restart already passed level to improve total score
+- `New Game` clear all current game progress and start new game
+- `Options` each section - Master Volume, Background Volume, SFX Volume - has own slider to adjust and save sound levels in PlayerPrefs
+- `Highscores` read top ten scores from Highscore key stored in PlayerPrefs
+- `Refuel and Landing Pad` after colliding with them, rocket is going into auto landing state which places rocket object in the center of pad in vertical position
