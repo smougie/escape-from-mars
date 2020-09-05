@@ -9,7 +9,7 @@ The player takes on the role of a rocket pilot and his task is to move from laun
 My own ideas which I extended the project with are:
 - Alien collectible - player can collect alien coins (created using blender), those coins are one of  main components of level score.
 - Rocket collectible - player can collect rocket collectible (created in blender) and restore his life if he already lost some. If current life is equal to maximum life, `Maximum rocket count` prompt will be displayed for a short time. Player lifes are displayed on life bar (three rockets).
-- Life Bar - if player lose life, one of rockets will fade out (code created using C# script), if player picks up rocket collectible one of rockets will be filled once again, scaling rocket image to 120% scale and than drops to 100% (code created using C# script) to create simply animation.
+- Life Bar - if player lose life, one of rockets will fade out (code created using C# script), if player picks up rocket collectible one of rockets will be filled once again, scaling rocket image to 120% scale and then drops to 100% (code created using C# script) to create simply animation.
 - Auto Landing - when player collides with landing pad or refueling pad auto pilot system is turning on moving player into the center of landing/refuel pad and rotated to starting rotation. Meanwhile player cannot control the rocket.
 - Fuel System - using space button to apply thrust uses rocket fuel which player can track on fuel bar.
 - Refueling System - when collinding with refueling pad, rocket fuel is getting refueled. The smaller fuel level, the faster speed of refueling. Also refueling pad can be used as a checkpoint. If used as a checkpoint green flag(created in blender) will be raised behind refueling pad.
