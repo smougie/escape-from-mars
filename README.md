@@ -32,10 +32,8 @@ Rocket can only collide with alien collectible, rocket collectible, refueling pa
 - Mysterious space anomaly
 - Moving lift
 - Metal chests
-- Metal chest machine 
-`this machine is creating metal chests, they are mostly placed at the top of level which causes metal box to fall down until hit the floor`
-- Squeezer 
-`this machine is pushing metal boxes into fire`
+- Metal chest machine `this machine is creating metal chests, they are mostly placed at the top of level which causes metal box to fall down until hit the floor`
+- Squeezer `this machine is pushing metal boxes into fire`
 
 ### Core Mechanics:
 -`Continue` read current player progress from PlayerPrefs and move player into level section where has possibility to restart already passed level to improve total score
