@@ -9,15 +9,15 @@ The main assumption is to expand already known unity and C# mechanics. Expanding
 
 ## Game Mechanics:
 ### Main Menu:
--Continue
+- Continue
 If player already pass through first level Continue button will be shown and after pressing this button, player will be moved to Level Selection screen where he can track his progress, check level scores, restart and overwrite old level score to get the highest score.
--New Game
+- New Game
 Starting new game, removing old progression
--Highscores
+- Highscores
 Player can check all Highscores. Highscore can be submited after completing all levels. Only ten best scores will be displayed.
--Options
+- Options
 Player can adjust master, background and SFX volume here.
--Quit
+- Quit
 Quit the application
 
 ### Level Obstacles
