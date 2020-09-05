@@ -165,7 +165,7 @@ public class Missile : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.R))
         {
-            print("Clearing Highscores...");
+            Debug.Log("Clearing Highscores...");
             PlayerPrefs.DeleteKey("Highscores");
         }
     }

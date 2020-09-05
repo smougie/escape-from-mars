@@ -11,8 +11,6 @@ public class FireNozzle : MonoBehaviour
     [SerializeField] ParticleSystem nozzleFireEffect;
     [SerializeField] ParticleSystem prewarmFireEffect;
     private BoxCollider boxCollider;
-    //private float prewarmFireParticlesLifeTime = .1f;
-    //private float nozzleFireParticlesLifeTime = .4f;
     private bool nozzleFireTriggered;
     private bool playingNozzleFire;
     private bool pauseTriggered;

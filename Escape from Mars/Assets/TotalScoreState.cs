@@ -45,7 +45,7 @@ public class TotalScoreState : MonoBehaviour
         {
             showSubmitScorePrompt = true;
         }
-        else if (showSubmitScoreValue > 1)
+        else if (showSubmitScoreValue > 1 || showSubmitScoreValue == 0)
         {
             showSubmitScorePrompt = false;
         }
