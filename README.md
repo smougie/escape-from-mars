@@ -7,6 +7,43 @@ The player takes on the role of a rocket pilot and his job is to move from launc
 ## Project Description
 The main assumption is to expand already known unity and C# mechanics. Expanding course project with my own ideas aims at providing player fully finished product.
 
+## My own vision
+My own ideas which I extended the project with are:
+- Alien collectible - player can collect alien coins (created using blender), those coins are one of  main components of level score.
+- Rocket collectible - player can collect rocket (created in blender) collectible and restore his life if he already lost some. If current life is equal to maximum life, `Maximum rocket count` prompt will be displayed for a short time. Player lifes are displayed on life bar (three rockets).
+- Life Bar - if player lose life, one of rocket will fade out (code created using C# script), if player pick up rocket collectible one of rocket will be filled once again, scaling rocket image to 120% scale and droping to 100% (code created using C# script) to create simply animation.
+- Auto Landing - when player collides with landing pad or refueling pad auto pilot system is turning on moving player into the center of landing/refuel pad and rotated to starting rotation. Meanwhile player cannot control the rocket.
+- Fuel System - Using space button to apply thrust uses rocket fuel which player can track on fuel bar.
+- Refueling System - when collinding with refueling pad, rocket fuel is getting refueled. The smaller fuel level, the faster speed of refueling. Also refueling pad can be used as a checkpoint. If used as a checkpoint green flag(created in blender) will be raised behind refueling pad.
+- Meteorites (obstacle) - created meteorites obstacle objects (created in blender) to simulate large group of meteorites falling from point A to point B. Same meteorites objects were used to create flying (single) meteorite from point A to point B. And one more obstacle was created using meteorites objects - I created hole in ground and surrounded it with crystals, than I simulated meteorite flying up from the hole.
+- Metal Gates/Floodgates (obstacle)- constantly opening and closing doors, which can be adjusted  individually by setting some properties:
+`delay time` we can delay gate start
+`opened time` we can set how long gate stays opened
+`locked time` we can set how long gate stay closed
+`closing speed` we can set gate closing speed
+`opening speed` we can set gate opening speed
+- Fire from nozzle (obstacle)- simple fire created using particle system it can destroy player rocket or `metal boxes` spawned by `BoxMachine`. Fire Nozzle is also customizable:
+`delay time` we can delay Fire Nozzle start
+`prewarm time` period of time where prewarm fire is shown to warn player that soon Fire will be active
+`active time` period of time where fire is active
+`pause time` period of time where Fire Nozzle is not active
+- Rotating Fan (obstacle) - simple fan created using unity primitives, placed on the wall and rotating, we can adjust rotation speed and direction
+- Anomaly (obstacle) - simple anomaly created using unity primitives and particle system. We can adjust:
+`delay time` delay anomaly start
+`active time` how long obstacle will be dangerous
+`pause time` how long obstacle will not be dangerous
+- Lift (obstacle) - simple lift moving up and down created using unity primitives. Player has to move inside the lift, carefully move rocket with lift and travel further into level
+- Metal Box (obstacle) - simple metal box created using unity primitive with five different materials. Box can collide with:
+`Rocket` destroying it
+`Squeezer Machine` getting moved by Squeezer face
+`Fire Nozzle` when collides with nozzle fire, metling effect is getting spawned from metal box, after `2 - 4` seconds box is getting destroyed and explosion animation is getting spawned.
+- Box Machine (obstacle) - machine is spawning metal boxes. Machine can work in `4` modes:
+`static` machine stays in place and spawn metal boxes after specified time (can be adjusted in inspector same as delay start time)
+`normal` machine travels from first point to last point, than moves to first point and repeat, spawning boxes when reach point 
+`reverse` machine travels from first point to last point and from last point to first point,  spawning boxes when reach point
+`random` machine pick random point and travel to them,  spawning boxes when reach point
+- Camera Move - when level is to big, we set up camera trigger, when rocket trigger it, timeScale is set to 0f camera is moving to next point, previous stage entrance is getting blocked to avoid players trying go back and when camera is in right place timeScale is set to 1f. Camera triggers also enable next stage obstacles.
+
 ## Game Mechanics:
 ### Main Menu:
 - Continue
