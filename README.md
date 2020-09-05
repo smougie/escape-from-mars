@@ -41,3 +41,9 @@ Rocket can only collide with alien collectible, rocket collectible, refueling pa
 - `Options` each section - Master Volume, Background Volume, SFX Volume - has own slider to adjust and save sound levels in PlayerPrefs
 - `Highscores` read top ten scores from Highscore key stored in PlayerPrefs
 - `Refuel and Landing Pad` after colliding with them, rocket is going into auto landing state which places rocket object in the center of pad in vertical position
+
+## How to try?
+- `A`/`Left Arrow` - rotate rocket left
+- `D`/`Right Arrow` - rotate rocket left
+- `SPACE` - apply thrust
+Start on blue launch pad, finish on neon green landing pad, avoid obstacles and use refueling pad to reach checkpoint or refuel rocket.
