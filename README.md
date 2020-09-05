@@ -1,19 +1,17 @@
 # Escape from Mars
-Another project created while processing through "Complete C# Unity Developer 3D: Learn to Code Making Games" course. Once again I decided to expand course project with some of my ideas that came to my mind while project concept was presented by course teachers.
+## Project Description
+Another project created while processing through "Complete C# Unity Developer 3D: Learn to Code Making Games" course. Once again I decided to expand course project with some of my ideas that came to my mind while project concept was presented by course teachers. Expanding course project with my own ideas aims at providing player fully finished product.
 
 ## Game Description
-The player takes on the role of a rocket pilot and his job is to move from launch pad (point A) to landing pad (point B) meanwhile avoiding all of dangerous obstacles placed on levels. In addition, the player must pay attention to fuel level, if it fall down to zero, the player will have big problem. Traveling across space levels will go hand in hand with collecting alien coins. After level completion, level score is being calculated - the main component of the score value is percentage of collected alien coins and player lifes left.
-
-## Project Description
-The main assumption is to expand already known unity and C# mechanics. Expanding course project with my own ideas aims at providing player fully finished product.
+The player takes on the role of a rocket pilot and his task is to move from launch pad (point A) to landing pad (point B) meanwhile avoiding all of dangerous obstacles placed on levels. In addition, the player must pay attention to fuel level, if it fall down to zero, the player will have a big problem. Traveling across space levels will go hand in hand with collecting alien coins. After level completion, level score is being calculated - the main component of the score value is percentage of collected alien coins and player lifes left.
 
 ## My own vision
 My own ideas which I extended the project with are:
 - Alien collectible - player can collect alien coins (created using blender), those coins are one of  main components of level score.
-- Rocket collectible - player can collect rocket (created in blender) collectible and restore his life if he already lost some. If current life is equal to maximum life, `Maximum rocket count` prompt will be displayed for a short time. Player lifes are displayed on life bar (three rockets).
-- Life Bar - if player lose life, one of rocket will fade out (code created using C# script), if player pick up rocket collectible one of rocket will be filled once again, scaling rocket image to 120% scale and droping to 100% (code created using C# script) to create simply animation.
+- Rocket collectible - player can collect rocket collectible (created in blender) and restore his life if he already lost some. If current life is equal to maximum life, `Maximum rocket count` prompt will be displayed for a short time. Player lifes are displayed on life bar (three rockets).
+- Life Bar - if player lose life, one of rockets will fade out (code created using C# script), if player picks up rocket collectible one of rockets will be filled once again, scaling rocket image to 120% scale and than drops to 100% (code created using C# script) to create simply animation.
 - Auto Landing - when player collides with landing pad or refueling pad auto pilot system is turning on moving player into the center of landing/refuel pad and rotated to starting rotation. Meanwhile player cannot control the rocket.
-- Fuel System - Using space button to apply thrust uses rocket fuel which player can track on fuel bar.
+- Fuel System - using space button to apply thrust uses rocket fuel which player can track on fuel bar.
 - Refueling System - when collinding with refueling pad, rocket fuel is getting refueled. The smaller fuel level, the faster speed of refueling. Also refueling pad can be used as a checkpoint. If used as a checkpoint green flag(created in blender) will be raised behind refueling pad.
 - Meteorites (obstacle) - created meteorites obstacle objects (created in blender) to simulate large group of meteorites falling from point A to point B. Same meteorites objects were used to create flying (single) meteorite from point A to point B. And one more obstacle was created using meteorites objects - I created hole in ground and surrounded it with crystals, than I simulated meteorite flying up from the hole.
 - Metal Gates/Floodgates (obstacle)- constantly opening and closing doors, which can be adjusted  individually by setting some properties:
