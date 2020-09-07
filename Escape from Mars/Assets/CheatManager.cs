@@ -2,7 +2,7 @@
 
 public class CheatManager : MonoBehaviour
 {
-    private string[] cheatStrings = { "playg", "playo", "tutorial"};
+    private string[] cheatStrings = { "playground", "playsround", "tutorial"};
     private string strToCheck = "";
     private int inputIndex = 0;
     private int cheatIndex = 0;
@@ -13,7 +13,6 @@ public class CheatManager : MonoBehaviour
         currentEvent = Event.current;
         CheckPlayerInput(currentEvent);
         CheckCurrentCheatString();
-        print(strToCheck);
     }
 
     private void CheckPlayerInput(Event e)
@@ -38,16 +37,16 @@ public class CheatManager : MonoBehaviour
     {
         for (int i = 0; i < cheatStrings.Length; i++)
         {
-            if (inputIndex < cheatStrings[i].Length)
+            if (inputIndex < cheatStrings[i].Length)  // if current input type index ("playg" == 3) is less than currently checking cheat code string length (3 < "playg".length)
             {
-                if (e.keyCode.ToString().ToLower() == cheatStrings[i][inputIndex].ToString())
+                if (e.keyCode.ToString().ToLower() == cheatStrings[i][inputIndex].ToString())  // if current input value is equal to currently checking chead string ("g" == "playg"[4])
                 {
-                    ConcatenateString(e);
+                    ConcatenateString(e);  // add current input value into stringToCheck and return from this method
                     return;
                 }
             }
         }
-        ResetValues();
+        ResetValues();  // if current input value is not match any of cheat code string at indicated index than reset strToCheck value and inputIndex to start listening from beginning 
     }
 
     private void ConcatenateString(Event e)
@@ -70,7 +69,6 @@ public class CheatManager : MonoBehaviour
 
     private void ResetValues()
     {
-        Debug.Log("Reseting values");
         inputIndex = 0;
         strToCheck = "";
     }
