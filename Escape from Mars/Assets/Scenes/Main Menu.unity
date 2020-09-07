@@ -1061,6 +1061,11 @@ PrefabInstance:
       propertyPath: m_textInfo.lineCount
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 63882107301462812, guid: 2f359828fd438cb4d98e0a7ca54af8b2,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 63882107859352319, guid: 2f359828fd438cb4d98e0a7ca54af8b2,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target

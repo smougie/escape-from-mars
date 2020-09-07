@@ -111,10 +111,15 @@ public class EndLevel : MonoBehaviour
         endLevelWindowEnabled = true;
         endLevelWindow.SetActive(true);
         UpdatePlanets(gameManagerRef.levelPercentageScore);
+
         if (saveManagerRef.ReadRestartedValue() == 1)
         {
             buttonSection.SetActive(false);
             restartButtonSection.SetActive(true);
+            if (gameOver)
+            {
+                gameIsOver = true;
+            }
         }
         else if (gameOver)
         {
@@ -179,7 +184,10 @@ public class EndLevel : MonoBehaviour
             saveManagerRef.SetGameFinished(1);  // set gameFinished value in PlayerPrefs to 1 == true;
             saveManagerRef.SetShowSubmitScorePrompt();  // set PlayerPrefs.SetInt("ShowSubmitScorePrompt") += 1
         }
-        gameManagerRef.SaveScores();
+        if (!gameIsOver)
+        {
+            gameManagerRef.SaveScores();
+        }
         saveManagerRef.LoadLevelSettings(0);
         saveManagerRef.ClearRestartRecord();
         gameManagerRef.DestroyLeftObjects();

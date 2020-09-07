@@ -108,7 +108,7 @@ public class Highscore : MonoBehaviour
     {
         for (int i = 1; i <= scoresLimit; i++)
         {
-            if (i == ConvertScoresToInt().Count)
+            if (i == scoresLimit)
             {
                 places.text += $"{i}";
             }
