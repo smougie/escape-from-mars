@@ -2,9 +2,10 @@
 
 public class CheatManager : MonoBehaviour
 {
-    private string[] cheatStrings = { "playg", "tutorial"};
+    private string[] cheatStrings = { "playg", "playo", "tutorial"};
     private string strToCheck = "";
-    private int index = 0;
+    private int inputIndex = 0;
+    private int cheatIndex = 0;
     private Event currentEvent;
 
     void OnGUI()
@@ -12,10 +13,7 @@ public class CheatManager : MonoBehaviour
         currentEvent = Event.current;
         CheckPlayerInput(currentEvent);
         CheckCurrentCheatString();
-        if (currentEvent.type == EventType.KeyDown)
-        {
-            print(currentEvent.keyCode.ToString());
-        }
+        print(strToCheck);
     }
 
     private void CheckPlayerInput(Event e)
@@ -38,22 +36,24 @@ public class CheatManager : MonoBehaviour
     
     private void CheckForKeyInCheatString(Event e)
     {
-        foreach (var item in cheatStrings)
+        for (int i = 0; i < cheatStrings.Length; i++)
         {
-            if (index < item.Length)
+            if (inputIndex < cheatStrings[i].Length)
             {
-                if (e.keyCode.ToString().ToLower() == item[index].ToString())
+                if (e.keyCode.ToString().ToLower() == cheatStrings[i][inputIndex].ToString())
                 {
                     ConcatenateString(e);
+                    return;
                 }
             }
         }
+        ResetValues();
     }
 
     private void ConcatenateString(Event e)
     {
         strToCheck += e.keyCode.ToString().ToLower();
-        index++;
+        inputIndex++;
     }
 
     private void CheckCurrentCheatString()
@@ -70,7 +70,8 @@ public class CheatManager : MonoBehaviour
 
     private void ResetValues()
     {
-        index = 0;
+        Debug.Log("Reseting values");
+        inputIndex = 0;
         strToCheck = "";
     }
 }
