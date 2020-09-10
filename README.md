@@ -11,12 +11,12 @@ My own ideas which I extended the project with are:
 - Rocket collectible - player can collect rocket collectible (created in blender) and restore his life if he already lost some. If current life is equal to maximum life, `Maximum rocket count` prompt will be displayed for a short time. Player lifes are displayed on life bar (three rockets).
 - Life Bar - if player lose life, one of rockets will fade out (code created using C# script), if player picks up rocket collectible one of rockets will be filled once again, scaling rocket image to 120% scale and then drops to 100% (code created using C# script) to create simply animation.
 - Auto Landing - when player collides with landing pad or refueling pad auto pilot system is turning on moving player into the center of landing/refuel pad and rotated to starting rotation. Meanwhile player cannot control the rocket.
-- Fuel System - using space button to apply thrust uses rocket fuel which player can track on fuel bar.
+- Fuel System - use space button to apply thrust. Applying thrust uses rocket fuel which player can track on fuel bar.
 - Refueling System - when collinding with refueling pad, rocket fuel is getting refueled. The smaller fuel level, the faster speed of refueling. Also refueling pad can be used as a checkpoint. If used as a checkpoint green flag(created in blender) will be raised behind refueling pad.
-- Meteorites (obstacle) - created meteorites obstacle objects (created in blender) to simulate large group of meteorites falling from point A to point B. Same meteorites objects were used to create flying (single) meteorite from point A to point B. And one more obstacle was created using meteorites objects - I created hole in ground and surrounded it with crystals, than I simulated meteorite flying up from the hole.
+- Meteorites (obstacle) - created meteorites obstacle objects (created in blender) to simulate large group of meteorites falling from point A to point B. The same meteorites objects were used to create flying (single) meteorite from point A to point B. One more obstacle was created using meteorites objects - I created hole in the ground and surrounded it with crystals, then I simulated meteorite flying up from the hole.
 - Metal Gates/Floodgates (obstacle)- constantly opening and closing doors, which can be adjusted  individually by setting some properties:
-`delay time` we can delay gate start
-`opened time` we can set how long gate stays opened
+\n`delay time` we can delay gate start
+\n`opened time` we can set how long gate stays opened
 `locked time` we can set how long gate stay closed
 `closing speed` we can set gate closing speed
 `opening speed` we can set gate opening speed
