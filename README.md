@@ -81,4 +81,5 @@ Rocket can only collide with alien collectible, rocket collectible, refueling pa
 - `A`/`Left Arrow` - rotate rocket left
 - `D`/`Right Arrow` - rotate rocket right
 - `SPACE` - apply thrust
+
 Start on blue launch pad, finish on neon green landing pad, avoid obstacles and use refueling pad to reach checkpoint or refuel rocket.
