@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class Missile : MonoBehaviour
 {
+    [SerializeField] bool playground;
+    private PlaygroundCameraControler playgroundRef;
+
     [SerializeField] float rcsThrust = 200f;
     [SerializeField] float mainThrust = 1000f;
     [SerializeField] float levelLoadDelay = 3f;
@@ -99,6 +102,10 @@ public class Missile : MonoBehaviour
         if (checkPoint)
         {
             checkPointFlag = refuelingPad.GetComponentInChildren<CheckPointFlag>();
+        }
+        if (playground)
+        {
+            playgroundRef = GetComponent<PlaygroundCameraControler>();
         }
 
         gameManagerObject = GameObject.Find("Game Manager");
@@ -284,6 +291,10 @@ public class Missile : MonoBehaviour
         gameManager.DecreaseLife();
         if (gameManager.Alive())
         {
+            if (playground)
+            {
+                playgroundRef.setCameraPosition = false;
+            }
             state = State.Transistioning;
             deathParticles.Play();
             thrustParticles.Stop();
@@ -327,6 +338,11 @@ public class Missile : MonoBehaviour
         if (noFuel)
         {
             noFuel = false;
+        }
+        if (playground)
+        {
+            gameManager.IncreaseLife();
+            playgroundRef.setCameraPosition = true;
         }
         FreezeRigidbody(false);  // unfreeze rocket
     }
@@ -460,8 +476,16 @@ public class Missile : MonoBehaviour
         }
         else if (currentFuel <= 0)
         {
-            noFuel = true;
-            StartNoFuelSequence();
+            if (playground)
+            {
+                currentFuel = maxFuel;
+            }
+            else
+            {
+                noFuel = true;
+                StartNoFuelSequence();
+            }
+
         }
     }
 

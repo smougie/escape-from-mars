@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class CheatManager : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class CheatManager : MonoBehaviour
     private int inputIndex = 0;
     private int cheatIndex = 0;
     private Event currentEvent;
+    [SerializeField] GameObject playgroundButton;
 
     void OnGUI()
     {
@@ -62,8 +64,21 @@ public class CheatManager : MonoBehaviour
             if (strToCheck == item)
             {
                 print($"{strToCheck} cheat entered - enabling assigned cheat mode! >;->");
+                ActivateCheat(item);
                 ResetValues();
             }
+        }
+    }
+
+    private void ActivateCheat(string cheat)
+    {
+        switch (cheat)
+        {
+            case "playground":
+                playgroundButton.SetActive(true);
+                break;
+            default:
+                break;
         }
     }
 

@@ -1822,7 +1822,7 @@ PrefabInstance:
     - target: {fileID: 4270139836848696778, guid: 9645e2f9e43de1d4cb62c658aa8cefbd,
         type: 3}
       propertyPath: period
-      value: 1
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 4270139836848696778, guid: 9645e2f9e43de1d4cb62c658aa8cefbd,
         type: 3}
@@ -9891,7 +9891,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementVector: {x: 0, y: 13, z: 0}
   movementFactor: 0
-  period: 1.75
+  period: 1.6
   differenceTime: 0
 --- !u!1001 &2010622662
 PrefabInstance:
@@ -11905,7 +11905,7 @@ PrefabInstance:
     - target: {fileID: 5756899545443407427, guid: 56eb5adceaa93f0419776f3dd9f6f3ff,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 17.02
+      value: 17.25
       objectReference: {fileID: 0}
     - target: {fileID: 5756899545443407427, guid: 56eb5adceaa93f0419776f3dd9f6f3ff,
         type: 3}
