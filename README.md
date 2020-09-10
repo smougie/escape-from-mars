@@ -17,35 +17,35 @@ My own ideas which I extended the project with are:
 - Metal Gates/Floodgates (obstacle)- constantly opening and closing doors, which can be adjusted  individually by setting some properties:
 \n`delay time` we can delay gate start
 \n`opened time` we can set how long gate stays opened
-`locked time` we can set how long gate stay closed
+`locked time` we can set how long gate stays closed
 `closing speed` we can set gate closing speed
 `opening speed` we can set gate opening speed
-- Fire from nozzle (obstacle)- simple fire created using particle system it can destroy player rocket or `metal boxes` spawned by `BoxMachine`. Fire Nozzle is also customizable:
-`delay time` we can delay Fire Nozzle start
-`prewarm time` period of time where prewarm fire is shown to warn player that soon Fire will be active
+- Fire from nozzle (obstacle)- simple fire created by using particle system, it can destroy player rocket or `metal boxes` spawned by `BoxMachine`. Fire Nozzle is also customizable:
+\n`delay time` we can delay Fire Nozzle start
+`prewarm time` period of time where prewarm fire is shown to warn a player that soon Fire will be active
 `active time` period of time where fire is active
 `pause time` period of time where Fire Nozzle is not active
-- Rotating Fan (obstacle) - simple fan created using unity primitives, placed on the wall and rotating, we can adjust rotation speed and direction
-- Anomaly (obstacle) - simple anomaly created using unity primitives and particle system. We can adjust:
-`delay time` delay anomaly start
+- Rotating Fan (obstacle) - simple fan created by using unity primitives, placed on the wall and rotating, we can adjust rotation speed and direction
+- Anomaly (obstacle) - simple anomaly created by using unity primitives and particle system. We can adjust:
+\n`delay time` delay anomaly start
 `active time` how long obstacle will be dangerous
 `pause time` how long obstacle will not be dangerous
-- Lift (obstacle) - simple lift moving up and down created using unity primitives. Player has to move inside the lift, carefully move rocket with lift and travel further into level
-- Metal Box (obstacle) - simple metal box created using unity primitive with five different materials. Box can collide with:
-`Rocket` destroying it
+- Lift (obstacle) - simple lift moving up and down created by using unity primitives. Player has to move inside the lift, carefully move rocket with lift and travel further into level
+- Metal Box (obstacle) - simple metal box created by using unity primitive with five different materials. Box can collide with:
+\n`Rocket` destroying it
 `Squeezer Machine` getting moved by Squeezer face
 `Fire Nozzle` when collides with nozzle fire, metling effect is getting spawned from metal box, after `2 - 4` seconds box is getting destroyed and explosion animation is getting spawned.
-- Box Machine (obstacle) - machine is spawning metal boxes. Machine can work in `4` modes:
-`static` machine stays in place and spawn metal boxes after specified time (can be adjusted in inspector same as delay start time)
-`normal` machine travels from first point to last point, than moves to first point and repeat, spawning boxes when reach point 
-`reverse` machine travels from first point to last point and from last point to first point,  spawning boxes when reach point
-`random` machine pick random point and travel to them,  spawning boxes when reach point
-- Camera Move - when level is to big, we set up camera trigger, when rocket trigger it, timeScale is set to 0f camera is moving to next point, previous stage entrance is getting blocked to avoid players trying go back and when camera is in right place timeScale is set to 1f. Camera triggers also enable next stage obstacles.
+- Box Machine (obstacle) - machine is spawning metal boxes. Machine can work in `4` different modes:
+\n`static` machine stays in place and spawn metal boxes after specified time (can be adjusted in inspector, the same as delay start time)
+`normal` machine travels from the first point to the last point, then moves to the first point and repeats, spawning boxes when reaches each point 
+`reverse` machine travels from the first point to the last point and from the last point to the first point, spawning boxes when reaches each point
+`random` machine picks random point and travels to them, spawning boxes when reaches each point
+- Camera Move - when level is to big, we set up camera trigger, when rocket triggers it, timeScale is set to 0f, camera moves to the next point, previous stage entrance is getting blocked to avoid players trying to go back. When camera is in the right place timeScale is set to 1f. Camera triggers also enable next stage obstacles.
 
 ## Game Mechanics:
 ### Main Menu:
 - Continue
-If player already pass through first level Continue button will be shown and after pressing this button, player will be moved to Level Selection screen where he can track his progress, check level scores, restart and overwrite old level score to get the highest score.
+If player already pass through first level Continue button will be shown and after pressing this button, player will be moved to Level Selection screen where he can track his current progress, check level scores, restart and overwrite old level score to get the highest score.
 - New Game
 Starting new game, removing old progression
 - Highscores
@@ -66,19 +66,19 @@ Rocket can only collide with alien collectible, rocket collectible, refueling pa
 - Deadly fire from nozzles
 - Mysterious space anomaly
 - Moving lift
-- Metal chests
-- Metal chest machine `this machine is creating metal chests, they are mostly placed at the top of level which causes metal box to fall down until hit the floor`
-- Squeezer `this machine is pushing metal boxes into fire`
+- Metal box
+- Metal box machine `this machine is creating metal boxes, they are mostly placed at the top of level which causes metal box to fall down until they hit the floor`
+- Squeezer `this machine is pushing metal boxes into the fire`
 
 ### Core Mechanics:
-- `Continue` read current player progress from PlayerPrefs and move player into level section where has possibility to restart already passed level to improve total score
+- `Continue` read current player progress from PlayerPrefs and move player to the level section where he has possibility to restart already passed level to improve total score
 - `New Game` clear all current game progress and start new game
-- `Options` each section - Master Volume, Background Volume, SFX Volume - has own slider to adjust and save sound levels in PlayerPrefs
+- `Options` each section - Master Volume, Background Volume, SFX Volume - each of them has own slider to adjust and save sound levels in PlayerPrefs
 - `Highscores` read top ten scores from Highscore key stored in PlayerPrefs
 - `Refuel and Landing Pad` after colliding with them, rocket is going into auto landing state which places rocket object in the center of pad in vertical position
 
 ## How to try?
 - `A`/`Left Arrow` - rotate rocket left
-- `D`/`Right Arrow` - rotate rocket left
+- `D`/`Right Arrow` - rotate rocket right
 - `SPACE` - apply thrust
 Start on blue launch pad, finish on neon green landing pad, avoid obstacles and use refueling pad to reach checkpoint or refuel rocket.
