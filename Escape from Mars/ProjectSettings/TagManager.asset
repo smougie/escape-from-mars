@@ -17,6 +17,7 @@ TagManager:
   - Squeezer Head
   - NozzleBottom
   - NozzleInstantFire
+  - GravityControler
   layers:
   - Default
   - TransparentFX

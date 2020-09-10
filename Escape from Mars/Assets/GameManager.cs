@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] bool playground;
     [SerializeField] GameObject life1;
     [SerializeField] GameObject life2;
     [SerializeField] GameObject life3;
@@ -62,6 +63,25 @@ public class GameManager : MonoBehaviour
             }
 
             saveManagerRef.LoadLevelSettings(0);
+        }
+        else if (playground)
+        {
+            life1Image = life1.GetComponent<Image>();
+            life2Image = life2.GetComponent<Image>();
+            life3Image = life3.GetComponent<Image>();
+            currentLife = maxLife;
+            collectiblesBarUI = GameObject.Find("Alien Bar");
+            if (GameObject.Find("Collectibles").transform.childCount != 0)
+            {
+                maxLevelCollectibles = GameObject.Find("Collectibles").transform.childCount;
+                textMeshProText.text = collectiblesStatusText;
+                UpdateCollectiblesStatus();
+            }
+            else
+            {
+                collectiblesAvailable = false;
+                DisableCollectiblesUI();
+            }
         }
         else
         {

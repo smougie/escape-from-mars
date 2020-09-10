@@ -255,6 +255,9 @@ public class Missile : MonoBehaviour
                 // TODO assign vector3 of respawn point rocket/launch pad here
                 // camera trigger object position -> launch pad position and y + 2 rocket position
                 break;
+            case "GravityControler":
+                // GravitySwitch will manage action so here DO NOTHING
+                break;
             default:
                 StartDeathSequence();
                 break;
@@ -269,8 +272,15 @@ public class Missile : MonoBehaviour
         thrustParticles.Stop();  // stop playing thrusting particles
         RCSParticlesStop();
         ManageAudio(finishSound);  // control audio
-        gameManager.CalculateLevelScore();  // calculate level score without saving them
-        StartCoroutine(EndLevelWindowDelay(false));  // show endLevelWindow with delay
+        if (playground)
+        {
+            StartCoroutine(LeavePlayground());
+        }
+        else
+        {
+            gameManager.CalculateLevelScore();  // calculate level score without saving them
+            StartCoroutine(EndLevelWindowDelay(false));  // show endLevelWindow with delay
+        }
     }
 
     // TODO this method is previous StartDeathSequence
@@ -794,5 +804,11 @@ public class Missile : MonoBehaviour
     {
         yield return new WaitForSeconds(levelLoadDelay);
         endLevelRef.ShowEndLevelWindow(gameOver);
+    }
+
+    IEnumerator LeavePlayground()
+    {
+        yield return new WaitForSeconds(levelLoadDelay);
+        SceneManager.LoadScene(0);
     }
 }

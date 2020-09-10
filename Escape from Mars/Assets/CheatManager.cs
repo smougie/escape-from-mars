@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class CheatManager : MonoBehaviour
@@ -86,5 +87,10 @@ public class CheatManager : MonoBehaviour
     {
         inputIndex = 0;
         strToCheck = "";
+    }
+
+    public void LoadPlayground()
+    {
+        SceneManager.LoadScene("Playground");
     }
 }

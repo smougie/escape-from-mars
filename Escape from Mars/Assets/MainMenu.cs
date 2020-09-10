@@ -57,7 +57,7 @@ public class MainMenu : MonoBehaviour
 
     public void ContinueGame()
     {
-        SceneManager.LoadScene(SceneManager.sceneCountInBuildSettings - 1);  // load last scene in build (level selection)
+        SceneManager.LoadScene(SceneManager.sceneCountInBuildSettings - 2);  // load level selection level with index -2
     }
 
     public void EnableNewGameWaning()
