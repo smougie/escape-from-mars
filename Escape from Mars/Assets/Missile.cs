@@ -258,6 +258,9 @@ public class Missile : MonoBehaviour
             case "GravityControler":
                 // GravitySwitch will manage action so here DO NOTHING
                 break;
+            case "ArrowPrompt":
+                // Prompt Arrow will manage action so here DO NOTHING
+                break;
             default:
                 StartDeathSequence();
                 break;
@@ -566,7 +569,11 @@ public class Missile : MonoBehaviour
     }
 
     private void CheckSoundChanges()
-    {   
+    {
+        if (playground)
+        {
+            pauseMenuRef = GameObject.FindGameObjectWithTag("MainCanvas").GetComponent<PauseMenu>();
+        }
         if (pauseMenuRef.updateSoundValues)
         {
             UpdateSoundEffectsVolume();

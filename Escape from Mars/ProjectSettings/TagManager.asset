@@ -18,6 +18,8 @@ TagManager:
   - NozzleBottom
   - NozzleInstantFire
   - GravityControler
+  - MainCanvas
+  - ArrowPrompt
   layers:
   - Default
   - TransparentFX

@@ -6,6 +6,7 @@ using UnityEngine;
 public class GravitySwitch : MonoBehaviour
 {
     [SerializeField] GameObject rocket;
+    [SerializeField] ParticleSystem effect;
     private Rigidbody rocketRb;
     private bool gravityActive;
 
@@ -37,6 +38,7 @@ public class GravitySwitch : MonoBehaviour
         if (other.CompareTag("Rocket"))
         {
             SwitchGravityState();
+            effect.Play();
         }
     }
 
