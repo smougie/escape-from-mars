@@ -4,11 +4,35 @@ using UnityEngine;
 
 public class PromptManager : MonoBehaviour
 {
+    [SerializeField] bool onExit;
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Rocket"))
+        if (onExit)
         {
-            DisablePromptObj();
+            return;
+        }
+        else
+        {
+            if (other.CompareTag("Rocket"))
+            {
+                DisablePromptObj();
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (onExit)
+        {
+            if (other.CompareTag("Rocket"))
+            {
+                DisablePromptObj();
+            }
+        }
+        else
+        {
+            return;
         }
     }
 

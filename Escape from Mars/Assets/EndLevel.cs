@@ -160,14 +160,14 @@ public class EndLevel : MonoBehaviour
     {
         int sceneIndex = SceneManager.GetActiveScene().buildIndex;
         int nextSceneIndex = sceneIndex + 1;
-        if (nextSceneIndex == SceneManager.sceneCountInBuildSettings - 2)  // if sceneIndex is equal to last scene, load level select
+        if (nextSceneIndex == SceneManager.sceneCountInBuildSettings - 3)  // if sceneIndex is equal to last scene, load level select
         {
             saveManagerRef.SetGameFinished(1);  // set gameFinished value in PlayerPrefs to 1 == true;
             saveManagerRef.SetShowSubmitScorePrompt();  // set PlayerPrefs.SetInt("ShowSubmitScorePrompt") += 1
             gameManagerRef.SaveScores();
             saveManagerRef.LoadLevelSettings(0);
             gameManagerRef.DestroyLeftObjects();
-            SceneManager.LoadScene(SceneManager.sceneCountInBuildSettings - 2);
+            SceneManager.LoadScene(SceneManager.sceneCountInBuildSettings - 3);
         }
         else
         {
@@ -179,7 +179,7 @@ public class EndLevel : MonoBehaviour
 
     public void LoadLevelSelect()
     {
-        if (SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings - 3)  // if current scene is equal to last level scene (-2 because sceneinbuild is calc from 1, -1 is level select, and -2 is last level scene)
+        if (SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings - 4)  // if current scene is equal to last level scene (-2 because sceneinbuild is calc from 1, -1 is level select, and -2 is last level scene, -3 is tutorial scene, -4 is playground scene)
         {
             saveManagerRef.SetGameFinished(1);  // set gameFinished value in PlayerPrefs to 1 == true;
             saveManagerRef.SetShowSubmitScorePrompt();  // set PlayerPrefs.SetInt("ShowSubmitScorePrompt") += 1
@@ -191,7 +191,7 @@ public class EndLevel : MonoBehaviour
         saveManagerRef.LoadLevelSettings(0);
         saveManagerRef.ClearRestartRecord();
         gameManagerRef.DestroyLeftObjects();
-        SceneManager.LoadScene(SceneManager.sceneCountInBuildSettings - 1);
+        SceneManager.LoadScene(SceneManager.sceneCountInBuildSettings - 3);
     }
 
     public void LoadMainMenu()
