@@ -16,7 +16,7 @@ My own ideas which I extended the project with are:
 - Meteorites (obstacle) - created meteorites obstacle objects (created in blender) to simulate large group of meteorites falling from point A to point B. The same meteorites objects were used to create flying (single) meteorite from point A to point B. One more obstacle was created using meteorites objects - I created hole in the ground and surrounded it with crystals, then I simulated meteorite flying up from the hole.
 - Metal Gates/Floodgates (obstacle)- constantly opening and closing doors, which can be adjusted  individually by setting some properties:
 \n`delay time` we can delay gate start
-\n`opened time` we can set how long gate stays opened
+\n`opened time` we can set how long gate stays opened  
 `locked time` we can set how long gate stays closed
 `closing speed` we can set gate closing speed
 `opening speed` we can set gate opening speed
