@@ -25,7 +25,7 @@ My own ideas which I extended the project with are:
 `prewarm time` period of time where prewarm fire is shown to warn a player that soon Fire will be active.  
 `active time` period of time where fire is active.  
 `pause time` period of time where Fire Nozzle is not active.  
-- Rotating Fan (obstacle) - simple fan created by using unity primitives, placed on the wall and rotating, we can adjust rotation speed and direction
+- Rotating Fan (obstacle) - simple fan created by using unity primitives, placed on the wall and rotating, we can adjust rotation speed and direction.
 - Anomaly (obstacle) - simple anomaly created by using unity primitives and particle system. We can adjust:  
 `delay time` delay anomaly start.  
 `active time` how long obstacle will be dangerous.  
@@ -44,39 +44,32 @@ My own ideas which I extended the project with are:
 
 ## Game Mechanics:
 ### Main Menu:
-- `Continue`
-If player already pass through first level Continue button will be shown and after pressing this button, player will be moved to Level Selection screen where he can track his current progress, check level scores, restart and overwrite old level score to get better score.
-- `New Game`
-Clear all current game progress and start new game.
-- `Highscores1
-Highscore can be submited in level selection after completing all levels. Only ten best scores will be displayed.
-- `Options`
-Player can adjust master, background and SFX volume here. Each of them has own slider to adjust and save sound levels in PlayerPrefs.
-- `Quit`
-Quit the application.
-- `Game Tips` checkbox
-If player press the checkbox short information window with controls will be shown. Player can also press `Tutorial` button to try those controls and game mechanics in tutorial level.
-- `Tutorial`
-After colliding with any obstacle on this level, player rocket will be repsawned and heal value will be reseted. Player starts in no gravity mode where he can get familiar with controling rocket. When he feel more comfortable he can pass through `Gravity Controler` object and turn normal mode. All core objects are displayed with yellow arrow along with short prompt about that object.
+- `Continue`  If player already pass through first level Continue button will be shown and after pressing this button, player will be moved to Level Selection screen where he can track his current progress, check level scores, restart and overwrite old level score to get better score.
+- `New Game`  Clear all current game progress and start new game.
+- `Highscores`  Highscore can be submited in level selection after completing all levels. Only ten best scores will be displayed.
+- `Options`  Player can adjust master, background and SFX volume here. Each of them has own slider to adjust and save sound levels in PlayerPrefs.
+- `Quit`  Quit the application.
+- `Game Tips` checkbox  If player press the checkbox short information window with controls will be shown. Player can also press `Tutorial` button to try those controls and game mechanics in tutorial level.
+- `Tutorial`  After colliding with any obstacle on this level, player rocket will be repsawned and heal value will be reseted. Player starts in no gravity mode where he can get familiar with controling rocket. When he feel more comfortable he can pass through `Gravity Controler` object and turn normal mode. All core objects are displayed with yellow arrow along with short prompt about that object.
 
 ### Level Obstacles:
 Rocket can only collide with alien collectible, rocket collectible, refueling pad and landing pad.
-- Moving and Rotating rocks, crystals
-- Narrow slits on the road to landing pad
-- Flying with high speed meteorites
-- Flying crystal kernel from ground holes
-- Constantly opening and closing metal gates
-- Rotating Fan
-- Deadly fire from nozzles
-- Mysterious space anomaly
-- Moving lift
-- Metal box
-- Metal box machine `this machine is creating metal boxes, they are mostly placed at the top of level which causes metal box to fall down until they hit the floor`
-- Squeezer `this machine is pushing metal boxes into the fire`
+- Moving and Rotating rocks, crystals.
+- Narrow slits on the road to landing pad.
+- Flying with high speed meteorites.
+- Flying crystal kernel from ground holes.
+- Constantly opening and closing metal gates.
+- Rotating Fan.
+- Deadly fire from nozzles.
+- Mysterious space anomaly.
+- Moving lift.
+- Metal box.
+- Metal box machine `this machine is creating metal boxes, they are mostly placed at the top of level which causes metal box to fall down until they hit the floor`.
+- Squeezer `this machine is pushing metal boxes into the fire`.
 
 ## Game controls and goals
-- `A`/`Left Arrow` - rotate rocket left
-- `D`/`Right Arrow` - rotate rocket right
-- `SPACE` - apply thrust
+- `A`/`Left Arrow` - rotate rocket left.
+- `D`/`Right Arrow` - rotate rocket right.
+- `SPACE` - apply thrust.
 
 Start on blue launch pad, finish on neon green landing pad, avoid obstacles and use refueling pad to reach checkpoint or refuel rocket.
