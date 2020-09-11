@@ -816,6 +816,7 @@ public class Missile : MonoBehaviour
     IEnumerator LeavePlayground()
     {
         yield return new WaitForSeconds(levelLoadDelay);
+        gameManager.ResetScoresValues();
         SceneManager.LoadScene(0);
     }
 }

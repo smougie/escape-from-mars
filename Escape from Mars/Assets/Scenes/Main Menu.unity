@@ -3360,10 +3360,10 @@ RectTransform:
   m_Father: {fileID: 1591040108}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: -179.93842, y: 0}
-  m_SizeDelta: {x: 359.87683, y: 0}
+  m_SizeDelta: {x: 359.87683, y: 604}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1987850169
 GameObject:
@@ -3658,6 +3658,11 @@ PrefabInstance:
     - target: {fileID: 1262579040240845785, guid: a2093b0072904694c8a9bb264fe33b87,
         type: 3}
       propertyPath: resetAudioValues
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1262579040240845785, guid: a2093b0072904694c8a9bb264fe33b87,
+        type: 3}
+      propertyPath: resetPlayerPrefs
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1262579040240845786, guid: a2093b0072904694c8a9bb264fe33b87,
