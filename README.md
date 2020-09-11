@@ -41,6 +41,7 @@ My own ideas which I extended the project with are:
 `reverse` machine travels from the first point to the last point and from the last point to the first point, spawning boxes when reaches each point.  
 `random` machine picks random point and travels to them, spawning boxes when reaches each point.  
 - **Camera Move** - when level is to big, we set up camera trigger, when rocket triggers it, timeScale is set to 0f, camera moves to the next point, previous stage entrance is getting blocked to avoid players trying to go back. When camera is in the right place timeScale is set to 1f. Camera triggers also enable next stage obstacles.
+- **Cheat Manager** - while in the Main Menu player can type cheats. Currently there is only one cheat `playground` which enables `Playground` button in main menu. Pressing it will move player to playground level which is similar to tutorial but it's much larger and player can "drift" with rocket without colliding with obstacles. Cheat manager is tracking player inputs (only alphabetical - char.isLetter() == true), if pressed button match one of letters it moves to next letter index, if player inputs match whole cheat it will get Activated, if player make a mistake while typing password, cheat tracking state is getting reseted.
 
 ## Game Mechanics:
 ### Main Menu:
