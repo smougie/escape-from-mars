@@ -12,6 +12,7 @@ public class OptionsValues : MonoBehaviour
 
     [SerializeField] Slider masterVolumeSlider, backgroundVolumeSlider, soundEffectsSlider;
     [SerializeField] bool mainMenu;
+    [SerializeField] bool resetAudioValues;
 
     public static float loadedMasterVolumeValue;
     public static float loadedBackgroundVolumeValue;
@@ -23,7 +24,7 @@ public class OptionsValues : MonoBehaviour
         {
             DisableOptionsUI();  // set options UI inactive after loading volumes level
             firstPlayInt = PlayerPrefs.GetInt(firstPlayStr);
-            if (firstPlayInt == 0)
+            if (firstPlayInt == 0 || resetAudioValues)
             {
                 PlayerPrefs.SetInt(firstPlayStr, 1);
                 SetDefaultVolume();

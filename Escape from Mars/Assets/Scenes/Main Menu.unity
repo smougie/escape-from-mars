@@ -3655,6 +3655,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1591040108}
     m_Modifications:
+    - target: {fileID: 1262579040240845785, guid: a2093b0072904694c8a9bb264fe33b87,
+        type: 3}
+      propertyPath: resetAudioValues
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1262579040240845786, guid: a2093b0072904694c8a9bb264fe33b87,
         type: 3}
       propertyPath: m_LocalPosition.x

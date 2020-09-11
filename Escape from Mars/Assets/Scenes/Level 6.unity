@@ -9897,17 +9897,17 @@ PrefabInstance:
     - target: {fileID: 1712033451714288232, guid: e57e7a87b93d8f34dae7da764811ed66,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -25.28
+      value: -19.94
       objectReference: {fileID: 0}
     - target: {fileID: 1712033451714288232, guid: e57e7a87b93d8f34dae7da764811ed66,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.4
+      value: 6.45
       objectReference: {fileID: 0}
     - target: {fileID: 1712033451714288232, guid: e57e7a87b93d8f34dae7da764811ed66,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.3
+      value: 0.09
       objectReference: {fileID: 0}
     - target: {fileID: 1712033451714288232, guid: e57e7a87b93d8f34dae7da764811ed66,
         type: 3}
@@ -9957,7 +9957,7 @@ PrefabInstance:
     - target: {fileID: 1712033451714288232, guid: e57e7a87b93d8f34dae7da764811ed66,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 40.05907
+      value: 23.674109
       objectReference: {fileID: 0}
     - target: {fileID: 1712033451714288232, guid: e57e7a87b93d8f34dae7da764811ed66,
         type: 3}
@@ -15660,6 +15660,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4115125632538310491, guid: 56eb5adceaa93f0419776f3dd9f6f3ff,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.18
+      objectReference: {fileID: 0}
     - target: {fileID: 5756899545443407427, guid: 56eb5adceaa93f0419776f3dd9f6f3ff,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15719,6 +15724,41 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Landing Pad
+      objectReference: {fileID: 0}
+    - target: {fileID: 6870653309797964416, guid: 56eb5adceaa93f0419776f3dd9f6f3ff,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6870653309797964416, guid: 56eb5adceaa93f0419776f3dd9f6f3ff,
+        type: 3}
+      propertyPath: m_BoxProjection
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6870653309797964416, guid: 56eb5adceaa93f0419776f3dd9f6f3ff,
+        type: 3}
+      propertyPath: m_UseOcclusionCulling
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6870653309797964416, guid: 56eb5adceaa93f0419776f3dd9f6f3ff,
+        type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 512
+      objectReference: {fileID: 0}
+    - target: {fileID: 6870653309797964416, guid: 56eb5adceaa93f0419776f3dd9f6f3ff,
+        type: 3}
+      propertyPath: m_Importance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6870653309797964416, guid: 56eb5adceaa93f0419776f3dd9f6f3ff,
+        type: 3}
+      propertyPath: m_HDR
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6870653309797964416, guid: 56eb5adceaa93f0419776f3dd9f6f3ff,
+        type: 3}
+      propertyPath: m_TimeSlicingMode
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 56eb5adceaa93f0419776f3dd9f6f3ff, type: 3}
