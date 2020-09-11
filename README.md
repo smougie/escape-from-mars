@@ -44,16 +44,20 @@ My own ideas which I extended the project with are:
 
 ## Game Mechanics:
 ### Main Menu:
-- Continue
-If player already pass through first level Continue button will be shown and after pressing this button, player will be moved to Level Selection screen where he can track his current progress, check level scores, restart and overwrite old level score to get the highest score.
-- New Game
-Starting new game, removing old progression
-- Highscores
-Player can check all Highscores. Highscore can be submited after completing all levels. Only ten best scores will be displayed.
-- Options
-Player can adjust master, background and SFX volume here.
-- Quit
+- `Continue`
+If player already pass through first level Continue button will be shown and after pressing this button, player will be moved to Level Selection screen where he can track his current progress, check level scores, restart and overwrite old level score to get better score.
+- `New Game`
+Clear all current game progress and start new game
+- `Highscores1
+Highscore can be submited in level selection after completing all levels. Only ten best scores will be displayed.
+- `Options`
+Player can adjust master, background and SFX volume here. Each of them has own slider to adjust and save sound levels in PlayerPrefs.
+- `Quit`
 Quit the application
+- `Game Tips` checkbox
+If player press the checkbox short information window with controls will be shown. Player can also press `Tutorial` button to try those controls and game mechanics in tutorial level.
+- `Tutorial`
+After colliding with any obstacle on this level, player rocket will be repsawned and heal value will be reseted. Player starts in no gravity mode where he can get familiar with controling rocket. When he feel more comfortable he can pass through `Gravity Controler` object and turn normal mode. All core objects are displayed with yellow arrow along with short prompt about that object.
 
 ### Level Obstacles:
 Rocket can only collide with alien collectible, rocket collectible, refueling pad and landing pad.
@@ -70,14 +74,7 @@ Rocket can only collide with alien collectible, rocket collectible, refueling pa
 - Metal box machine `this machine is creating metal boxes, they are mostly placed at the top of level which causes metal box to fall down until they hit the floor`
 - Squeezer `this machine is pushing metal boxes into the fire`
 
-### Core Mechanics:
-- `Continue` read current player progress from PlayerPrefs and move player to the level section where he has possibility to restart already passed level to improve total score
-- `New Game` clear all current game progress and start new game
-- `Options` each section - Master Volume, Background Volume, SFX Volume - each of them has own slider to adjust and save sound levels in PlayerPrefs
-- `Highscores` read top ten scores from Highscore key stored in PlayerPrefs
-- `Refuel and Landing Pad` after colliding with them, rocket is going into auto landing state which places rocket object in the center of pad in vertical position
-
-## How to try?
+## Game controls and goals
 - `A`/`Left Arrow` - rotate rocket left
 - `D`/`Right Arrow` - rotate rocket right
 - `SPACE` - apply thrust
