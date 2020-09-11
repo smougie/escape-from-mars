@@ -50,7 +50,7 @@ My own ideas which I extended the project with are:
 - **Options** <br/>Player can adjust master, background and SFX volume here. Each of them has own slider to adjust and save sound levels in PlayerPrefs.
 - **Quit** <br/>Quit the application.
 - **Game Tips** `checkbox` <br/>If player press the checkbox short information window with controls will be shown. Player can also press `Tutorial` button to try those controls and game mechanics in tutorial level.
-- **Tutorial** <br/>After colliding with any obstacle on this level, player rocket will be repsawned and heal value will be reseted. Player starts in no gravity mode where he can get familiar with controling rocket. When he feel more comfortable he can pass through `Gravity Controler` object and turn normal mode. All core objects are displayed with yellow arrow along with short prompt about that object.
+- **Tutorial** <br/>After colliding with any obstacle on this level, player rocket will be repsawned and heal value will be reseted. When fuel value drops to 0, fuel value will be set to maximum automaticly. Player starts in no gravity mode where he can get familiar with controling rocket. When he feel more comfortable he can pass through `Gravity Controler` object and turn normal mode. All core objects are displayed with yellow arrow along with short prompt about that object.
 
 ### Level Obstacles:
 Rocket can only collide with alien collectible, rocket collectible, refueling pad and landing pad all other object are threated as obstacle and will result in the destruction of the rocket.
