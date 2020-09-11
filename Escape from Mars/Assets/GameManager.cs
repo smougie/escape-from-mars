@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
 
     float imageScaleDuration = .25f;
 
-    private float[] levelScoreImportance = new float[] { 100f, 150f, 200f, 250f, 300f, 350f, 400f, 500f};  // those values stores int which is added to level score value after completing level, index == level
+    private float[] levelScoreImportance = new float[] { 25f, 50f, 100f, 150f, 200f, 250f, 300f, 350f, 400f, 500f};  // those values stores int which is added to level score value after completing level, index == level
 
     public static int maxLife = 3;
     public static int currentLife;

@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class CheatManager : MonoBehaviour
 {
-    private string[] cheatStrings = { "playground", "playsround", "tutorial"};
+    private string[] cheatStrings = { "playground"};
     private string strToCheck = "";
     private int inputIndex = 0;
-    private int cheatIndex = 0;
+    //private int cheatIndex = 0;
     private Event currentEvent;
     [SerializeField] GameObject playgroundButton;
 
@@ -64,7 +64,6 @@ public class CheatManager : MonoBehaviour
         {
             if (strToCheck == item)
             {
-                print($"{strToCheck} cheat entered - enabling assigned cheat mode! >;->");
                 ActivateCheat(item);
                 ResetValues();
             }
