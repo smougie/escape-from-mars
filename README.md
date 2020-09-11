@@ -67,7 +67,7 @@ Rocket can only collide with alien collectible, rocket collectible, refueling pa
 - Metal box machine `this machine is creating metal boxes, they are mostly placed at the top of level which causes metal box to fall down until they hit the floor`.
 - Squeezer `this machine is pushing metal boxes into the fire`.
 
-## Game controls and goals
+## Controls and goals
 - `A`/`Left Arrow` - rotate rocket left.
 - `D`/`Right Arrow` - rotate rocket right.
 - `SPACE` - apply thrust.
