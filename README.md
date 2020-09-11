@@ -15,11 +15,11 @@ My own ideas which I extended the project with are:
 - Refueling System - when collinding with refueling pad, rocket fuel is getting refueled. The smaller fuel level, the faster speed of refueling. Also refueling pad can be used as a checkpoint. If used as a checkpoint green flag(created in blender) will be raised behind refueling pad.
 - Meteorites (obstacle) - created meteorites obstacle objects (created in blender) to simulate large group of meteorites falling from point A to point B. The same meteorites objects were used to create flying (single) meteorite from point A to point B. One more obstacle was created using meteorites objects - I created hole in the ground and surrounded it with crystals, then I simulated meteorite flying up from the hole.
 - Metal Gates/Floodgates (obstacle)- constantly opening and closing doors, which can be adjusted  individually by setting some properties:
-\n`delay time` we can delay gate start<br/>
-\n`opened time` we can set how long gate stays opened  
-`locked time` we can set how long gate stays closed
-`closing speed` we can set gate closing speed
-`opening speed` we can set gate opening speed
+`delay time` we can delay gate start  
+`opened time` we can set how long gate stays opened  
+`locked time` we can set how long gate stays closed  
+`closing speed` we can set gate closing speed  
+`opening speed` we can set gate opening speed  
 - Fire from nozzle (obstacle)- simple fire created by using particle system, it can destroy player rocket or `metal boxes` spawned by `BoxMachine`. Fire Nozzle is also customizable:
 \n`delay time` we can delay Fire Nozzle start
 `prewarm time` period of time where prewarm fire is shown to warn a player that soon Fire will be active
