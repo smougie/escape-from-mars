@@ -30,7 +30,7 @@ My own ideas which I extended the project with are:
 `delay time` delay anomaly start.  
 `active time` how long obstacle will be dangerous.  
 `pause time` how long obstacle will not be dangerous.  
-- Lift (obstacle) - simple lift moving up and down created by using unity primitives. Player has to move inside the lift, carefully move rocket with lift and travel further into level
+- Lift (obstacle) - simple lift moving up and down created by using unity primitives. Player has to move inside the lift, carefully move rocket with lift and travel further into level.
 - Metal Box (obstacle) - simple metal box created by using unity primitive with five different materials. Box can collide with:  
 `Rocket` destroying it.  
 `Squeezer Machine` getting moved by Squeezer face.  
@@ -44,7 +44,7 @@ My own ideas which I extended the project with are:
 
 ## Game Mechanics:
 ### Main Menu:
-- `Continue`  If player already pass through first level Continue button will be shown and after pressing this button, player will be moved to Level Selection screen where he can track his current progress, check level scores, restart and overwrite old level score to get better score.
+- `Continue` <br/>If player already pass through first level Continue button will be shown and after pressing this button, player will be moved to Level Selection screen where he can track his current progress, check level scores, restart and overwrite old level score to get better score.
 - `New Game`  Clear all current game progress and start new game.
 - `Highscores`  Highscore can be submited in level selection after completing all levels. Only ten best scores will be displayed.
 - `Options`  Player can adjust master, background and SFX volume here. Each of them has own slider to adjust and save sound levels in PlayerPrefs.
