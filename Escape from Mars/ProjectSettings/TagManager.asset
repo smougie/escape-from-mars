@@ -51,7 +51,7 @@ TagManager:
   - Cave Wall 1
   - Cave Wall 2
   - Blocker
-  - 
+  - Post Processing
   - 
   m_SortingLayers:
   - name: Default
