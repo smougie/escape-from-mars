@@ -44,7 +44,7 @@ My own ideas which I extended the project with are:
 
 ## Game Mechanics:
 ### Main Menu:
-- Continue <br/>If player already pass through first level Continue button will be shown and after pressing this button, player will be moved to Level Selection screen where he can track his current progress, check level scores, restart and overwrite old level score to get better score.
+- **Continue** <br/>If player already pass through first level Continue button will be shown and after pressing this button, player will be moved to Level Selection screen where he can track his current progress, check level scores, restart and overwrite old level score to get better score.
 - `New Game` <br/>Clear all current game progress and start new game.
 - `Highscores` <br/>Highscore can be submited in level selection after completing all levels. Only ten best scores will be displayed.
 - `Options` <br/>Player can adjust master, background and SFX volume here. Each of them has own slider to adjust and save sound levels in PlayerPrefs.
