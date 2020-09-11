@@ -74,3 +74,6 @@ Rocket can only collide with alien collectible, rocket collectible, refueling pa
 - `SPACE` - apply thrust.
 
 Start on blue launch pad, finish on neon green landing pad, avoid obstacles and use refueling pad to reach checkpoint or refuel rocket.
+
+## Bonus content
+Type `playground` while in the Main Menu and feel free to drift with rocket ;)
