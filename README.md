@@ -14,33 +14,33 @@ My own ideas which I extended the project with are:
 - **Fuel System** - use space button to apply thrust. Applying thrust uses rocket fuel which player can track on fuel bar.
 - **Refueling System** - when collinding with refueling pad, rocket fuel is getting refueled. The smaller fuel level, the faster speed of refueling. Also refueling pad can be used as a checkpoint. If used as a checkpoint green flag(created in blender) will be raised behind refueling pad.
 - **Meteorites (obstacle)** - created meteorites obstacle objects (created in blender) to simulate large group of meteorites falling from point A to point B. The same meteorites objects were used to create flying (single) meteorite from point A to point B. One more obstacle was created using meteorites objects - I created hole in the ground and surrounded it with crystals, then I simulated meteorite flying up from the hole.
-- **Metal Gates/Floodgates** (obstacle)- constantly opening and closing doors, which can be adjusted  individually by setting some properties:
+- **Metal Gates/Floodgates (obstacle)** - constantly opening and closing doors, which can be adjusted  individually by setting some properties:
 `delay time` we can delay gate start.  
 `opened time` we can set how long gate stays opened.  
 `locked time` we can set how long gate stays closed.  
 `closing speed` we can set gate closing speed.  
 `opening speed` we can set gate opening speed.  
-- Fire from nozzle (obstacle)- simple fire created by using particle system, it can destroy player rocket or `metal boxes` spawned by `BoxMachine`. Fire Nozzle is also customizable:  
+- **Fire from nozzle (obstacle)** - simple fire created by using particle system, it can destroy player rocket or `metal boxes` spawned by `BoxMachine`. Fire Nozzle is also customizable:  
 `delay time` we can delay Fire Nozzle start.  
 `prewarm time` period of time where prewarm fire is shown to warn a player that soon Fire will be active.  
 `active time` period of time where fire is active.  
 `pause time` period of time where Fire Nozzle is not active.  
-- Rotating Fan (obstacle) - simple fan created by using unity primitives, placed on the wall and rotating, we can adjust rotation speed and direction.
-- Anomaly (obstacle) - simple anomaly created by using unity primitives and particle system. We can adjust:  
+- **Rotating Fan (obstacle)** - simple fan created by using unity primitives, placed on the wall and rotating, we can adjust rotation speed and direction.
+- **Anomaly (obstacle)** - simple anomaly created by using unity primitives and particle system. We can adjust:  
 `delay time` delay anomaly start.  
 `active time` how long obstacle will be dangerous.  
 `pause time` how long obstacle will not be dangerous.  
-- Lift (obstacle) - simple lift moving up and down created by using unity primitives. Player has to move inside the lift, carefully move rocket with lift and travel further into level.
-- Metal Box (obstacle) - simple metal box created by using unity primitive with five different materials. Box can collide with:  
+- **Lift (obstacle)** - simple lift moving up and down created by using unity primitives. Player has to move inside the lift, carefully move rocket with lift and travel further into level.
+- **Metal Box (obstacle)** - simple metal box created by using unity primitive with five different materials. Box can collide with:  
 `Rocket` destroying it.  
 `Squeezer Machine` getting moved by Squeezer face.  
 `Fire Nozzle` when collides with nozzle fire, metling effect is getting spawned from metal box, after `2 - 4` seconds box is getting destroyed and explosion animation is getting spawned.  
-- Box Machine (obstacle) - machine is spawning metal boxes. Machine can work in `4` different modes:  
+- **Box Machine (obstacle)** - machine is spawning metal boxes. Machine can work in `4` different modes:  
 `static` machine stays in place and spawn metal boxes after specified time (can be adjusted in inspector, the same as delay start time).  
 `normal` machine travels from the first point to the last point, then moves to the first point and repeats, spawning boxes when reaches each point.  
 `reverse` machine travels from the first point to the last point and from the last point to the first point, spawning boxes when reaches each point.  
 `random` machine picks random point and travels to them, spawning boxes when reaches each point.  
-- Camera Move - when level is to big, we set up camera trigger, when rocket triggers it, timeScale is set to 0f, camera moves to the next point, previous stage entrance is getting blocked to avoid players trying to go back. When camera is in the right place timeScale is set to 1f. Camera triggers also enable next stage obstacles.
+- **Camera Move** - when level is to big, we set up camera trigger, when rocket triggers it, timeScale is set to 0f, camera moves to the next point, previous stage entrance is getting blocked to avoid players trying to go back. When camera is in the right place timeScale is set to 1f. Camera triggers also enable next stage obstacles.
 
 ## Game Mechanics:
 ### Main Menu:
