@@ -53,7 +53,7 @@ My own ideas which I extended the project with are:
 - **Tutorial** <br/>After colliding with any obstacle on this level, player rocket will be repsawned and heal value will be reseted. Player starts in no gravity mode where he can get familiar with controling rocket. When he feel more comfortable he can pass through `Gravity Controler` object and turn normal mode. All core objects are displayed with yellow arrow along with short prompt about that object.
 
 ### Level Obstacles:
-Rocket can only collide with alien collectible, rocket collectible, refueling pad and landing pad.
+Rocket can only collide with alien collectible, rocket collectible, refueling pad and landing pad all other object are threated as obstacle and will result in the destruction of the rocket.
 - Moving and Rotating rocks, crystals.
 - Narrow slits on the road to landing pad.
 - Flying with high speed meteorites.
