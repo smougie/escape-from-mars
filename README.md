@@ -78,5 +78,5 @@ Start on blue launch pad, finish on neon green landing pad, avoid obstacles and 
 **Bonus content**  
 Type `playground` while in the Main Menu and feel free to drift with rocket ;)
 
-**Download link (google drive)**  
+**Download link**  
 [Google Drive Link - 43mb](https://drive.google.com/file/d/1TThNM27XUOhR8cmaTDqUnIUag9OExyA2/view?usp=sharing)
