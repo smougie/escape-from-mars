@@ -69,6 +69,7 @@ Rocket can only collide with alien collectible, rocket collectible, refueling pa
 - Squeezer `this machine is pushing metal boxes into the fire`.
 
 ## How to play
+**Controls**  
 - `A`/`Left Arrow` - rotate rocket left.
 - `D`/`Right Arrow` - rotate rocket right.
 - `SPACE` - apply thrust.
