@@ -68,12 +68,15 @@ Rocket can only collide with alien collectible, rocket collectible, refueling pa
 - Metal box machine `this machine is creating metal boxes, they are mostly placed at the top of level which causes metal box to fall down until they hit the floor`.
 - Squeezer `this machine is pushing metal boxes into the fire`.
 
-## Controls and goals
+## How to play
 - `A`/`Left Arrow` - rotate rocket left.
 - `D`/`Right Arrow` - rotate rocket right.
 - `SPACE` - apply thrust.
 
 Start on blue launch pad, finish on neon green landing pad, avoid obstacles and use refueling pad to reach checkpoint or refuel rocket.
 
-## Bonus content
+**Bonus content**
 Type `playground` while in the Main Menu and feel free to drift with rocket ;)
+
+**Direct link**
+https://drive.google.com/file/d/1TThNM27XUOhR8cmaTDqUnIUag9OExyA2/view?usp=sharing
