@@ -75,6 +75,8 @@ Rocket can only collide with alien collectible, rocket collectible, refueling pa
 
 Start on blue launch pad, finish on neon green landing pad, avoid obstacles and use refueling pad to reach checkpoint or refuel rocket.
 
-**Bonus content**  Type `playground` while in the Main Menu and feel free to drift with rocket ;)
+**Bonus content**  
+Type `playground` while in the Main Menu and feel free to drift with rocket ;)
 
-**Download link (google drive)**  [Google Drive Link - 43mb](https://drive.google.com/file/d/1TThNM27XUOhR8cmaTDqUnIUag9OExyA2/view?usp=sharing)
+**Download link (google drive)**  
+[Google Drive Link - 43mb](https://drive.google.com/file/d/1TThNM27XUOhR8cmaTDqUnIUag9OExyA2/view?usp=sharing)
