@@ -84,4 +84,4 @@ Type `playground` while in the Main Menu and feel free to drift with rocket ;)
 [Google Drive Link - 43mb](https://drive.google.com/file/d/1TThNM27XUOhR8cmaTDqUnIUag9OExyA2/view?usp=sharing)
 
 ## Media
-![Level_1](https://imgur.com/7oT7VcY)
+![Level1](https://imgur.com/7oT7VcY)
